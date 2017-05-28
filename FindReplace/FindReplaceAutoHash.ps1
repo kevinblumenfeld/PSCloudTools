@@ -1,5 +1,5 @@
 ﻿Write-Output "Import File"
-$file = Import-Csv "C:\scripts\lausd\LA_Mbx_upn_holds.csv"
+$file = Import-Csv ".\MBX_UPN_Holds.csv"
 Write-Output "Get-MailboxSearch to Create HashTable"
 $HoldList = Get-MailboxSearch | Select Name, InPlaceHoldIdentity
 # Create Hash Table with Hold GUIDS(Key) & Friendly Name (Value) 
@@ -24,9 +24,9 @@ foreach ($row in $file) {
                 $new += $temp.Value + ","
             }
         }   
-        $row.userprincipalname + "," + $new | Out-File ".\LA_With_Holds.csv" -Append -Encoding utf8
+        $row.userprincipalname + "," + $new | Out-File ".\With_Holds.csv" -Append -Encoding utf8
     }
     else {
-        $row.userprincipalname + "," + "" | Out-File ".\LA_Without_Holds.csv" -Append -Encoding utf8
+        $row.userprincipalname + "," + "" | Out-File ".\Without_Holds.csv" -Append -Encoding utf8
     }
 }
