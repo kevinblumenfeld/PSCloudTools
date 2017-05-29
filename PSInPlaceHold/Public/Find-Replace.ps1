@@ -40,26 +40,20 @@ function Find-Replace() {
             $resultArray += [pscustomobject]$line
             
             if (!($OneHoldPerLine)) {
-                if ($row.$FindParameter) {
-                    if ($row.$FindParameter.split().count -gt 1) {
-                        ForEach ($hold in $row.$FindParameter.split()) {
-                            $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $Replace[$hold] = ($Find.Value.holdname) -join ","
-                        }
+                if ($row.$FindParameter.split().count -gt 1) {
+                    ForEach ($hold in $row.$FindParameter.split()) {
+                        $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
+                        $Replace[$hold] = ($Find.Value.holdname) -join ","
                     }
-                    else {
-                        ForEach ($hold in $row.$FindParameter.split()) {
-                            $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $Replace[$hold] = ($Find.Value.holdname) -join ","
-                        }
-                    }        
-                } # BELOW CREATES CSV ROWS OF USERS WITHOUT IN-PLACE HOLDS
+                
                 else {
-                    "$DynamicVars" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
-                }
+                    ForEach ($hold in $row.$FindParameter.split()) {
+                        $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
+                        $Replace[$hold] = ($Find.Value.holdname) -join ","
+                    }
+                }        
             } # BEGIN One Hold Per Line
             else {
-                Write-Host "INTO ONEHOLDPERLINE!!!!!!!!!!!!"
                 if ($row.$FindParameter) {
                     if ($row.$FindParameter.split().count -gt 1) {
                         ForEach ($hold in $row.$FindParameter.split()) {
