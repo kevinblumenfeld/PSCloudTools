@@ -34,10 +34,14 @@ function Find-Replace() {
         # Row by Row of each Mailbox to...
         #   FIND    (in this case, INPLACEHOLDS)  - (Get-Mailbox) 
         #   REPLACE (in this case, NAME) - matched from hashtable of InPlaceHolds - (created with Get-MailboxSearch)
+        $resultArray = @()
+        $line = @{}
         foreach ($row in $MailboxHold) {
-            $it = foreach ($f in $Props.name) {
-                ($row.$f) -join ","
-            } 
+            $line = @{}
+            foreach ($field in $Props.name) {
+                $line[$field] = ($row.$field) -join ","
+            }
+            $resultArray += [pscustomobject]$line
             $Replace = @()
             if (!($OneHoldPerLine)) {
                 if ($row.$FindParameter) {
@@ -48,18 +52,20 @@ function Find-Replace() {
                             $Replace = $Replace.trim()
                         }
                         $Replace = $Replace.trim(",")
-                        Write-Host "REPLACE: $Replace"
+                        # Write-Host "REPLACE: $Replace"
                         $it = $it + $Replace
                     }
                     else {
                         ForEach ($hold in $row.$FindParameter.split()) {
                             $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
                             $Replace += $Find.Value.holdname
-                            Write-Host "REPLACE: $Replace"
+                            # Write-Host "REPLACE: $Replace"
                             $it = $it + $Replace
                         }
                     } 
-                    write-output "IT: $it"
+                    ([PScustomobject]$resultArray)|Export-Csv "C:\scripts\test\asdsdsdf.csv" -nti
+                    
+                    # Write-Output "IT: $it"
                     # &([scriptblock]::Create($DynamicVars)) |Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
                 } # BELOW CREATES CSV ROWS OF USERS WITHOUT IN-PLACE HOLDS
                 else {
@@ -74,7 +80,7 @@ function Find-Replace() {
                             $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
                             $Replace = $Find.Value.holdname + ","
                             $Replace = $Replace.trim()
-                            Write-Output "NEW: $Replace"
+                            # Write-Output "NEW: $Replace"
                             $DynamicVars + "," + $Replace | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
                         }
                         $Replace = $Replace.trim(",")
@@ -95,6 +101,5 @@ function Find-Replace() {
     }
 
     End {
-        
     }
 }
