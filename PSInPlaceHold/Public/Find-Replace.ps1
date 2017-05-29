@@ -20,14 +20,8 @@ function Find-Replace() {
     Begin {
         Write-Host "Find-Replace"
         $FindParameter = "inplaceholds"
-        $DynamicVars = @()
         $Props = @()
-        $f = @()
         $Props = $MailboxHold | Get-Member -MemberType 'NoteProperty'| where {$_.Name -ne $FindParameter}| Select Name
-        $DynamicVars = $Props.name -join ","
-        # $DynamicVars = "`$`(`$row." + ($Props.name -join "`) + `",`" + `$`(`$row.")
-        # $DynamicVars = $DynamicVars + "`)"
-        Write-Host "DynamicVARS: $DynamicVars"
     }
    
     Process {
@@ -35,38 +29,30 @@ function Find-Replace() {
         #   FIND    (in this case, INPLACEHOLDS)  - (Get-Mailbox) 
         #   REPLACE (in this case, NAME) - matched from hashtable of InPlaceHolds - (created with Get-MailboxSearch)
         $resultArray = @()
-        $line = @{}
+        $find = @()
+        $row = @()
         foreach ($row in $MailboxHold) {
             $line = @{}
+            $Replace = @{}
             foreach ($field in $Props.name) {
                 $line[$field] = ($row.$field) -join ","
             }
             $resultArray += [pscustomobject]$line
-            $Replace = @()
+            
             if (!($OneHoldPerLine)) {
                 if ($row.$FindParameter) {
                     if ($row.$FindParameter.split().count -gt 1) {
                         ForEach ($hold in $row.$FindParameter.split()) {
                             $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $Replace += $Find.Value.holdname + ","
-                            $Replace = $Replace.trim()
+                            $Replace[$hold] = ($Find.Value.holdname) -join ","
                         }
-                        $Replace = $Replace.trim(",")
-                        # Write-Host "REPLACE: $Replace"
-                        $it = $it + $Replace
                     }
                     else {
                         ForEach ($hold in $row.$FindParameter.split()) {
                             $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $Replace += $Find.Value.holdname
-                            # Write-Host "REPLACE: $Replace"
-                            $it = $it + $Replace
+                            $Replace[$hold] = ($Find.Value.holdname) -join ","
                         }
-                    } 
-                    ([PScustomobject]$resultArray)|Export-Csv "C:\scripts\test\asdsdsdf.csv" -nti
-                    
-                    # Write-Output "IT: $it"
-                    # &([scriptblock]::Create($DynamicVars)) |Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
+                    }        
                 } # BELOW CREATES CSV ROWS OF USERS WITHOUT IN-PLACE HOLDS
                 else {
                     "$DynamicVars" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
@@ -80,7 +66,6 @@ function Find-Replace() {
                             $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
                             $Replace = $Find.Value.holdname + ","
                             $Replace = $Replace.trim()
-                            # Write-Output "NEW: $Replace"
                             $DynamicVars + "," + $Replace | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
                         }
                         $Replace = $Replace.trim(",")
@@ -97,9 +82,12 @@ function Find-Replace() {
                     $DynamicVars + "," + "" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
                 }
             } 
+            $resultArray += [pscustomobject]$Replace
         }
     }
 
     End {
+        $resultArray
+        ([PScustomobject]$resultArray)|Export-Csv "C:\scripts\test\333.csv" -nti
     }
 }

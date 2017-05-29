@@ -33,7 +33,7 @@ function Export-MailboxHold() {
         }        
         else {
             if (!(Test-Path $csv)) {
-                Write-Output "File Path/Name $csv is invalid. Please provide proper path to CSV"
+                Write-Host "File Path/Name $csv is invalid. Please provide proper path to CSV"
             }
             Try {
                 Write-Host "IMPORTCSV!!!!!!!!!"
@@ -41,7 +41,7 @@ function Export-MailboxHold() {
             }
             Catch {
                 throw $_
-                Write-Output "Import of $csv failed. Please verify CSV is structured properly"
+                Write-Host "Import of $csv failed. Please verify CSV is structured properly"
             }
             
         }
