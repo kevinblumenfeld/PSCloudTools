@@ -19,59 +19,61 @@ function Find-Replace() {
 
     Begin {
         Write-Host "Find-Replace"
-        Write-Output $hash
-        Write-Output $MailboxHold
+        $FindParameter = "inplaceholds"
+        $Properties = $MailboxHold | Get-Member -MemberType 'NoteProperty'| where {$_.Name -ne $FindParameter}| Select Name
+        $DynamicVars = "`"`$row." + ($Properties.name -join "`",`$row.")
     }
    
     Process {
-        Write-Output "PROCESS BLOCK!!!!!!!!!"
+        # Row by Row of each Mailbox to...
+        #   FIND    (in this case, INPLACEHOLDS)  - (Get-Mailbox) 
+        #   REPLACE (in this case, NAME) - matched from hashtable of InPlaceHolds - (created with Get-MailboxSearch)
         foreach ($row in $MailboxHold) {
-            $new = @()
-            Write-Output "ROW: $ROW"
+            $Replace = @()
             if (!($OneHoldPerLine)) {
-                if ($row.inplaceholds) {
-                    if ($row.inplaceholds.split().count -gt 1) {
-                        ForEach ($hold in $row.inplaceholds.split()) {
-                            $temp = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $new += $temp.Value.holdname + ","
-                            $new = $new.trim()
+                if ($row.$FindParameter) {
+                    if ($row.$FindParameter.split().count -gt 1) {
+                        ForEach ($hold in $row.$FindParameter.split()) {
+                            $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
+                            $Replace += $Find.Value.holdname + ","
+                            $Replace = $Replace.trim()
                         }
-                        $new = $new.trim(",")
+                        $Replace = $Replace.trim(",")
                     }
                     else {
-                        ForEach ($hold in $row.inplaceholds.split()) {
-                            $temp = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $new += $temp.Value.holdname
+                        ForEach ($hold in $row.$FindParameter.split()) {
+                            $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
+                            $Replace += $Find.Value.holdname
                         }
-                    }   
-                    $row.userprincipalname + "," + $new | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
+                    }
+                    $DynamicVars + "," + $Replace | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
                 } # BELOW CREATES CSV ROWS OF USERS WITHOUT IN-PLACE HOLDS
                 else {
-                    $row.userprincipalname + "," + "" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
+                    $DynamicVars + "," + "" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
                 }
             } # BEGIN One Hold Per Line
             else {
-                if ($row.inplaceholds) {
-                    if ($row.inplaceholds.split().count -gt 1) {
-                        ForEach ($hold in $row.inplaceholds.split()) {
-                            $temp = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $new = $temp.Value.holdname + ","
-                            $new = $new.trim()
-                            Write-Output "NEW: $new"
-                            $row.userprincipalname + "," + $new | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
+                if ($row.$FindParameter) {
+                    if ($row.$FindParameter.split().count -gt 1) {
+                        ForEach ($hold in $row.$FindParameter.split()) {
+                            $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
+                            $Replace = $Find.Value.holdname + ","
+                            $Replace = $Replace.trim()
+                            Write-Output "NEW: $Replace"
+                            $DynamicVars + "," + $Replace | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
                         }
-                        $new = $new.trim(",")
+                        $Replace = $Replace.trim(",")
                     }
                     else {
-                        ForEach ($hold in $row.inplaceholds.split()) {
-                            $temp = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $new = $temp.Value.holdname
-                            $row.userprincipalname + "," + $new | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
+                        ForEach ($hold in $row.$FindParameter.split()) {
+                            $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
+                            $Replace = $Find.Value.holdname
+                            $DynamicVars + "," + $Replace | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
                         }
                     }   
                 } 
                 else {
-                    $row.userprincipalname + "," + "" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
+                    $DynamicVars + "," + "" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
                 }
             } 
         }

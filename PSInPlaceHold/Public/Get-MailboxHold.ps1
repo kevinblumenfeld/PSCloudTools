@@ -21,7 +21,7 @@ function Get-MailboxHold() {
    
     Process {
         Write-Host "Get-MailboxHold"
-        $script:MailboxHold = Get-Mailbox -IncludeInactiveMailbox -ResultSize 10 | Select DisplayName, accountdisabled, IsInactiveMailbox, RecipientTypeDetails, UserPrincipalName, LitigationHoldEnabled, RetentionPolicy, RecoverableItemsQuota, InPlaceHolds
+        $script:MailboxHold = Get-Mailbox -IncludeInactiveMailbox -ResultSize 500 | Select DisplayName, accountdisabled, IsInactiveMailbox, RecipientTypeDetails, UserPrincipalName, LitigationHoldEnabled, RetentionPolicy, RecoverableItemsQuota, InPlaceHolds
     }
 
     End {

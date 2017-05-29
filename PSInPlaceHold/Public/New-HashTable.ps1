@@ -21,9 +21,6 @@ function New-HashTable() {
    
     Process {
         Write-Host "New-HashTable"
-        # Write-Host $($InPlaceHold[1].name)
-        # Write-Host $InPlaceHold.gettype()
-        # $InPlaceHold = Get-MailboxSearch -ResultSize unlimited | select name, inplaceholdidentity, Status, version, StartDate, EndDate
         $script:hash = @{}
         foreach ($iHold in $InPlaceHold) {
             Write-Host "iHold: $($iHold.InPlaceHoldIdentity)"
