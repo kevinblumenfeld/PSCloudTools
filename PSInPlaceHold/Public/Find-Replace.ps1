@@ -20,8 +20,11 @@ function Find-Replace() {
     Begin {
         Write-Host "Find-Replace"
         $FindParameter = "inplaceholds"
-        $Properties = $MailboxHold | Get-Member -MemberType 'NoteProperty'| where {$_.Name -ne $FindParameter}| Select Name
-        $DynamicVars = "`"`$row." + ($Properties.name -join "`",`$row.")
+        $DynamicVars = @()
+        $Props = $MailboxHold | Get-Member -MemberType 'NoteProperty'| where {$_.Name -ne $FindParameter}| Select Name
+        $DynamicVars = "`$`(`$row." + ($Props.name -join "`) + `",`" + `$`(`$row.")
+        $DynamicVars = $DynamicVars + "`)"
+        Write-Host "$DynamicVars"
     }
    
     Process {
@@ -45,14 +48,16 @@ function Find-Replace() {
                             $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
                             $Replace += $Find.Value.holdname
                         }
-                    }
-                    $DynamicVars + "," + $Replace | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
+                    } 
+
+                    &([scriptblock]::Create($DynamicVars)) |Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
                 } # BELOW CREATES CSV ROWS OF USERS WITHOUT IN-PLACE HOLDS
                 else {
-                    $DynamicVars + "," + "" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
+                    "$DynamicVars" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
                 }
             } # BEGIN One Hold Per Line
             else {
+                Write-Host "INTO ONEHOLDPERLINE!!!!!!!!!!!!"
                 if ($row.$FindParameter) {
                     if ($row.$FindParameter.split().count -gt 1) {
                         ForEach ($hold in $row.$FindParameter.split()) {

@@ -36,7 +36,8 @@ function Export-MailboxHold() {
                 Write-Output "File Path/Name $csv is invalid. Please provide proper path to CSV"
             }
             Try {
-                $script:MailboxHold = Import-Csv $csv -ErrorAction SilentlyContinue
+                Write-Host "IMPORTCSV!!!!!!!!!"
+                $script:MailboxHold = Import-Csv $csv # -ErrorAction SilentlyContinue
             }
             Catch {
                 throw $_
