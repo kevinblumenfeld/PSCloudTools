@@ -25,9 +25,6 @@ function Find-Replace() {
     }
    
     Process {
-        # Row by Row of each Mailbox to...
-        #   FIND    (in this case, INPLACEHOLDS)  - (Get-Mailbox) 
-        #   REPLACE (in this case, NAME) - matched from hashtable of InPlaceHolds - (created with Get-MailboxSearch)
         $resultArray = @()
         $find = @()
         $row = @()
@@ -38,44 +35,11 @@ function Find-Replace() {
                 $line[$field] = ($row.$field) -join ","
             }
             $resultArray += [pscustomobject]$line
-            
-            if (!($OneHoldPerLine)) {
-                if ($row.$FindParameter.split().count -gt 1) {
-                    ForEach ($hold in $row.$FindParameter.split()) {
-                        $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                        $Replace[$hold] = ($Find.Value.holdname) -join ","
-                    }
-                
-                else {
-                    ForEach ($hold in $row.$FindParameter.split()) {
-                        $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                        $Replace[$hold] = ($Find.Value.holdname) -join ","
-                    }
-                }        
-            } # BEGIN One Hold Per Line
-            else {
-                if ($row.$FindParameter) {
-                    if ($row.$FindParameter.split().count -gt 1) {
-                        ForEach ($hold in $row.$FindParameter.split()) {
-                            $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $Replace = $Find.Value.holdname + ","
-                            $Replace = $Replace.trim()
-                            $DynamicVars + "," + $Replace | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
-                        }
-                        $Replace = $Replace.trim(",")
-                    }
-                    else {
-                        ForEach ($hold in $row.$FindParameter.split()) {
-                            $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                            $Replace = $Find.Value.holdname
-                            $DynamicVars + "," + $Replace | Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
-                        }
-                    }   
-                } 
-                else {
-                    $DynamicVars + "," + "" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
-                }
-            } 
+
+            ForEach ($hold in $row.$FindParameter.split()) {
+                $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
+                $replace[$hold] = ($Find.Value.psbase.holdname) -join ","
+            }
             $resultArray += [pscustomobject]$Replace
         }
     }

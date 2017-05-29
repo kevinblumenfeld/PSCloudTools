@@ -24,7 +24,7 @@ function New-HashTable() {
         $script:hash = @{}
         foreach ($iHold in $InPlaceHold) {
             Write-Host "iHold: $($iHold.InPlaceHoldIdentity)"
-            $script:hash.add($iHold.InPlaceHoldIdentity, @{holdname = $iHold.name; status = $iHold.status; version = $iHold.version; StartDate = $iHold.startdate; EndDate = $iHold.enddate})
+            $hash.add($iHold.InPlaceHoldIdentity, @{holdname = $iHold.name; status = $iHold.status; version = $iHold.version; StartDate = $iHold.startdate; EndDate = $iHold.enddate})
         }
         $hash
     }
