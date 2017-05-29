@@ -21,10 +21,13 @@ function Find-Replace() {
         Write-Host "Find-Replace"
         $FindParameter = "inplaceholds"
         $DynamicVars = @()
+        $Props = @()
+        $f = @()
         $Props = $MailboxHold | Get-Member -MemberType 'NoteProperty'| where {$_.Name -ne $FindParameter}| Select Name
-        $DynamicVars = "`$`(`$row." + ($Props.name -join "`) + `",`" + `$`(`$row.")
-        $DynamicVars = $DynamicVars + "`)"
-        Write-Host "$DynamicVars"
+        $DynamicVars = $Props.name -join ","
+        # $DynamicVars = "`$`(`$row." + ($Props.name -join "`) + `",`" + `$`(`$row.")
+        # $DynamicVars = $DynamicVars + "`)"
+        Write-Host "DynamicVARS: $DynamicVars"
     }
    
     Process {
@@ -32,6 +35,9 @@ function Find-Replace() {
         #   FIND    (in this case, INPLACEHOLDS)  - (Get-Mailbox) 
         #   REPLACE (in this case, NAME) - matched from hashtable of InPlaceHolds - (created with Get-MailboxSearch)
         foreach ($row in $MailboxHold) {
+            $it = foreach ($f in $Props.name) {
+                ($row.$f) -join ","
+            } 
             $Replace = @()
             if (!($OneHoldPerLine)) {
                 if ($row.$FindParameter) {
@@ -42,15 +48,19 @@ function Find-Replace() {
                             $Replace = $Replace.trim()
                         }
                         $Replace = $Replace.trim(",")
+                        Write-Host "REPLACE: $Replace"
+                        $it = $it + $Replace
                     }
                     else {
                         ForEach ($hold in $row.$FindParameter.split()) {
                             $Find = $hash.GetEnumerator() | Where {$_.Name -match $hold}
                             $Replace += $Find.Value.holdname
+                            Write-Host "REPLACE: $Replace"
+                            $it = $it + $Replace
                         }
                     } 
-
-                    &([scriptblock]::Create($DynamicVars)) |Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
+                    write-output "IT: $it"
+                    # &([scriptblock]::Create($DynamicVars)) |Out-File "C:\scripts\test\With_Holds.csv" -Append -Encoding utf8
                 } # BELOW CREATES CSV ROWS OF USERS WITHOUT IN-PLACE HOLDS
                 else {
                     "$DynamicVars" | Out-File "C:\scripts\test\Without_Holds.csv" -Append -Encoding utf8
@@ -85,5 +95,6 @@ function Find-Replace() {
     }
 
     End {
+        
     }
 }
