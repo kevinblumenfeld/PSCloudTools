@@ -13,22 +13,19 @@ function New-HashTable() {
 
     Param
     (
-
     )
 
     Begin {
     }
    
     Process {
-        Write-Host "New-HashTable"
         $script:hash = @{}
         foreach ($iHold in $InPlaceHold) {
-            Write-Host "iHold: $($iHold.InPlaceHoldIdentity)"
-            $hash.add($iHold.InPlaceHoldIdentity, @{holdname = $iHold.name; status = $iHold.status; version = $iHold.version; StartDate = $iHold.startdate; EndDate = $iHold.enddate})
+            foreach ($id in $ihold.InPlaceHoldIdentity) {
+                $script:hash[$id] = $iHold 
+            } 
         }
-        $hash
     }
-    
     End {
     }
 }

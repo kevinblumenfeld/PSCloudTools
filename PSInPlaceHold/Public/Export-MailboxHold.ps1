@@ -14,7 +14,7 @@ function Export-MailboxHold() {
     Param
     (
         [Parameter(Mandatory = $false, Position = 0)] 
-        [string]$csv,
+        [string[]]$csv,
         
         [Parameter(Mandatory = $false, Position = 1)] 
         [string]$find,
@@ -47,7 +47,7 @@ function Export-MailboxHold() {
         }
         
         Get-InPlaceHold
-        New-HashTable # -hashkey InPlaceHoldIdentity
+        # New-HashTable # -hashkey InPlaceHoldIdentity
         Find-Replace
     }
 
