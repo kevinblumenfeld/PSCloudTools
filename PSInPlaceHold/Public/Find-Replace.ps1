@@ -8,9 +8,8 @@
 
     }
     Process {
-        $resultArray  = @()
-        $Row = @()
-        $Mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize 10 | Select DisplayName, accountdisabled, IsInactiveMailbox, RecipientTypeDetails, UserPrincipalName, LitigationHoldEnabled, RetentionPolicy, RecoverableItemsQuota, InPlaceHolds
+        $resultArray = @()
+        $Mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize 500 | Select DisplayName, accountdisabled, IsInactiveMailbox, RecipientTypeDetails, UserPrincipalName, LitigationHoldEnabled, RetentionPolicy, RecoverableItemsQuota, InPlaceHolds
         $InPlaceHold = Get-MailboxSearch -ResultSize unlimited | select name, inplaceholdidentity, Status, version, StartDate, EndDate
         $MailboxProperties = $Mailbox | Get-Member -MemberType 'NoteProperty'| where {$_.Name -ne $FindParameter}| Select Name
         $Id2NameLookup = @{}
@@ -18,17 +17,13 @@
             $Id2NameLookup.add($hold.InPlaceHoldIdentity, $hold.name)
         }
         $FindParameter = "InPlaceHolds"
-        foreach ($Row in $Mailbox) {
-            $MailboxHash = @{}
-            foreach ($field in $MailboxProperties.name) {
-                $MailboxHash[$field] = ($Row.$field) -join ","
-            }
-            $resultArray += [string]$MailboxHash
-            
-            ForEach ($HoldID in $Row.$FindParameter.split()) {
+        foreach ($Row in $Mailbox) {           
+            ForEach ($HoldID in $Row.$FindParameter) {
                 $ReplaceHash = @{}
-                #$ReplaceHash['HoldID'] = $HoldId
-                $ReplaceHash['Name'] = $Id2NameLookup[$holdid]     
+                $ReplaceHash['Name'] = $Id2NameLookup[$holdid]   
+                foreach ($field in $MailboxProperties.name) {
+                    $ReplaceHash[$field] = ($Row.$field) -join ","
+                }  
                 $resultArray += [PScustomobject]$ReplaceHash        
             }
         }
