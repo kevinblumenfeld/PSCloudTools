@@ -1,6 +1,6 @@
 # Project Name
 
-PSInPlaceHold
+PSCloudTool - A series of Office 365 tools
 
 ## Installation
 
