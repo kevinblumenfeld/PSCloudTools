@@ -1,5 +1,4 @@
-
-function Connect-Cloud {
+function Connect-PSCloud {
     <#
 .Synopsis
    Short description
@@ -43,7 +42,6 @@ function Connect-Cloud {
     }
     Process {
 
-        # $Customer = "sentc"
         $RootPath = "c:\ps\"
         $KeyPath = $Rootpath + "creds\"
 

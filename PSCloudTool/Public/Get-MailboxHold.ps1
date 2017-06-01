@@ -1,4 +1,4 @@
-function Find-Replace() {
+function Get-PSMailboxHold() {
     [CmdletBinding()]
     Param
     (
