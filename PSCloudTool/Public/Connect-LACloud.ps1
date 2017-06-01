@@ -1,4 +1,4 @@
-function Connect-PSCloud {
+function Connect-LACloud {
     <#
 .Synopsis
    Short description
@@ -13,8 +13,7 @@ function Connect-PSCloud {
     Param
     (
 
-        [parameter(Mandatory = $false)]
-        # [ValidateSet("sentc","contoso")]
+        [parameter(Mandatory = $true)]
         [string] $Customer,
        
         [Parameter(Mandatory = $false)]

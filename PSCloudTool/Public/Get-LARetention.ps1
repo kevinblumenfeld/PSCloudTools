@@ -1,4 +1,4 @@
-function Find-Retention() {
+function Get-LARetention() {
     [CmdletBinding()]
     Param
     (

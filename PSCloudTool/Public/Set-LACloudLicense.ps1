@@ -1,4 +1,4 @@
-﻿function Set-365License {
+﻿function Set-LACloudLicense {
     <#
     .SYNOPSIS 
         The user of this script can perform one or more of the following tasks against one or more Office 365 users:

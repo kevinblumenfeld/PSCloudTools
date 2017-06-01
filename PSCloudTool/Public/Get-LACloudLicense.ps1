@@ -1,4 +1,4 @@
-﻿function Get-CloudLicense { 
+﻿function Get-LACloudLicense { 
     <#
     .SYNOPSIS
     Short description

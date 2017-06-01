@@ -1,4 +1,4 @@
-function Get-PSMailboxHold() {
+function Get-LAMailboxHold {
     [CmdletBinding()]
     Param
     (
