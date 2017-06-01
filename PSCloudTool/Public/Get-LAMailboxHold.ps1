@@ -11,7 +11,7 @@ function Get-LAMailboxHold {
         $resultArray = @()
         $findParameter = "InPlaceHolds"
         $mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize 10 | Select DisplayName, accountdisabled, IsInactiveMailbox, RecipientTypeDetails, UserPrincipalName, LitigationHoldEnabled, RetentionPolicy, RecoverableItemsQuota, InPlaceHolds
-        $mbxSearch = Get-MailboxSearch -ResultSize unlimited | select name, inplaceholdidentity, Status, version, StartDate, EndDate, sourcemailboxes
+        $mbxSearch = Get-MailboxSearch -ResultSize unlimited | select name, inplaceholdidentity, Status, version, StartDate, EndDate, sourcemailboxes, ItemHoldPeriod
         $mailboxProperties = $mailbox | Get-Member -MemberType 'NoteProperty' | Select Name
         
         $hash = @{}
@@ -27,7 +27,8 @@ function Get-LAMailboxHold {
                 $mailboxHash['InPlaceHoldName'] = ($hash[$guid]).name
                 $mailboxHash['StatusofHold'] = ($hash[$guid]).Status
                 $mailboxHash['StartDate'] = ($hash[$guid]).StartDate
-                $mailboxHash['EndDate'] = ($hash[$guid]).EndDate                                             
+                $mailboxHash['EndDate'] = ($hash[$guid]).EndDate    
+                $mailboxHash['ItemHoldPeriod'] = ($hash[$guid]).ItemHoldPeriod                                             
                 foreach ($field in $mailboxProperties.name) {
                     $mailboxHash[$field] = ($row.$field) -join ","
                 }  
@@ -37,6 +38,5 @@ function Get-LAMailboxHold {
     }
     End {
         ([psCustomObject]$resultArray)
-        [psCustomObject]$resultArray | Export-Csv "C:\scripts\test\333.csv" -nti
     }
 }
