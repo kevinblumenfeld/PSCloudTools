@@ -21,8 +21,8 @@ function Get-LAMailboxHoldColumns {
     }
    
     Process {
-        $Holds = "c:\scripts\test\withHolds.csv"
-        $NoHolds = "c:\scripts\test\withoutHolds.csv"
+        $Holds = "c:\scripts\lausd\withHolds-" + ($(get-date -Format yyyy-MM-dd_HH-mm-ss) + ".csv")
+        $NoHolds = "c:\scripts\lausd\withoutHolds-" + ($(get-date -Format yyyy-MM-dd_HH-mm-ss) + ".csv")
         $headerstring = "userprincipalname, IsInactiveMailbox, accountdisabled, RecipientTypeDetails"
         Out-File -FilePath $Holds -InputObject $headerstring -Encoding UTF8
         Out-File -FilePath $NoHolds -InputObject $headerstring -Encoding UTF8

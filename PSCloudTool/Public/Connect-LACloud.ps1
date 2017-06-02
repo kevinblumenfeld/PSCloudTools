@@ -49,7 +49,7 @@ function Connect-LACloud {
             New-Item -ItemType Directory -Force -Path ($RootPath + $Customer + "\logs\")
         }
 
-        Start-Transcript -path ($RootPath + $Customer + "\logs\" + "transcript" + ($(get-date -Format _yyyy-MM-dd_HH-mm-ss)) + ".txt")
+        Start-Transcript -path ($RootPath + $Customer + "\logs\" + "transcript-" + ($(get-date -Format _yyyy-MM-dd_HH-mm-ss)) + ".txt")
 
         # Create KeyPath Directory
         if (!(Test-Path $KeyPath)) {
