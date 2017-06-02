@@ -21,42 +21,27 @@ function Get-LAMailboxHoldColumns {
     }
    
     Process {
-        $Holds = "c:\scripts\lausd\withHolds-" + ($(get-date -Format yyyy-MM-dd_HH-mm-ss) + ".csv")
-        $NoHolds = "c:\scripts\lausd\withoutHolds-" + ($(get-date -Format yyyy-MM-dd_HH-mm-ss) + ".csv")
-        $headerstring = "userprincipalname, IsInactiveMailbox, accountdisabled, RecipientTypeDetails"
-        Out-File -FilePath $Holds -InputObject $headerstring -Encoding UTF8
-        Out-File -FilePath $NoHolds -InputObject $headerstring -Encoding UTF8
-
-        $mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize 300 | Select userprincipalname, inplaceholds, IsInactiveMailbox, accountdisabled, RecipientTypeDetails
-        $HoldList = Get-MailboxSearch | Select Name, InPlaceHoldIdentity
+        $resultArray = @()
+        $mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize 200 | Select userprincipalname, inplaceholds, IsInactiveMailbox, accountdisabled, RecipientTypeDetails
+        $mbxSearch = Get-MailboxSearch | Select Name, InPlaceHoldIdentity
         $hash = @{}
-        foreach ($Hold in $HoldList) {
-            $hash.add($hold.InPlaceHoldIdentity, $hold.name)
-        }
-        foreach ($row in $mailbox) {
-            $new = @()
-            if ($row.inplaceholds) {
-                if ($row.inplaceholds.split().count -gt 1) {
-                    ForEach ($hold in $row.inplaceholds.split()) {
-                        $temp = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                        $new += $temp.Value + ","
-                        $new = $new.trim()
-                    }
-                    $new = $new.trim(",")
-                }
-                else {
-                    ForEach ($hold in $row.inplaceholds.split()) {
-                        $temp = $hash.GetEnumerator() | Where {$_.Name -match $hold}
-                        $new += $temp.Value
-                    }
-                }   
-                $row.userprincipalname + "," + $row.IsInactiveMailbox + "," + $row.accountdisabled + "," + $row.RecipientTypeDetails + "," + $new | Out-File -FilePath $Holds -Encoding UTF8 -append
-            } # BELOW CREATES CSV ROWS OF USERS WITHOUT IN-PLACE HOLDS
-            else {
-                $row.userprincipalname + "," + $row.IsInactiveMailbox + "," + $row.accountdisabled + "," + $row.RecipientTypeDetails | Out-File -FilePath $NoHolds -Encoding UTF8 -append
+        foreach ($sRow in $mbxSearch) {
+            foreach ($id in $sRow.InPlaceHoldIdentity) {
+                $hash[$id] = $sRow 
             }
+        }
+        $mailboxhash = @{}
+        foreach ($row in $mailbox) {
+            $mailboxhash['UPN'] = ($($row.userprincipalname))
+            $i = 0
+            ForEach ($guid in $row.inplaceholds) {
+                $i++
+                $mailboxhash['HOLDS' + $i] = ($hash[$guid]).name -join ","
+            }
+            $resultArray += [psCustomObject]$mailboxHash
         }
     }
     End {
+        ([psCustomObject]$resultArray)
     }
 }
