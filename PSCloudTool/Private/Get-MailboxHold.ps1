@@ -1,4 +1,4 @@
-function Get-LAMailboxHold {
+function Get-MailboxHold {
     [CmdletBinding()]
     Param
     (
@@ -10,7 +10,7 @@ function Get-LAMailboxHold {
     Process {
         $resultArray = @()
         $findParameter = "InPlaceHolds"
-        $mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize 10 | Select DisplayName, accountdisabled, IsInactiveMailbox, RecipientTypeDetails, UserPrincipalName, LitigationHoldEnabled, RetentionPolicy, RecoverableItemsQuota, InPlaceHolds
+        $mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize 600 | Select DisplayName, accountdisabled, IsInactiveMailbox, RecipientTypeDetails, UserPrincipalName, LitigationHoldEnabled, RetentionPolicy, RecoverableItemsQuota, InPlaceHolds
         $mbxSearch = Get-MailboxSearch -ResultSize unlimited | select name, inplaceholdidentity, Status, version, StartDate, EndDate, sourcemailboxes, ItemHoldPeriod
         $mailboxProperties = $mailbox | Get-Member -MemberType 'NoteProperty' | Select Name
         

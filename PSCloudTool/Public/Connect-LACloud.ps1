@@ -14,7 +14,7 @@ function Connect-LACloud {
     (
 
         [parameter(Mandatory = $true)]
-        [string] $Customer,
+        [string] $Tenant,
        
         [Parameter(Mandatory = $false)]
         [switch] $All365,
@@ -45,11 +45,11 @@ function Connect-LACloud {
         $KeyPath = $Rootpath + "creds\"
 
         # Create Directory for Transact Logs
-        if (!(Test-Path ($RootPath + $Customer + "\logs\"))) {
-            New-Item -ItemType Directory -Force -Path ($RootPath + $Customer + "\logs\")
+        if (!(Test-Path ($RootPath + $Tenant + "\logs\"))) {
+            New-Item -ItemType Directory -Force -Path ($RootPath + $Tenant + "\logs\")
         }
 
-        Start-Transcript -path ($RootPath + $Customer + "\logs\" + "transcript-" + ($(get-date -Format _yyyy-MM-dd_HH-mm-ss)) + ".txt")
+        Start-Transcript -path ($RootPath + $Tenant + "\logs\" + "transcript-" + ($(get-date -Format _yyyy-MM-dd_HH-mm-ss)) + ".txt")
 
         # Create KeyPath Directory
         if (!(Test-Path $KeyPath)) {
@@ -60,15 +60,15 @@ function Connect-LACloud {
                 throw $_.Exception.Message
             }           
         }
-        if (Test-Path ($KeyPath + "$($Customer).cred")) {
-            $PwdSecureString = Get-Content ($KeyPath + "$($Customer).cred") | ConvertTo-SecureString
-            $UsernameString = Get-Content ($KeyPath + "$($Customer).ucred") 
+        if (Test-Path ($KeyPath + "$($Tenant).cred")) {
+            $PwdSecureString = Get-Content ($KeyPath + "$($Tenant).cred") | ConvertTo-SecureString
+            $UsernameString = Get-Content ($KeyPath + "$($Tenant).ucred") 
             $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $UsernameString, $PwdSecureString 
         }
         else {
             $Credential = Get-Credential -Message "Enter a user name and password"
-            $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Customer.cred" -Force
-            $Credential.UserName | Out-File "$($KeyPath)\$Customer.ucred"
+            $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Tenant.cred" -Force
+            $Credential.UserName | Out-File "$($KeyPath)\$Tenant.ucred"
         }
 
         # Office 365 Tenant
@@ -86,13 +86,7 @@ function Connect-LACloud {
             Export-PSSession $ccSession -OutputModule ComplianceCenter -Force
             Import-Module ComplianceCenter -Scope Global
         }
-
-        # Sharepoint Online
-        if ($Sharepoint -or $All365) {
-            Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking
-            Connect-SPOService -Url ("https://" + $Customer + "-admin.sharepoint.com") -credential $Credential
-        }
-
+        
         # Skype Online
         if ($Skype -or $All365) {
             Import-Module SkypeOnlineConnector
@@ -100,15 +94,22 @@ function Connect-LACloud {
             Import-PSSession $sfboSession
         }
 
+        # Sharepoint Online
+        if ($Sharepoint -or $All365) {
+            Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking -Verbose
+            Connect-SPOService -Url ("https://" + $Tenant + "-admin.sharepoint.com") -credential $Credential
+
+        }
+
         # Azure
         if ($Azure) {
-            if (!(Test-Path ($KeyPath + $Customer + ".json"))) {
+            if (!(Test-Path ($KeyPath + $Tenant + ".json"))) {
                 Login-AzureRmAccount
-                Save-AzureRmContext -Path ($KeyPath + $Customer + ".json")
-                Import-AzureRmContext -Path ($KeyPath + $Customer + ".json")
+                Save-AzureRmContext -Path ($KeyPath + $Tenant + ".json")
+                Import-AzureRmContext -Path ($KeyPath + $Tenant + ".json")
             }
             else {
-                Import-AzureRmContext -Path ($KeyPath + $Customer + ".json")
+                Import-AzureRmContext -Path ($KeyPath + $Tenant + ".json")
             }
             Write-Output "Select Subscription and Click "OK" in lower right-hand corner"
             $subscription = Get-AzureRmSubscription | Out-GridView -PassThru | Select id
