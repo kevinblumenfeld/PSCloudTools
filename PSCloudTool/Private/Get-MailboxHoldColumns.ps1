@@ -17,7 +17,7 @@ function Get-MailboxHoldColumns {
         Out-File -FilePath $Holds -InputObject $headerstring -Encoding UTF8
         Out-File -FilePath $NoHolds -InputObject $headerstring -Encoding UTF8
 
-        $mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize 10 | Select displayname, userprincipalname, inplaceholds, IsInactiveMailbox, accountdisabled, RecipientTypeDetails
+        $mailbox = Get-Mailbox -IncludeInactiveMailbox -ResultSize unlimited | Select displayname, userprincipalname, inplaceholds, IsInactiveMailbox, accountdisabled, RecipientTypeDetails
         $HoldList = Get-MailboxSearch | Select Name, InPlaceHoldIdentity
         $hash = @{}
         foreach ($Hold in $HoldList) {
