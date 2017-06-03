@@ -1,13 +1,3 @@
-<#
-.Synopsis
-   Short description
-.DESCRIPTION
-   Long description
-.EXAMPLE
-   Example of how to use this cmdlet
-.EXAMPLE
-   Another example of how to use this cmdlet
-#>
 function Get-MailboxHoldColumns {
     [CmdletBinding()]
 
@@ -53,7 +43,7 @@ function Get-MailboxHoldColumns {
                 "`"" + $row.displayname + "`"" + "," + $row.userprincipalname + "," + $row.IsInactiveMailbox + "," + $row.accountdisabled + "," + $row.RecipientTypeDetails + "," + $new | Out-File -FilePath $Holds -Encoding UTF8 -append
             } # BELOW CREATES CSV ROWS OF USERS WITHOUT IN-PLACE HOLDS
             else {
-               "`"" + $row.displayname + "`"" + "," + $row.userprincipalname + "," + $row.IsInactiveMailbox + "," + $row.accountdisabled + "," + $row.RecipientTypeDetails | Out-File -FilePath $NoHolds -Encoding UTF8 -append
+                "`"" + $row.displayname + "`"" + "," + $row.userprincipalname + "," + $row.IsInactiveMailbox + "," + $row.accountdisabled + "," + $row.RecipientTypeDetails | Out-File -FilePath $NoHolds -Encoding UTF8 -append
             }
         }
     }

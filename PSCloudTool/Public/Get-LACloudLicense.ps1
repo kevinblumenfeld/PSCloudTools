@@ -1,17 +1,14 @@
 ﻿function Get-LACloudLicense { 
-    <#
-    .SYNOPSIS
-    Short description
-    
-    .DESCRIPTION
-    Long description
-    
-    .EXAMPLE
-    An example
-    
-    .NOTES
-    General notes
-    #>
+<#
+.Synopsis
+   Short description
+.DESCRIPTION
+   Long description
+.EXAMPLE
+   Example of how to use this cmdlet
+.EXAMPLE
+   Another example of how to use this cmdlet
+#>
     Begin {
 
     }

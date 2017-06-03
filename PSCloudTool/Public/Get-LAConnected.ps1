@@ -1,4 +1,4 @@
-function Connect-LACloud {
+function Get-LAConnected {
     <#
 .Synopsis
    Short description

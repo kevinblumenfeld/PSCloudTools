@@ -1,8 +1,22 @@
-function Get-LARetention() {
+function Get-LARetention {
+    <#
+.Synopsis
+   Short description
+.DESCRIPTION
+   Long description
+.EXAMPLE
+   Example of how to use this cmdlet
+.EXAMPLE
+   Another example of how to use this cmdlet
+#>
     [CmdletBinding()]
     Param
     (
+        [Parameter(Mandatory = $false)]
+        [switch] $SortbyTag,
 
+        [Parameter(Mandatory = $false)]
+        [switch] $SortbyPolicy
     )
     Begin {
 
@@ -38,6 +52,11 @@ function Get-LARetention() {
         }
     }
     End {
-        [psCustomObject]$resultArray
+        If ($SortbyTag) {
+            $resultArray | Select "IsDefault", "Name", "TagName", "TagAgeLimit", "TagAction", "TagType", "TagEnabled", "TagComment", "RetentionPolicyTagLinks", "Identity" | Sort TagName
+        }
+        else {
+            $resultArray | Select "IsDefault", "Name", "TagName", "TagAgeLimit", "TagAction", "TagType", "TagEnabled", "TagComment", "RetentionPolicyTagLinks", "Identity" | Sort Name        
+        }
     }
 }

@@ -1,4 +1,14 @@
-function Get-LALitigationHold {
+function Get-LAMailboxLitigationHold {
+    <#
+.Synopsis
+   Short description
+.DESCRIPTION
+   Long description
+.EXAMPLE
+   Example of how to use this cmdlet
+.EXAMPLE
+   Another example of how to use this cmdlet
+#>
     [CmdletBinding()]
     Param
     (
@@ -8,9 +18,8 @@ function Get-LALitigationHold {
         [string[]] $list
     )
     Begin {
-        $row = @()
         $resultArray = @()
-        $mailboxProperties = @("DisplayName", "IsMailboxEnabled", "AccountDisabled", "archivename", "UserPrincipalName", "Office", "RetainDeletedItemsFor", "LitigationHoldEnabled", "LitigationHoldDuration", "LitigationHoldDate", "LitigationHoldOwner", "RetentionPolicy", "SingleItemRecoveryEnabled", "RecipientTypeDetails", "UseDatabaseRetentionDefaults", "RecoverableItemsQuota", "RoleAssignmentPolicy")
+        $mailboxProperties = @("DisplayName", "IsMailboxEnabled", "AccountDisabled", "LitigationHoldEnabled", "LitigationHoldDuration", "LitigationHoldDate", "LitigationHoldOwner", "UserPrincipalName", "Office", "RetainDeletedItemsFor", "RetentionPolicy", "SingleItemRecoveryEnabled", "RecipientTypeDetails", "UseDatabaseRetentionDefaults", "RecoverableItemsQuota", "archivename", "RoleAssignmentPolicy")
     }
     Process {
         $entry = Get-Mailbox -identity $_.UserPrincipalName
