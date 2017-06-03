@@ -20,6 +20,9 @@ function Get-LAConnected {
         [switch] $All365,
                 
         [Parameter(Mandatory = $false)]
+        [switch] $AzureOnly,        
+                 
+        [Parameter(Mandatory = $false)]
         [switch] $Azure,        
  
         [parameter(Mandatory = $false)]
@@ -60,25 +63,29 @@ function Get-LAConnected {
                 throw $_.Exception.Message
             }           
         }
-        if (Test-Path ($KeyPath + "$($Tenant).cred")) {
-            $PwdSecureString = Get-Content ($KeyPath + "$($Tenant).cred") | ConvertTo-SecureString
-            $UsernameString = Get-Content ($KeyPath + "$($Tenant).ucred") 
-            $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $UsernameString, $PwdSecureString 
+        if (! $AzureOnly) {
+            if (Test-Path ($KeyPath + "$($Tenant).cred")) {
+                $PwdSecureString = Get-Content ($KeyPath + "$($Tenant).cred") | ConvertTo-SecureString
+                $UsernameString = Get-Content ($KeyPath + "$($Tenant).ucred") 
+                $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $UsernameString, $PwdSecureString 
+            }
+            else {
+                $Credential = Get-Credential -Message "Enter a user name and password"
+                $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Tenant.cred" -Force
+                $Credential.UserName | Out-File "$($KeyPath)\$Tenant.ucred"
+            }
         }
-        else {
-            $Credential = Get-Credential -Message "Enter a user name and password"
-            $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Tenant.cred" -Force
-            $Credential.UserName | Out-File "$($KeyPath)\$Tenant.ucred"
+        if (! $AzureOnly) {
+            # Office 365 Tenant
+            Import-Module MsOnline
+            Connect-MsolService -Credential $Credential
+
+            # Exchange Online
+            $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell -Credential $Credential -Authentication Basic -AllowRedirection -Verbose
+            Export-PSSession $Session -OutputModule ExchangeOnline -Force
+            Import-Module ExchangeOnline -Scope Global
+
         }
-
-        # Office 365 Tenant
-        Import-Module MsOnline
-        Connect-MsolService -Credential $Credential
-
-        # Exchange Online
-        $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell -Credential $Credential -Authentication Basic -AllowRedirection -Verbose
-        Export-PSSession $Session -OutputModule ExchangeOnline -Force
-        Import-Module ExchangeOnline -Scope Global
 
         # Security and Compliance Center
         if ($Compliance -or $All365) {
@@ -102,7 +109,7 @@ function Get-LAConnected {
         }
 
         # Azure
-        if ($Azure) {
+        if ($Azure -or $AzureOnly) {
             if (!(Test-Path ($KeyPath + $Tenant + ".json"))) {
                 Login-AzureRmAccount
                 Save-AzureRmContext -Path ($KeyPath + $Tenant + ".json")

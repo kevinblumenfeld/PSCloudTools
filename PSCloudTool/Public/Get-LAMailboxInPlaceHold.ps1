@@ -35,7 +35,7 @@ function Get-LAMailboxInPlaceHold {
             $mailboxProperties = Get-Mailbox -Identity $_.userprincipalname | Select displayname, userprincipalname, IsInactiveMailbox, accountdisabled, RecipientTypeDetails, inplaceholds| Get-Member -MemberType 'NoteProperty' | Select Name
         }
         foreach ($mailbox in $list) {   
-            $row = Get-Mailbox -Identity $mailbox
+            $row = Get-Mailbox -ResultSize 1 -Identity $mailbox
             ForEach ($guid in $row.$findParameter) {
                 $mailboxHash = @{}
                 $mailboxHash['InPlaceHoldName'] = ($hash[$guid]).name
