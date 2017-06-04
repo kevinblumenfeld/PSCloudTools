@@ -12,15 +12,18 @@ function Get-LAMailboxInPlaceHold {
     [CmdletBinding()]
     Param
     (
+        [Parameter(Mandatory = $false)]
+        [switch] $WithoutInPlaceHold,
+        
         [Parameter(Mandatory = $true,
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true)]
-        [string[]] $list
+        [object[]]$list
     )
     Begin {
-        $row = @()
         $resultArray = @()
         $findParameter = "InPlaceHolds"
+        $mailboxProperties = @("displayname", "userprincipalname", "IsInactiveMailbox", "accountdisabled", "RecipientTypeDetails", "inplaceholds")
         $mbxSearch = Get-MailboxSearch -ResultSize unlimited | select name, inplaceholdidentity, Status, version, StartDate, EndDate, sourcemailboxes, ItemHoldPeriod
                 
         $hash = @{}
@@ -31,22 +34,39 @@ function Get-LAMailboxInPlaceHold {
         }
     }
     Process {
-        if (! $mailboxProperties) {
-            $mailboxProperties = Get-Mailbox -Identity $_.userprincipalname | Select displayname, userprincipalname, IsInactiveMailbox, accountdisabled, RecipientTypeDetails, inplaceholds| Get-Member -MemberType 'NoteProperty' | Select Name
+        if ($WithoutInPlaceHold) {
+            $each = Get-Mailbox -Identity $_.userprincipalname | where {$_.inplaceholds -eq $null}
+            foreach ($mailbox in $each) {   
+                ForEach ($guid in $mailbox.$findParameter) {
+                    $mailboxHash = @{}
+                    $mailboxHash['InPlaceHoldName'] = ($hash[$guid]).name
+                    $mailboxHash['StatusofHold'] = ($hash[$guid]).Status
+                    $mailboxHash['StartDate'] = ($hash[$guid]).StartDate
+                    $mailboxHash['EndDate'] = ($hash[$guid]).EndDate    
+                    $mailboxHash['ItemHoldPeriod'] = ($hash[$guid]).ItemHoldPeriod   
+                    foreach ($field in $mailboxProperties) {
+                        $mailboxHash[$field] = ($mailbox.$field) -join ","
+                    }                                            
+                    $resultArray += [psCustomObject]$mailboxHash        
+                }
+            }
         }
-        foreach ($mailbox in $list) {   
-            $row = Get-Mailbox -ResultSize 1 -Identity $mailbox
-            ForEach ($guid in $row.$findParameter) {
-                $mailboxHash = @{}
-                $mailboxHash['InPlaceHoldName'] = ($hash[$guid]).name
-                $mailboxHash['StatusofHold'] = ($hash[$guid]).Status
-                $mailboxHash['StartDate'] = ($hash[$guid]).StartDate
-                $mailboxHash['EndDate'] = ($hash[$guid]).EndDate    
-                $mailboxHash['ItemHoldPeriod'] = ($hash[$guid]).ItemHoldPeriod   
-                foreach ($field in $mailboxProperties.name) {
-                    $mailboxHash[$field] = ($row.$field) -join ","
-                }                                            
-                $resultArray += [psCustomObject]$mailboxHash        
+        else {
+            $each = Get-Mailbox -Identity $_.userprincipalname
+            foreach ($mailbox in $each) {   
+            
+                ForEach ($guid in $mailbox.$findParameter) {
+                    $mailboxHash = @{}
+                    $mailboxHash['InPlaceHoldName'] = ($hash[$guid]).name
+                    $mailboxHash['StatusofHold'] = ($hash[$guid]).Status
+                    $mailboxHash['StartDate'] = ($hash[$guid]).StartDate
+                    $mailboxHash['EndDate'] = ($hash[$guid]).EndDate    
+                    $mailboxHash['ItemHoldPeriod'] = ($hash[$guid]).ItemHoldPeriod   
+                    foreach ($field in $mailboxProperties) {
+                        $mailboxHash[$field] = ($mailbox.$field) -join ","
+                    }                                            
+                    $resultArray += [psCustomObject]$mailboxHash        
+                }
             }
         }
     }

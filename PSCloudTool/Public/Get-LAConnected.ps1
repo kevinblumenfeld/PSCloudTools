@@ -23,7 +23,7 @@ function Get-LAConnected {
         [switch] $AzureOnly,        
                  
         [Parameter(Mandatory = $false)]
-        [switch] $Azure,        
+        [switch] $AzureAnd365,        
  
         [parameter(Mandatory = $false)]
         [switch] $Skype,
@@ -109,7 +109,7 @@ function Get-LAConnected {
         }
 
         # Azure
-        if ($Azure -or $AzureOnly) {
+        if ($AzureAnd365 -or $AzureOnly) {
             if (!(Test-Path ($KeyPath + $Tenant + ".json"))) {
                 Login-AzureRmAccount
                 Save-AzureRmContext -Path ($KeyPath + $Tenant + ".json")
