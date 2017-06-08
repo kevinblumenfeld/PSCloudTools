@@ -33,6 +33,9 @@ function Get-LAConnected {
          
         [parameter(Mandatory = $false)]
         [switch] $Compliance,
+
+        [parameter(Mandatory = $false)]
+        [switch] $ComplianceLegacy,
           
         [parameter(Mandatory = $false)]
         [switch] $AzurePreview
@@ -92,6 +95,13 @@ function Get-LAConnected {
             $ccSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $credential -Authentication Basic -AllowRedirection
             Export-PSSession $ccSession -OutputModule ComplianceCenter -Force
             Import-Module ComplianceCenter -Scope Global
+        }
+
+        if ($ComplianceLegacy) {
+            $UserCredential = Get-Credential 
+            $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid -Credential $UserCredential -Authentication Basic -AllowRedirection 
+            Import-PSSession $Session -AllowClobber -DisableNameChecking 
+            $Host.UI.RawUI.WindowTitle = $UserCredential.UserName + " (Office 365 Security & Compliance Center)"
         }
         
         # Skype Online

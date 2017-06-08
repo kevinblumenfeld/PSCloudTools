@@ -54,7 +54,6 @@ function Get-LAMailboxInPlaceHold {
         else {
             $each = Get-Mailbox -Identity $_.userprincipalname
             foreach ($mailbox in $each) {   
-            
                 ForEach ($guid in $mailbox.$findParameter) {
                     $mailboxHash = @{}
                     $mailboxHash['InPlaceHoldName'] = ($hash[$guid]).name
