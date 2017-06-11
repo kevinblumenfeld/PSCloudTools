@@ -34,8 +34,9 @@ function Get-LAMailboxInPlaceHold {
         }
     }
     Process {
-        if ($WithoutInPlaceHold) {
-            $each = Get-Mailbox -Identity $_.userprincipalname | where {$_.inplaceholds -eq $null}
+        if (!($WithoutInPlaceHold)) {
+            $each = Get-Mailbox -Identity $_.userprincipalname
+            write-host "UPN: $($each.userprincipalname)"
             foreach ($mailbox in $each) {   
                 ForEach ($guid in $mailbox.$findParameter) {
                     $mailboxHash = @{}
@@ -52,7 +53,8 @@ function Get-LAMailboxInPlaceHold {
             }
         }
         else {
-            $each = Get-Mailbox -Identity $_.userprincipalname
+            $each = Get-Mailbox -Identity $_.userprincipalname | where {$_.inplaceholds -eq $null}
+            write-host "NoHold UPN: $($each.userprincipalname)"
             foreach ($mailbox in $each) {   
                 ForEach ($guid in $mailbox.$findParameter) {
                     $mailboxHash = @{}
