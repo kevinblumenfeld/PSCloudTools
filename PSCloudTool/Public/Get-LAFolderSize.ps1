@@ -10,6 +10,7 @@ function Get-LAFolderSize {
         $resultArray = @()
     }
     Process {
+        Write-Verbose "UPN: $UserPrincipalName"
         $mboxsize = Get-MailboxStatistics $userprincipalname | select-Object -ExpandProperty TotalItemSize | Select  @{name = "Size"; expression = {[math]::Round((($_.Value.ToString()).Split("(")[1].Split(" ")[0].Replace(",", "") / 1GB), 2)}}
         $reitemsize = (Get-MailboxFolderStatistics $userprincipalname -FolderScope RecoverableItems)[0] | select @{name = "Size"; expression = {[math]::Round((($_.FolderAndSubfolderSize.ToString()).Split("(")[1].Split(" ")[0].Replace(",", "") / 1GB), 2)}}
         $hash = [Ordered]@{}
