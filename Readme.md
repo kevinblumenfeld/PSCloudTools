@@ -1,15 +1,14 @@
 # Project Name
 
-PSCloudTool - A series of Office 365 tools
+ PSCompliance: A set of tools to report on cloud compliance objects.
 
 ## Installation
 
-TODO: Describe the installation process
+Drop the entire module (including folder structure) in any path found when running: PS C:\> $env:PSModulePath
 
 ## Usage
 
-TODO: Write usage instructions
+
 
 ## History
 
-TODO: Write history
