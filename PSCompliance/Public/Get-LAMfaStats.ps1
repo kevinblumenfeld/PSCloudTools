@@ -1,4 +1,4 @@
-function Get-LAMfaStats {
+function Get-LAmfaStats {
     <#
 .Synopsis
    Short description
