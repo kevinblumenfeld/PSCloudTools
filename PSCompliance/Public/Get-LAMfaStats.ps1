@@ -15,21 +15,39 @@ function Get-LAMfaStats {
         [Parameter(Mandatory = $true,
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true)]
-        [string[]] $userprincipalname
+        [string[]] $userprincipalname,
+        
+        [Parameter(Mandatory = $false)]
+        [switch] $Archive,
+  
+        [Parameter(Mandatory = $false)]
+        [switch] $StartMFA
     )
     Begin {
         $resultarray = @()
     }
     Process {
-        $logProps = Export-MailboxDiagnosticLogs $_.userprincipalname -ExtendedProperties
-        $xmlprops = [xml]($logProps.MailboxLog)
-        $stats = $xmlprops.Properties.MailboxTable.Property | ? {$_.Name -like "ELC*"} 
-        $statHash = [ordered]@{}
-        for ($i = 0; $i -lt $stats.count; $i++) {
-            $statHash['UPN'] = $_.userprincipalname
-            $statHash[$stats[$i].name] = $stats[$i].value
+        if ($StartMFA) {
+            Write-Output "Starting Managed Folder Assistant on: $($_.UserPrincipalName)"
+            Start-ManagedFolderAssistant $_.userprincipalname
         }
-        $resultarray += [PSCustomObject]$statHash
+        else {
+            if ($Archive) {
+                $logProps = Export-MailboxDiagnosticLogs $_.userprincipalname -ExtendedProperties -Archive
+            }
+            else {
+                $logProps = Export-MailboxDiagnosticLogs $_.userprincipalname -ExtendedProperties
+            }
+            $xmlprops = [xml]($logProps.MailboxLog)
+            $stats = $xmlprops.Properties.MailboxTable.Property | ? {$_.Name -like "ELC*"} 
+            $statHash = [ordered]@{}
+            for ($i = 0; $i -lt $stats.count; $i++) {
+                $statHash['UPN'] = $_.userprincipalname
+                $statHash[$stats[$i].name] = $stats[$i].value
+            }
+            $resultarray += [PSCustomObject]$statHash
+        }
+
     }
     End {
         $resultarray
