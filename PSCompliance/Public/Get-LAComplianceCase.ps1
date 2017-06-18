@@ -1,5 +1,26 @@
 function Get-LAComplianceCase {
+<#
 
+.SYNOPSIS
+   Retrieve Office 365 Compliance Cases, holds and hold queries
+
+.DESCRIPTION
+   All Office 365 Compliance Cases are returned from the Office 365 Security & Compliance Center.
+   Additionally, each case's hold (Exchange and/or SharePoint) are returned.
+
+.EXAMPLE
+   Get-LAComplianceCase
+   User is prompted for path for output.  Simply enter a path and not the file name:
+   
+   This is what the user will see:
+   Enter a file path to save the report to a .csv file:
+
+   Enter the following, for example: c:\scripts\test
+   
+   This is what the user will see:
+   Enter a file path to save the report to a .csv file: c:\scripts\test
+
+#>
     #script begin
     write-host "***********************************************"
     write-host "   Office 365 Security & Compliance Center   " -foregroundColor yellow -backgroundcolor darkgreen

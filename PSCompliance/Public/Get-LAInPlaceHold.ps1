@@ -1,13 +1,18 @@
 function Get-LAInPlaceHold {
     <#
-.Synopsis
-   Short description
+.SYNOPSIS
+   Reports on in-place holds in the legacy Exchange specific, "Compliance Management > in-place eDiscovery & hold"
+
 .DESCRIPTION
-   Long description
+   Reports on in-place holds in the legacy Exchange specific, "Compliance Management > in-place eDiscovery & hold"
+   This does not report of each mailbox that is on hold - Get-LAMailboxInPlaceHold to report on that.
+
 .EXAMPLE
-   Example of how to use this cmdlet
+   Get-LAInPlaceHold | Export-Csv ./LegacyHolds.csv -notypeinformation
+
 .EXAMPLE
-   Another example of how to use this cmdlet
+   Get-LAInPlaceHold | Out-GridView
+
 #>
     [CmdletBinding()]
     Param

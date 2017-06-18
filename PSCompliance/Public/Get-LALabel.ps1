@@ -1,13 +1,21 @@
 function Get-LALabel {
     <#
 .Synopsis
-   Short description
+   Report on each Label Policy and the Labels linked to each(policy).  Also, reports on Office 365 Retention Policies
+
 .DESCRIPTION
-   Long description
+   Report on each Label Policy and the Labels linked to each(policy).  Also, reports on Office 365 Retention Policies
+
+   Make sure you are first connected to compliance when using Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
+
 .EXAMPLE
-   Example of how to use this cmdlet
+   Get-LAConnected -Tenant Contoso -Compliance
+   Get-LALabel | Out-GridView
+
 .EXAMPLE
-   Another example of how to use this cmdlet
+   Get-LAConnected -Tenant Contoso -Compliance
+   Get-LALabel | Export-Csv ./labelsandpols.csv -notypeinformation
+
 #>
     [CmdletBinding()]
     Param
