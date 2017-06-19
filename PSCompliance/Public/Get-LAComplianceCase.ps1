@@ -8,6 +8,8 @@ function Get-LAComplianceCase {
    All Office 365 Compliance Cases are returned from the Office 365 Security & Compliance Center.
    Additionally, each case's hold (Exchange and/or SharePoint) are returned.
 
+   Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
+
 .EXAMPLE
    Get-LAComplianceCase
    User is prompted for path for output.  Simply enter a path and not the file name:

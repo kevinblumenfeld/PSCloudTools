@@ -6,7 +6,7 @@ function Get-LALabel {
 .DESCRIPTION
    Report on each Label Policy and the Labels linked to each(policy).  Also, reports on Office 365 Retention Policies
 
-   Make sure you are first connected to compliance when using Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
+   Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
 
 .EXAMPLE
    Get-LAConnected -Tenant Contoso -Compliance
