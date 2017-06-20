@@ -28,7 +28,7 @@ function Get-LALabel {
     Process {
         $resultArray = @()
         $policies = Get-RetentionCompliancePolicy | Select name, guid, comment, type
-        $rules = Get-RetentionComplianceRule | Select Policy, RetentionComplianceAction, RetentionDuration, Priority, mode, ContentMatchQuery, disabled, ApplyComplianceTag, @{n = "LabelName"; e = {($_.ComplianceTagProperty).split(",")[1]}}, @{n = "LabelGuid"; e = {($_.ComplianceTagProperty).split(",")[0]}}
+        $rules = Get-RetentionComplianceRule | Select Name, Policy, RetentionComplianceAction, RetentionDuration, Priority, mode, ContentMatchQuery, disabled, ApplyComplianceTag, @{n = "LabelName"; e = {($_.ComplianceTagProperty).split(",")[1]}}, @{n = "LabelGuid"; e = {($_.ComplianceTagProperty).split(",")[0]}}
         $tags = Get-ComplianceTag | Select name, guid, isRecordLabel, RetentionAction, RetentionDuration
 
         $policyHash = @{}
@@ -70,12 +70,10 @@ function Get-LALabel {
         }
 
         foreach ($rule in $rules) { 
-            if (!($rule.LabelName) -and !($ApplyComplianceTag)) {
-                write-host "Office 365 Retention Policies sorted here"
-                # Write-Host "LABELNAME:  $($rule.LabelName)"
-                # Write-Host "Apply:   $ApplyComplianceTag"
+            if ((((($rule.name).split("-"))[0]) -ne 'ctaptr') -and (((($rule.name).split("-"))[0]) -ne 'ctptr') ) {
+                write-host "Office 365 Retention Policies without KQL sorted here"
                 $ruleHash = [ordered]@{}
-                $ruleHash['LabelName'] = "(No Labels in 365 Retention Policies)"
+                $ruleHash['LabelName'] = "(Non-KQL O365 Retention Policies)"
                 $ruleHash['PolicyName'] = $policyHash[$rule.policy].name
                 $ruleHash['RetentionComplianceAction'] = $rule.RetentionComplianceAction
                 $ruleHash['RetentionDuration'] = $rule.RetentionDuration
@@ -86,10 +84,11 @@ function Get-LALabel {
                                                           
                 $resultArray += [psCustomObject]$ruleHash
             }
-            if ($rule.ApplyComplianceTag) {
-                write-host "Auto-Apply Labels are sorted here"
+
+            if ((((($rule.name).split("-"))[0]) -eq 'ctaptr')) {
+                write-host "Office 365 Retention Policies without KQL sorted here"
                 $ruleHash = [ordered]@{}
-                $ruleHash['LabelName'] = $tagHash[$rule.ApplyComplianceTag].name
+                $ruleHash['LabelName'] = "(Auto-Apply Label Policy or KQL O365 Retention Policy)"
                 $ruleHash['PolicyName'] = $policyHash[$rule.policy].name
                 $ruleHash['RetentionComplianceAction'] = $rule.RetentionComplianceAction
                 $ruleHash['RetentionDuration'] = $rule.RetentionDuration
@@ -99,9 +98,9 @@ function Get-LALabel {
                 $ruleHash['Disabled'] = $rule.Disabled   
                                                           
                 $resultArray += [psCustomObject]$ruleHash
-                
-            } 
-            if ($rule.LabelName) {
+            }
+            
+            if ((((($rule.name).split("-"))[0]) -eq 'ctptr')) {
                 write-host "Standard Labels sorted here"
                 $ruleHash = [ordered]@{}
                 $ruleHash['LabelName'] = $rule.LabelName
@@ -114,8 +113,7 @@ function Get-LALabel {
                 $ruleHash['Disabled'] = $rule.Disabled   
                                                           
                 $resultArray += [psCustomObject]$ruleHash  
-            }       
-
+            } 
         }
     }
     End {
