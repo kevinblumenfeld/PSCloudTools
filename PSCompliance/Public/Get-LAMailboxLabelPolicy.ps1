@@ -1,13 +1,50 @@
 function Get-LAMailboxLabelPolicy {
     <#
 .Synopsis
-   Short description
+   Reports on all Label Policies located in the Security and Compliance Center
+
 .DESCRIPTION
-   Long description
+   Reports on all Label Policies located in the Security and Compliance Center
+   Label Policies contain labels.
+
+   The Label Policies are applied to (either include OR exclude) 4 different locations/workflows.  
+   1. Exchange Email
+   2. SharePoint Sites
+   3. OneDrive Accounts
+   4. Office 365 Groups
+
+   A Label Policy can contain be made up either a set of inclusions or exclusions from anywhere to 1 - 4 locations/workflows.
+   For Example, a Label Policy cannot exclude the mailbox of USER01 and include the mailbox of USER02.  It is one or the other.
+
+   This function will display each policy and the included locations and/or the excluded locations of all 4 workflows.
+
+   If the location column displays, "ALL", then all locations of that workflow are included. For example, all mailboxes or all sharePoint sites
+   The location column will otherwise display a specific location, for example, a specific mailbox or specific sharepoint site.
+
+   The column ContentLocation can have one if 8 possibilities (all of which are fairly self-explainatory):
+
+   1. Exchange
+   2. SharePoint
+   3. OneDrive
+   4. Groups
+   5. Exchange_Exception
+   6. SharePoint_Exception
+   7. OneDrive_Exception
+   8. Groups_Exception   
+
 .EXAMPLE
-   Example of how to use this cmdlet
+   Get-LAMailboxLabelPolicy -All -WithExceptions | Out-GridView
+   This will display everything so this is a good command to start with.
+
 .EXAMPLE
-   Another example of how to use this cmdlet
+   Get-LAMailboxLabelPolicy -Exchange -OnlyExceptions | Out-GridView
+
+.EXAMPLE
+   Get-LAMailboxLabelPolicy -SharePoint -WithExceptions | Out-GridView
+
+.EXAMPLE
+   Get-LAMailboxLabelPolicy -SharePoint -OnlyExceptions | Export-Csv ./sharepointexceptions.csv -notypeinformation
+
 #>
     [CmdletBinding()]
     Param
@@ -50,7 +87,7 @@ function Get-LAMailboxLabelPolicy {
                         $hash['DisplayName'] = $policyLocation.DisplayName
                         $hash['Locations'] = $policyLocation.name
                         $hash['Policy'] = $labelPolicy.name
-                        $hash['ContentLocation'] = "OneDrive"
+                        $hash['ContentLocation'] = "SharePoint_Exception"
                         $hash['Exception'] = "True"
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
@@ -67,7 +104,7 @@ function Get-LAMailboxLabelPolicy {
                         $hash['DisplayName'] = $policyLocation.DisplayName
                         $hash['Locations'] = $policyLocation.name
                         $hash['Policy'] = $labelPolicy.name
-                        $hash['ContentLocation'] = "OneDrive"
+                        $hash['ContentLocation'] = "SharePoint"
                         $hash['Exception'] = "False"
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
@@ -90,7 +127,7 @@ function Get-LAMailboxLabelPolicy {
                         $hash['DisplayName'] = $policyLocation.DisplayName
                         $hash['Locations'] = $policyLocation.name
                         $hash['Policy'] = $labelPolicy.name
-                        $hash['ContentLocation'] = "OneDrive"
+                        $hash['ContentLocation'] = "OneDrive_Exception"
                         $hash['Exception'] = "True"
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
@@ -129,7 +166,7 @@ function Get-LAMailboxLabelPolicy {
                         $hash['DisplayName'] = $policyLocation.DisplayName
                         $hash['Locations'] = $policyLocation.name
                         $hash['Policy'] = $labelPolicy.name
-                        $hash['ContentLocation'] = "Skype"
+                        $hash['ContentLocation'] = "Skype_Exception"
                         $hash['Exception'] = "True"
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
@@ -168,7 +205,7 @@ function Get-LAMailboxLabelPolicy {
                         $hash['DisplayName'] = $policyLocation.DisplayName
                         $hash['Locations'] = $policyLocation.name
                         $hash['Policy'] = $labelPolicy.name
-                        $hash['ContentLocation'] = "Groups"
+                        $hash['ContentLocation'] = "Groups_Exception"
                         $hash['Exception'] = "True"
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
@@ -207,7 +244,7 @@ function Get-LAMailboxLabelPolicy {
                         $hash['DisplayName'] = $policyLocation.DisplayName
                         $hash['Locations'] = $policyLocation.name
                         $hash['Policy'] = $labelPolicy.name
-                        $hash['ContentLocation'] = "Exchange"
+                        $hash['ContentLocation'] = "Exchange_Exception"
                         $hash['Exception'] = "True"
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled

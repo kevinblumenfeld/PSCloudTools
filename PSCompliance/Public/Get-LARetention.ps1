@@ -1,22 +1,24 @@
 function Get-LARetention {
     <#
-.Synopsis
-   Short description
+.SYNOPSIS
+   Reports on Exchange Retention Policies, Retention Policy Tags and Retention Policy Tag Links
+
 .DESCRIPTION
-   Long description
+   Reports on Exchange Retention Policies, Retention Policy Tags and Retention Policy Tag Links
+   
+   This function will display all Retention Policy Tags and to which Retention Policy they are linked
+   
 .EXAMPLE
-   Example of how to use this cmdlet
+   Get-LARetention | Export-Csv ./Retention.csv -notypeinformation
+
 .EXAMPLE
-   Another example of how to use this cmdlet
+   Get-LARetention | Out-Gridview
+
 #>
     [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory = $false)]
-        [switch] $SortbyTag,
 
-        [Parameter(Mandatory = $false)]
-        [switch] $SortbyPolicy
     )
     Begin {
 
@@ -50,13 +52,30 @@ function Get-LARetention {
                 $resultArray += [psCustomObject]$polHash        
             }
         }
+        $links = @()
+        foreach ($nPolicy in $RetPols) {
+            foreach ($nId in $nPolicy.RetentionPolicyTagLinks) {
+                $links += $nId 
+            }
+        }
+        foreach ($nTag in $retTags) {
+            if ($links -notcontains $nTag.name) {
+                $polHash = @{}
+                $polHash['TagName'] = $nTag.name
+                $polHash['TagType'] = $nTag.type
+                $polHash['TagEnabled'] = $nTag.RetentionEnabled
+                $polHash['TagAgeLimit'] = $nTag.AgeLimitForRetention  
+                $polHash['TagAction'] = $nTag.RetentionAction
+                $polHash['TagComment'] = $nTag.Comment 
+                foreach ($field in $retPolProps.name) {
+                    $polHash[$field] = "Tag_Not_Linked" -join ","
+                }  
+                $resultArray += [psCustomObject]$polHash  
+            }
+           
+        }
     }
     End {
-        If ($SortbyTag) {
-            $resultArray | Select "IsDefault", "Name", "TagName", "TagAgeLimit", "TagAction", "TagType", "TagEnabled", "TagComment", "RetentionPolicyTagLinks", "Identity" | Sort TagName
-        }
-        else {
-            $resultArray | Select "IsDefault", "Name", "TagName", "TagAgeLimit", "TagAction", "TagType", "TagEnabled", "TagComment", "RetentionPolicyTagLinks", "Identity" | Sort Name        
-        }
+            $resultArray | Select "IsDefault", "Name", "TagName", "TagAgeLimit", "TagAction", "TagType", "TagEnabled", "TagComment", "RetentionPolicyTagLinks", "Identity" | Sort Name
     }
 }
