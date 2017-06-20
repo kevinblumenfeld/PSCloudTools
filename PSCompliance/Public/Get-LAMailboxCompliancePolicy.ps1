@@ -1,11 +1,12 @@
 function Get-LAMailboxCompliancePolicy {
     <#
-.Synopsis
+.SYNOPSIS
    Reports on all Label Policies and Office 365 Retention Policies located in the Security and Compliance Center
 
 .DESCRIPTION
    Reports on all Label Policies and Office 365 Retention Policies located in the Security and Compliance Center
-   Label Policies contain labels that are applied by end-users.
+   Label Policies contain labels that are applied by end-users or with Auto-Apply (E5 license required).
+   Note: Auto-Apply is by keyword or by Sensitive Data Types (Sensitive Data Types is only for OneDrive and SharePoint)
    Office 365 Retention Policies are applied by administrators.
    For Label Policies, this reports which users are presented with which labels.
    For Office 365 Retention Policies, this reports on where administrators have chosen to apply this policy.
@@ -18,7 +19,8 @@ function Get-LAMailboxCompliancePolicy {
 
    A Label or Retention Policy can contain be made up either a set of inclusions or exclusions from anywhere to one to four of the above workflows.
    It is worth noting, a Label or Retention Policy cannot exclude the mailbox of USER01 and include the mailbox of USER02.  
-   In other words, for each workflow, a policy can either include or exclude, not both.
+   So, when excluding certain mailboxes or sites for example, all other mailboxes or sites are included.
+   In contrast, When including certain mailbox or sites, all other mailboxes or site are excluded.
 
    This function will display each policy and the included locations or the excluded locations of all 4 workflows.
 
@@ -38,7 +40,7 @@ function Get-LAMailboxCompliancePolicy {
 
 .EXAMPLE
    Get-LAMailboxCompliancePolicy -All -WithExceptions | Out-GridView
-   * This will display everything so this is a good command to start with. *
+   * This will display everything, so this is a good command to start with *
 
 .EXAMPLE
    Get-LAMailboxCompliancePolicy -Exchange -OnlyExceptions | Out-GridView
@@ -78,13 +80,20 @@ function Get-LAMailboxCompliancePolicy {
         [switch] $OnlyExceptions
     )
     Begin {
+        $RetRules = Get-RetentionComplianceRule | Select Policy, ContentMatchQuery
+        $retresultArray = @()
+        $retRuleHash = @{}
+        foreach ($RetRule in $RetRules) {
+            $retRuleHash[$RetRule.Policy] = $RetRule.ContentMatchQuery
+            $retresultArray += [psCustomObject]$retRuleHash
+        }
         $resultArray = @()        
     
         if ($SharePoint -or $All) {
             for ($i = 0; $i -lt (Get-RetentionCompliancePolicy).count; $i++) {
                 $getPol = (Get-RetentionCompliancePolicy -DistributionDetail)[$i]
                 if ($WithExceptions -or $OnlyExceptions) {
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "SharePointSites"; e = {$getPol | Select -ExpandProperty SharePointLocationException}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, Guid, @{n = "SharePointSites"; e = {$getPol | Select -ExpandProperty SharePointLocationException}}
 
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.SharePointSites) {
@@ -96,13 +105,14 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
                 }
                 if (!($OnlyExceptions)) {
                     
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "SharePointSites"; e = {$getPol | Select -ExpandProperty SharePointLocation}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "SharePointSites"; e = {$getPol | Select -ExpandProperty SharePointLocation}}
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.SharePointSites) {
                         $hash['DisplayName'] = $policyLocation.DisplayName
@@ -113,6 +123,7 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
@@ -124,7 +135,7 @@ function Get-LAMailboxCompliancePolicy {
             for ($i = 0; $i -lt (Get-RetentionCompliancePolicy).count; $i++) {
                 $getPol = (Get-RetentionCompliancePolicy -DistributionDetail)[$i]
                 if ($WithExceptions -or $OnlyExceptions) {
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "OneDriveLocations"; e = {$getPol | Select -ExpandProperty OneDriveLocationException}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "OneDriveLocations"; e = {$getPol | Select -ExpandProperty OneDriveLocationException}}
 
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.OneDriveLocations) {
@@ -136,13 +147,14 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
                 }
                 if (!($OnlyExceptions)) {
                     
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "OneDriveLocations"; e = {$getPol | Select -ExpandProperty OneDriveLocation}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "OneDriveLocations"; e = {$getPol | Select -ExpandProperty OneDriveLocation}}
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.OneDriveLocations) {
                         $hash['DisplayName'] = $policyLocation.DisplayName
@@ -153,6 +165,7 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
@@ -163,7 +176,7 @@ function Get-LAMailboxCompliancePolicy {
             for ($i = 0; $i -lt (Get-RetentionCompliancePolicy).count; $i++) {
                 $getPol = (Get-RetentionCompliancePolicy -DistributionDetail)[$i]
                 if ($WithExceptions) {
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "SkypeLocations"; e = {$getPol | Select -ExpandProperty SkypeLocationException}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "SkypeLocations"; e = {$getPol | Select -ExpandProperty SkypeLocationException}}
 
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.SkypeLocations) {
@@ -175,13 +188,14 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
                 }
                 if (!($OnlyExceptions)) {
                     
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "SkypeLocations"; e = {$getPol | Select -ExpandProperty SkypeGroupLocation}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "SkypeLocations"; e = {$getPol | Select -ExpandProperty SkypeGroupLocation}}
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.SkypeLocations) {
                         $hash['DisplayName'] = $policyLocation.DisplayName
@@ -192,6 +206,7 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
@@ -202,7 +217,7 @@ function Get-LAMailboxCompliancePolicy {
             for ($i = 0; $i -lt (Get-RetentionCompliancePolicy).count; $i++) {
                 $getPol = (Get-RetentionCompliancePolicy -DistributionDetail)[$i]
                 if ($WithExceptions -or $OnlyExceptions) {
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "GroupLocations"; e = {$getPol | Select -ExpandProperty ModernGroupLocationException}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "GroupLocations"; e = {$getPol | Select -ExpandProperty ModernGroupLocationException}}
 
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.GroupLocations) {
@@ -214,13 +229,14 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
                 }
                 if (!($OnlyExceptions)) {
                     
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "GroupLocations"; e = {$getPol | Select -ExpandProperty ModernGroupLocation}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "GroupLocations"; e = {$getPol | Select -ExpandProperty ModernGroupLocation}}
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.GroupLocations) {
                         $hash['DisplayName'] = $policyLocation.DisplayName
@@ -231,6 +247,7 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
@@ -241,7 +258,7 @@ function Get-LAMailboxCompliancePolicy {
             for ($i = 0; $i -lt (Get-RetentionCompliancePolicy).count; $i++) {
                 $getPol = (Get-RetentionCompliancePolicy -DistributionDetail)[$i]
                 if ($WithExceptions -or $OnlyExceptions) {
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "Mailboxes"; e = {$getPol | Select -ExpandProperty ExchangeLocationException}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "Mailboxes"; e = {$getPol | Select -ExpandProperty ExchangeLocationException}}
 
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.Mailboxes) {
@@ -253,13 +270,14 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
                 }
                 if (!($OnlyExceptions)) {
                     
-                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, @{n = "Mailboxes"; e = {$getPol | Select -ExpandProperty ExchangeLocation}}
+                    $labelPolicy = $getPol | select name, type, enabled, mode, comment, guid, @{n = "Mailboxes"; e = {$getPol | Select -ExpandProperty ExchangeLocation}}
                     $hash = [ordered]@{}
                     foreach ($policyLocation in $labelPolicy.Mailboxes) {
                         $hash['DisplayName'] = $policyLocation.DisplayName
@@ -270,6 +288,7 @@ function Get-LAMailboxCompliancePolicy {
                         $hash['Type'] = $labelPolicy.type
                         $hash['Enabled'] = $labelPolicy.enabled
                         $hash['Mode'] = $labelPolicy.mode
+                        $hash['ContentQuery'] = $retRuleHash[$labelPolicy.Guid]
                         $hash['comment'] = $labelPolicy.comment
                         $resultArray += [psCustomObject]$hash  
                     } 
