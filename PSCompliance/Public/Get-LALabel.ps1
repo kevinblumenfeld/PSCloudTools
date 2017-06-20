@@ -20,11 +20,7 @@ function Get-LALabel {
     [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory = $false)]
-        [switch] $SortbyTag,
 
-        [Parameter(Mandatory = $false)]
-        [switch] $SortbyPolicy
     )
     Begin {
 
@@ -32,25 +28,97 @@ function Get-LALabel {
     Process {
         $resultArray = @()
         $policies = Get-RetentionCompliancePolicy | Select name, guid, comment, type
-        $labels = Get-RetentionComplianceRule | Select Policy, RetentionComplianceAction, RetentionDuration, Priority, mode, disabled, @{n = "LabelName"; e = {($_.ComplianceTagProperty).split(",")[1]}}
-        
+        $rules = Get-RetentionComplianceRule | Select Policy, RetentionComplianceAction, RetentionDuration, Priority, mode, ContentMatchQuery, disabled, ApplyComplianceTag, @{n = "LabelName"; e = {($_.ComplianceTagProperty).split(",")[1]}}, @{n = "LabelGuid"; e = {($_.ComplianceTagProperty).split(",")[0]}}
+        $tags = Get-ComplianceTag | Select name, guid, isRecordLabel, RetentionAction, RetentionDuration
+
         $policyHash = @{}
         foreach ($policy in $policies) {
             $policyHash[$policy.guid] = $policy 
         }
-        foreach ($label in $labels) {           
-            $labelHash = [ordered]@{}
-            $labelHash['LabelName'] = $label.LabelName
-            $labelHash['PolicyName'] = $policyHash[$label.policy].name
-            $labelHash['RetentionComplianceAction'] = $label.RetentionComplianceAction
-            $labelHash['RetentionDuration'] = $label.RetentionDuration
-            $labelHash['Priority'] = $label.Priority
-            $labelHash['Mode'] = $label.mode
-            $labelHash['Disabled'] = $label.Disabled                                                           
-            $resultArray += [psCustomObject]$labelHash        
+
+        $tagHash = @{}
+        foreach ($tag in $tags) {
+            $tagHash[$tag.guid] = $tag 
+        }
+
+        $rtagarray = @()
+        foreach ($rtag in $rules) {
+            if ($rtag.LabelGuid) {
+                $rtagarray += $rtag.LabelGuid
+            }
+            if ($rtag.ApplyComplianceTag) {
+                $rtagarray += $rtag.ApplyComplianceTag                
+            }
+        }
+
+        foreach ($t in $tags) {
+            if ($rtagarray -notcontains $t.guid) {
+                write-host "UnPublished Labels are sorted here"
+                $ruleHash = [ordered]@{}
+                $ruleHash['LabelName'] = $t.name
+                $ruleHash['PolicyName'] = "(Label not Published)"
+                $ruleHash['RetentionComplianceAction'] = "(Label not Published)"
+                $ruleHash['RetentionDuration'] = "(Label not Published)"
+                $ruleHash['Priority'] = "(Label not Published)"
+                $ruleHash['ContentQuery'] = "(Label not Published)"
+                $ruleHash['Mode'] = "(Label not Published)"
+                $ruleHash['Disabled'] = "(Label not Published)"   
+                                                          
+                $resultArray += [psCustomObject]$ruleHash
+            }
+
+        }
+
+        foreach ($rule in $rules) { 
+            if (!($rule.LabelName) -and !($ApplyComplianceTag)) {
+                write-host "Office 365 Retention Policies sorted here"
+                # Write-Host "LABELNAME:  $($rule.LabelName)"
+                # Write-Host "Apply:   $ApplyComplianceTag"
+                $ruleHash = [ordered]@{}
+                $ruleHash['LabelName'] = "(No Labels in 365 Retention Policies)"
+                $ruleHash['PolicyName'] = $policyHash[$rule.policy].name
+                $ruleHash['RetentionComplianceAction'] = $rule.RetentionComplianceAction
+                $ruleHash['RetentionDuration'] = $rule.RetentionDuration
+                $ruleHash['Priority'] = $rule.Priority
+                $ruleHash['ContentQuery'] = $rule.ContentMatchQuery
+                $ruleHash['Mode'] = $rule.mode
+                $ruleHash['Disabled'] = $rule.Disabled   
+                                                          
+                $resultArray += [psCustomObject]$ruleHash
+            }
+            if ($rule.ApplyComplianceTag) {
+                write-host "Auto-Apply Labels are sorted here"
+                $ruleHash = [ordered]@{}
+                $ruleHash['LabelName'] = $tagHash[$rule.ApplyComplianceTag].name
+                $ruleHash['PolicyName'] = $policyHash[$rule.policy].name
+                $ruleHash['RetentionComplianceAction'] = $rule.RetentionComplianceAction
+                $ruleHash['RetentionDuration'] = $rule.RetentionDuration
+                $ruleHash['Priority'] = $rule.Priority
+                $ruleHash['ContentQuery'] = $rule.ContentMatchQuery
+                $ruleHash['Mode'] = $rule.mode
+                $ruleHash['Disabled'] = $rule.Disabled   
+                                                          
+                $resultArray += [psCustomObject]$ruleHash
+                
+            } 
+            if ($rule.LabelName) {
+                write-host "Standard Labels sorted here"
+                $ruleHash = [ordered]@{}
+                $ruleHash['LabelName'] = $rule.LabelName
+                $ruleHash['PolicyName'] = $policyHash[$rule.policy].name
+                $ruleHash['RetentionComplianceAction'] = $rule.RetentionComplianceAction
+                $ruleHash['RetentionDuration'] = $rule.RetentionDuration
+                $ruleHash['Priority'] = $rule.Priority
+                $ruleHash['ContentQuery'] = $rule.ContentMatchQuery
+                $ruleHash['Mode'] = $rule.mode
+                $ruleHash['Disabled'] = $rule.Disabled   
+                                                          
+                $resultArray += [psCustomObject]$ruleHash  
+            }       
+
         }
     }
     End {
-        $resultArray 
+        $resultArray | sort PolicyName
     }
 }

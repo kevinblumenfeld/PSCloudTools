@@ -1,4 +1,4 @@
-function Get-LAMailboxCompliancePolicy {
+function Get-LACompliancePolicyLocation {
     <#
 .SYNOPSIS
    Reports on all Label Policies and Office 365 Retention Policies located in the Security and Compliance Center
