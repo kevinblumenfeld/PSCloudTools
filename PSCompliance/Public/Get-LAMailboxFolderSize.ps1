@@ -35,7 +35,6 @@ function Get-LAMailboxFolderSize {
    Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAFolderSize | Export-Csv ./FolderSizes.csv -notypeinformation
 
 .EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Export-Csv ./upns.csv -notypeinformation
    Import-Csv ./upns.csv | Get-LAFolderSize | Export-Csv ./FolderSizes.csv -notypeinformation
 
 #>

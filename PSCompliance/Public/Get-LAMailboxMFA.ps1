@@ -1,9 +1,26 @@
-function Get-LAmfaStats {
+function Get-LAMailboxMFA {
     <#
 .Synopsis
-   Short description
+   Reports on several key indicators of the Managed Folder Assistant against one or many mailboxes
+
 .DESCRIPTION
-   Long description
+   Reports on several key indicators of the Managed Folder Assistant against one or many mailboxes.
+   One of which is the last time the managed folder assistant processed the mailbox
+   
+   Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
+
+   Individual mailboxes, all mailboxes, all mailboxes in a department are all possibilities.
+
+   Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
+   
+   A CSV could look like this
+
+   UserPrincipalName
+   user01@contoso.com
+   user02@contoso.com
+   user03@contoso.com
+   user04@contoso.com
+
 .EXAMPLE
    Example of how to use this cmdlet
 .EXAMPLE

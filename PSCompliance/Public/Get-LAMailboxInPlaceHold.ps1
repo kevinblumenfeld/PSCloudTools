@@ -1,13 +1,38 @@
 function Get-LAMailboxInPlaceHold {
     <#
-.Synopsis
-   Short description
+.SYNOPSIS
+   Reports on the legacy In-Place Holds for each mailbox
+
 .DESCRIPTION
-   Long description
+   Reports on the legacy In-Place Holds for each mailbox.
+   For easy sorting and readability, if a mailbox has more than one In-Place Hold, the mailbox and the cooresponding hold is listed one per row.
+   In other words, if a mailbox has 3 legacy holds, that mailbox will appear on three rows.
+
+   Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
+
+   Individual mailboxes, all mailboxes, all mailboxes in a department are all possibilities.
+
+   Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
+   
+   A CSV could look like this
+
+   UserPrincipalName
+   user01@contoso.com
+   user02@contoso.com
+   user03@contoso.com
+   user04@contoso.com
+
 .EXAMPLE
-   Example of how to use this cmdlet
+   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Out-GridView
+
 .EXAMPLE
-   Another example of how to use this cmdlet
+   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\legacyholds.csv -notypeinformation
+
+.EXAMPLE
+   Import-Csv .\upns.csv | Get-LAMailboxInPlaceHold | Export-Csv .\legacyHoldsbyMailbox.csv -notypeinformation
+
+.EXAMPLE
+   Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\HRsHolds.csv -NoTypeInformation
 #>
     [CmdletBinding()]
     Param

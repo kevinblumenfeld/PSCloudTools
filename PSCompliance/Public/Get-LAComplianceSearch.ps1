@@ -10,8 +10,10 @@ function Get-LAComplianceSearch {
 
    Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
 
-   If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint, OneDrive & PublicFolders)
-   If run with no switches, it will output all included mailboxes with each search name
+   ** If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint, OneDrive & PublicFolders)
+     ** this report will report on everything
+
+   If run with no switches, it will output all included Exchange mailboxes with each search name
    If run with the SharePoint switch, it will output all included SharePoint Sites with each search name
    If run with the OneDrive switch, it will output all included OneDrive Sites with each search name
    If run with the PublicFolder switch, it will output all included Public Folders with each search name
