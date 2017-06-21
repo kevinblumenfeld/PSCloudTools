@@ -1,11 +1,12 @@
 function Get-LAMailboxMFA {
     <#
-.Synopsis
-   Reports on several key indicators of the Managed Folder Assistant against one or many mailboxes
+.SYNOPSIS
+   Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes.
+   Also it can start the Managed Folder Assistant for one more or more mailboxes.
 
 .DESCRIPTION
-   Reports on several key indicators of the Managed Folder Assistant against one or many mailboxes.
-   One of which is the last time the managed folder assistant processed the mailbox
+   Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes.
+   Also it can start the Managed Folder Assistant for one more or more mailboxes.
    
    Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
 
@@ -22,9 +23,21 @@ function Get-LAMailboxMFA {
    user04@contoso.com
 
 .EXAMPLE
-   Example of how to use this cmdlet
+   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Out-GridView
+
 .EXAMPLE
-   Another example of how to use this cmdlet
+   Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA
+
+   ** This command starts the Managed Folder Assistant and could be subject to Microsoft throttling **
+
+.EXAMPLE
+   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -notypeinformation
+
+.EXAMPLE
+   Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -notypeinformation
+
+.EXAMPLE
+   Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation
 #>
     [CmdletBinding()]
     Param
