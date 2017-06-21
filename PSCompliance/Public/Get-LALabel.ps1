@@ -53,7 +53,6 @@ function Get-LALabel {
 
         foreach ($t in $tags) {
             if ($rtagarray -notcontains $t.guid) {
-                write-host "UnPublished Labels are sorted here"
                 $ruleHash = [ordered]@{}
                 $ruleHash['LabelName'] = $t.name
                 $ruleHash['PolicyName'] = "(Label not Published)"
@@ -71,9 +70,8 @@ function Get-LALabel {
 
         foreach ($rule in $rules) { 
             if ((((($rule.name).split("-"))[0]) -ne 'ctaptr') -and (((($rule.name).split("-"))[0]) -ne 'ctptr') ) {
-                write-host "Office 365 Retention Policies without KQL sorted here"
                 $ruleHash = [ordered]@{}
-                $ruleHash['LabelName'] = "(Non-KQL O365 Retention Policies)"
+                $ruleHash['LabelName'] = "(O365 Retention Policy (Non-KQL))"
                 $ruleHash['PolicyName'] = $policyHash[$rule.policy].name
                 $ruleHash['RetentionComplianceAction'] = $rule.RetentionComplianceAction
                 $ruleHash['RetentionDuration'] = $rule.RetentionDuration
@@ -86,12 +84,13 @@ function Get-LALabel {
             }
 
             if ((((($rule.name).split("-"))[0]) -eq 'ctaptr')) {
-                write-host "Office 365 Retention Policies without KQL sorted here"
                 $ruleHash = [ordered]@{}
-                $ruleHash['LabelName'] = "(Auto-Apply Label Policy or KQL O365 Retention Policy)"
+                $ruleHash['LabelName'] = "(O365 Retention Policy (KQL) or Auto-Apply Label Policy)"
                 $ruleHash['PolicyName'] = $policyHash[$rule.policy].name
                 $ruleHash['RetentionComplianceAction'] = $rule.RetentionComplianceAction
-                $ruleHash['RetentionDuration'] = $rule.RetentionDuration
+                if ($rule.ApplyComplianceTag) {
+                    $ruleHash['RetentionDuration'] = $tagHash[$rule.ApplyComplianceTag].RetentionDuration
+                }
                 $ruleHash['Priority'] = $rule.Priority
                 $ruleHash['ContentQuery'] = $rule.ContentMatchQuery
                 $ruleHash['Mode'] = $rule.mode
@@ -99,14 +98,19 @@ function Get-LALabel {
                                                           
                 $resultArray += [psCustomObject]$ruleHash
             }
-            
+
             if ((((($rule.name).split("-"))[0]) -eq 'ctptr')) {
-                write-host "Standard Labels sorted here"
                 $ruleHash = [ordered]@{}
                 $ruleHash['LabelName'] = $rule.LabelName
                 $ruleHash['PolicyName'] = $policyHash[$rule.policy].name
                 $ruleHash['RetentionComplianceAction'] = $rule.RetentionComplianceAction
-                $ruleHash['RetentionDuration'] = $rule.RetentionDuration
+                if ($rule.LabelGuid) {
+                    $ruleHash['RetentionDuration'] = $tagHash[[System.Guid]$rule.LabelGuid].RetentionDuration
+                }
+                if (!($rule.LabelGuid) -and !($rule.ApplyComplianceTag)) {
+                    $ruleHash['RetentionDuration'] = $rule.RetentionDuration
+                }
+                
                 $ruleHash['Priority'] = $rule.Priority
                 $ruleHash['ContentQuery'] = $rule.ContentMatchQuery
                 $ruleHash['Mode'] = $rule.mode
