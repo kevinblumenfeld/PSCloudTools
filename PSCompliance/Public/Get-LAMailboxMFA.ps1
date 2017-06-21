@@ -1,12 +1,12 @@
 function Get-LAMailboxMFA {
     <#
 .SYNOPSIS
-   Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes.
-   Also it can start the Managed Folder Assistant for one more or more mailboxes.
+   Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives.
+   Also, it can start the Managed Folder Assistant for one more or more mailboxes.
 
 .DESCRIPTION
-   Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes.
-   Also it can start the Managed Folder Assistant for one more or more mailboxes.
+   Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives.
+   Also, it can start the Managed Folder Assistant for one more or more mailboxes.
    
    Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
 
@@ -26,15 +26,25 @@ function Get-LAMailboxMFA {
    Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Out-GridView
 
 .EXAMPLE
+   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation
+
+   * This command reports on the Managed Folder Assistant statistics for archive mailbox(es)
+
+.EXAMPLE
    Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA
 
    ** This command starts the Managed Folder Assistant and could be subject to Microsoft throttling **
 
 .EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -notypeinformation
+   Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA
+
+   ** This command starts the Managed Folder Assistant and could be subject to Microsoft throttling **
 
 .EXAMPLE
-   Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -notypeinformation
+   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
+
+.EXAMPLE
+   Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
 
 .EXAMPLE
    Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation
