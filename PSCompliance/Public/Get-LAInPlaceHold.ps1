@@ -1,10 +1,10 @@
 function Get-LAInPlaceHold {
     <#
 .SYNOPSIS
-   Reports on in-place holds in the legacy, Exchange specific, "Compliance Management > in-place eDiscovery & hold"
+   Reports on in-place holds from the legacy, Exchange specific, "Compliance Management > in-place eDiscovery & hold"
 
 .DESCRIPTION
-   Reports on in-place holds in the legacy, Exchange specific, "Compliance Management > in-place eDiscovery & hold"
+   Reports on in-place holds from the legacy, Exchange specific, "Compliance Management > in-place eDiscovery & hold"
    This does not report on each mailbox that is on hold - Use Get-LAMailboxInPlaceHold to report on that (however that command provides only the legacy holds).
    Use Get-LAComplianceCase to report on in-place holds from the new "Security and Compliance Center".
 

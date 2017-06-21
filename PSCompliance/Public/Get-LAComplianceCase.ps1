@@ -10,6 +10,8 @@ function Get-LAComplianceCase {
 
    Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
 
+   Credit: https://support.office.com/en-us/article/Create-a-report-on-holds-in-eDiscovery-cases-in-Office-365-cca08d26-6fbf-4b2c-b102-b226e4cd7381
+
 .EXAMPLE
    Get-LAComplianceCase
    User is prompted for path for output.  Simply enter a path and not the file name:

@@ -39,17 +39,17 @@ function Get-LACompliancePolicyLocation {
    8. Groups_Exception   
 
 .EXAMPLE
-   Get-LAMailboxCompliancePolicy -All -WithExceptions | Out-GridView
+   Get-LACompliancePolicyLocation -All -WithExceptions | Out-GridView
    * This will display everything, so this is a good command to start with *
 
 .EXAMPLE
-   Get-LAMailboxCompliancePolicy -Exchange -OnlyExceptions | Out-GridView
+   Get-LACompliancePolicyLocation -Exchange -OnlyExceptions | Out-GridView
 
 .EXAMPLE
-   Get-LAMailboxCompliancePolicy -SharePoint -WithExceptions | Out-GridView
+   Get-LACompliancePolicyLocation -SharePoint -WithExceptions | Out-GridView
 
 .EXAMPLE
-   Get-LAMailboxCompliancePolicy -SharePoint -OnlyExceptions | Export-Csv ./sharepointexceptions.csv -notypeinformation
+   Get-LACompliancePolicyLocation -SharePoint -OnlyExceptions | Export-Csv ./sharepointexceptions.csv -notypeinformation
 
 #>
     [CmdletBinding()]

@@ -1,20 +1,20 @@
-function Get-LALabel {
+function Get-LACompliancePolicy {
     <#
 .Synopsis
-   Report on each Label Policy and the Labels linked to each(policy).  Also, reports on Office 365 Retention Policies
+   Report on each Auto-Applied and Standard Label Polices and the Labels linked to each(policy).  Also, reports on Office 365 Retention Policies
 
 .DESCRIPTION
-   Report on each Label Policy and the Labels linked to each(policy).  Also, reports on Office 365 Retention Policies
+   Report on each Auto-Applied and Standard Label Polices and the Labels linked to each(policy).  Also, reports on Office 365 Retention Policies
 
    Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
 
 .EXAMPLE
    Get-LAConnected -Tenant Contoso -Compliance
-   Get-LALabel | Out-GridView
+   Get-LACompliancePolicy | Out-GridView
 
 .EXAMPLE
    Get-LAConnected -Tenant Contoso -Compliance
-   Get-LALabel | Export-Csv ./labelsandpols.csv -notypeinformation
+   Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -notypeinformation
 
 #>
     [CmdletBinding()]

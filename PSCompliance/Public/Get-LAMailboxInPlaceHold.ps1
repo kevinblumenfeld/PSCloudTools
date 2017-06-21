@@ -36,19 +36,26 @@ function Get-LAMailboxInPlaceHold {
     Process {
         if (!($WithoutInPlaceHold)) {
             $each = Get-Mailbox -Identity $_.userprincipalname
-            write-host "UPN: $($each.userprincipalname)"
+            write-host "OVERALLUPN: $($each.userprincipalname)"
             foreach ($mailbox in $each) {   
                 ForEach ($guid in $mailbox.$findParameter) {
-                    $mailboxHash = @{}
-                    $mailboxHash['InPlaceHoldName'] = ($hash[$guid]).name
-                    $mailboxHash['StatusofHold'] = ($hash[$guid]).Status
-                    $mailboxHash['StartDate'] = ($hash[$guid]).StartDate
-                    $mailboxHash['EndDate'] = ($hash[$guid]).EndDate    
-                    $mailboxHash['ItemHoldPeriod'] = ($hash[$guid]).ItemHoldPeriod   
-                    foreach ($field in $mailboxProperties) {
-                        $mailboxHash[$field] = ($mailbox.$field) -join ","
-                    }                                            
-                    $resultArray += [psCustomObject]$mailboxHash        
+
+                    if (!($guid.Substring(0,3) -eq "mbx") -and !($guid.Substring(0,1) -eq "-") -and !($guid.Substring(0,3) -eq "uni") -and !($guid.Substring(0,3) -eq "skp")) {
+                        write-host "UPN: $($each.userprincipalname)"
+                        Write-Host "GUID: $guid"
+                        Write-Host "Three: $($guid.Substring(0,3))"
+                        Write-Host "Minus: $($guid.Substring(0,1))"
+                        $mailboxHash = @{}
+                        $mailboxHash['InPlaceHoldName'] = ($hash[$guid]).name
+                        $mailboxHash['StatusofHold'] = ($hash[$guid]).Status
+                        $mailboxHash['StartDate'] = ($hash[$guid]).StartDate
+                        $mailboxHash['EndDate'] = ($hash[$guid]).EndDate    
+                        $mailboxHash['ItemHoldPeriod'] = ($hash[$guid]).ItemHoldPeriod   
+                        foreach ($field in $mailboxProperties) {
+                            $mailboxHash[$field] = ($mailbox.$field) -join ","
+                        }                                            
+                        $resultArray += [psCustomObject]$mailboxHash
+                    }
                 }
             }
         }
