@@ -1,6 +1,14 @@
-# Project Name
+# PSCompliance
 
- PSCompliance: A set of tools to report on cloud compliance objects.
+PSCompliance reports on these technologies and the mailboxes utilizing them
+
+* Exchange 365 Retention Policies
+* Office 365 Retention Policies
+* Label Policies
+* Legacy & Modern In-Place Holds
+* Legacy & Modern Searches
+* Managed Folder Assistant Stats for Mailbox(es)
+
 
 ## Installation
 
