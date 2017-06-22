@@ -28,7 +28,7 @@ function Get-LAMailboxMFA {
 .EXAMPLE
    Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation
 
-   * This command reports on the Managed Folder Assistant statistics for archive mailbox(es)
+   * This command reports on the Managed Folder Assistant statistics for ARCHIVE mailboxes. Hence, the -Archive switch. *
 
 .EXAMPLE
    Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA
@@ -47,7 +47,11 @@ function Get-LAMailboxMFA {
    Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
 
 .EXAMPLE
+   Import-Csv .\upns.csv | Get-LAMailboxMFA | Out-GridView
+
+.EXAMPLE
    Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation
+   
 #>
     [CmdletBinding()]
     Param

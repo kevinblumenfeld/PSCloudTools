@@ -33,6 +33,7 @@ function Get-LAMailboxInPlaceHold {
 
 .EXAMPLE
    Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\HRsHolds.csv -NoTypeInformation
+   
 #>
     [CmdletBinding()]
     Param
