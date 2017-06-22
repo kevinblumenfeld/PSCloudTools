@@ -19,13 +19,13 @@ function Get-LAConnected {
    2. is the same .txt for all the Office 365 Services.
    3. for Azure is separate and is a .json file.
    
-   If Azure or Azureonly switch is used for first time:
+   If Azure or AzureOnly switch is used for first time:
    
    1. User will login as normal when prompted by Azure
    2. User will be prompted to select which Azure Subscription
    3. Select the subscription and click "OK"
 
-   If Azure or Azureonly switch is used:
+   If Azure or AzureOnly switch is used:
 
    1. User will be prompted to pick username used previously
    2. If a new username is to be used (e.g. username not found when prompted), click Cancel to be prompted to login.
@@ -111,7 +111,7 @@ function Get-LAConnected {
         [switch] $Skype,
           
         [parameter(Mandatory = $false)]
-        [switch] $Sharepoint,
+        [switch] $SharePoint,
          
         [parameter(Mandatory = $false)]
         [switch] $Compliance,
@@ -120,7 +120,7 @@ function Get-LAConnected {
         [switch] $ComplianceLegacy,
           
         [parameter(Mandatory = $false)]
-        [switch] $AzurePreview
+        [switch] $AzureADver2
         
     )
 
@@ -168,7 +168,7 @@ function Get-LAConnected {
             Connect-MsolService -Credential $Credential
 
             # Exchange Online
-            $exchangeSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell -Credential $Credential -Authentication Basic -AllowRedirection -Verbose
+            $exchangeSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell -Credential $Credential -Authentication Basic -AllowRedirection 
             Import-Module (Import-PSSession $exchangeSession -AllowClobber) -Global | Out-Null
         }
 
@@ -191,9 +191,9 @@ function Get-LAConnected {
             Import-Module (Import-PSSession $sfboSession -AllowClobber) -Global | Out-Null
         }
 
-        # Sharepoint Online
-        if ($Sharepoint -or $All365) {
-            Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking -Verbose
+        # SharePoint Online
+        if ($SharePoint -or $All365) {
+            Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking 
             Connect-SPOService -Url ("https://" + $Tenant + "-admin.sharepoint.com") -credential $Credential
         }
 
@@ -202,7 +202,7 @@ function Get-LAConnected {
             Get-LAAzureConnected
         }
         # Azure AD (Preview)
-        If ($AzurePreview) {
+        If ($AzureADver2) {
             install-module azureadpreview
             import-module azureadpreview
             Connect-AzureAD -Credential $Credential
