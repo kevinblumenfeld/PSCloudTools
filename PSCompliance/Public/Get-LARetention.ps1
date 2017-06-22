@@ -12,7 +12,7 @@ function Get-LARetention {
    Get-LARetention | Export-Csv ./Retention.csv -NoTypeInformation
 
 .EXAMPLE
-   Get-LARetention | Out-Gridview
+   Get-LARetention | Out-GridView
 
 #>
     [CmdletBinding()]

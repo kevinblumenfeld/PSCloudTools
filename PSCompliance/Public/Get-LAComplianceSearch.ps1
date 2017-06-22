@@ -4,7 +4,7 @@ function Get-LAComplianceSearch {
    Reports on Compliance Searches (the predecessor to Get-MailboxSearch)
 
 .DESCRIPTION
-   Reports on Compliance Searches in the Office 365 Security & Compliance Center.  The commmand New-ComplianceSearch does not put any mailboxes on hold, therefor this only reports on searches.
+   Reports on Compliance Searches in the Office 365 Security & Compliance Center.  The command New-ComplianceSearch does not put any mailboxes on hold, therefor this only reports on searches.
    Holds are all now created through eDiscovery cases in the Office 365 Security & Compliance Center.
    Again, this report simply reports on "Searches"
 
@@ -19,19 +19,19 @@ function Get-LAComplianceSearch {
    If run with the PublicFolder switch, it will output all included Public Folders with each search name
    
 .EXAMPLE
-   Get-LAComplianceSearch | Export-Csv ./Exchangecompliancesearch.csv -notypeinformation
+   Get-LAComplianceSearch | Export-Csv ./Exchangecompliancesearch.csv -NoTypeInformation
 
 .EXAMPLE
-   Get-LAComplianceSearch -SharePoint | Export-Csv ./SharePointSearches.csv -notypeinformation
+   Get-LAComplianceSearch -SharePoint | Export-Csv ./SharePointSearches.csv -NoTypeInformation
 
 .EXAMPLE
-   Get-LAComplianceSearch -OneDrive | Export-Csv ./OneDriveSearches.csv -notypeinformation
+   Get-LAComplianceSearch -OneDrive | Export-Csv ./OneDriveSearches.csv -NoTypeInformation
 
 .EXAMPLE
-   Get-LAComplianceSearch -PublicFolder | Export-Csv ./PublicFolderSearches.csv -notypeinformation
+   Get-LAComplianceSearch -PublicFolder | Export-Csv ./PublicFolderSearches.csv -NoTypeInformation
 
 .EXAMPLE
-   Get-LAComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -notypeinformation
+   Get-LAComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -NoTypeInformation
 
 #>
     [CmdletBinding()]

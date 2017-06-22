@@ -17,7 +17,7 @@ function Get-LAConnected {
       
    1. can only be used on the computer and within the user's profile from which it was created.
    2. is the same .txt for all the Office 365 Services.
-   3. for Azure is seperate and is a .json file.
+   3. for Azure is separate and is a .json file.
    
    If Azure or Azureonly switch is used for first time:
    

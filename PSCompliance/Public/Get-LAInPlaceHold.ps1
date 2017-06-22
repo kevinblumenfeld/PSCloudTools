@@ -9,7 +9,7 @@ function Get-LAInPlaceHold {
    To report on modern holds, use Get-LAComplianceCase to report on in-place holds from the new "Security and Compliance Center".
 
 .EXAMPLE
-   Get-LAInPlaceHold | Export-Csv ./LegacyHolds.csv -notypeinformation
+   Get-LAInPlaceHold | Export-Csv ./LegacyHolds.csv -NoTypeInformation
 
 .EXAMPLE
    Get-LAInPlaceHold | Out-GridView

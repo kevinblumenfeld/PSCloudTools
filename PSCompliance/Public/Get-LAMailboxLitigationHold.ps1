@@ -12,7 +12,7 @@ function Get-LAMailboxLitigationHold {
 
    Individual mailboxes, all mailboxes, all mailboxes in a department are all possibilities.
 
-   Also demonstrated in an example below is importing mailboxes (UPN's) from a CSV
+   Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
    
    A CSV could look like this
 

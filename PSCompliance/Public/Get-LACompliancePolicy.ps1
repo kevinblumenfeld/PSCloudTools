@@ -14,7 +14,7 @@ function Get-LACompliancePolicy {
 
 .EXAMPLE
    Get-LAConnected -Tenant Contoso -Compliance
-   Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -notypeinformation
+   Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation
 
 #>
     [CmdletBinding()]

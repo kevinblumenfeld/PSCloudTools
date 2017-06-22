@@ -5,7 +5,7 @@ function Get-LAMailboxInPlaceHold {
 
 .DESCRIPTION
    Reports on the legacy In-Place Holds for each mailbox.
-   For easy sorting and readability, if a mailbox has more than one In-Place Hold, the mailbox and the cooresponding hold is listed one per row.
+   For easy sorting and readability, if a mailbox has more than one In-Place Hold, the mailbox and the corresponding hold is listed, one per row.
    In other words, if a mailbox has 3 legacy holds, that mailbox will appear on three rows.
 
    Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
@@ -26,10 +26,10 @@ function Get-LAMailboxInPlaceHold {
    Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Out-GridView
 
 .EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\legacyholds.csv -notypeinformation
+   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\legacyholds.csv -NoTypeInformation
 
 .EXAMPLE
-   Import-Csv .\upns.csv | Get-LAMailboxInPlaceHold | Export-Csv .\legacyHoldsbyMailbox.csv -notypeinformation
+   Import-Csv .\upns.csv | Get-LAMailboxInPlaceHold | Export-Csv .\legacyHoldsbyMailbox.csv -NoTypeInformation
 
 .EXAMPLE
    Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\HRsHolds.csv -NoTypeInformation
