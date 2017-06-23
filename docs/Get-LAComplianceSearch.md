@@ -63,7 +63,7 @@ Get-LAComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -NoTypeIn
 ## PARAMETERS
 
 ### -SharePoint
-{{Fill SharePoint Description}}
+{{SharePoint Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -OneDrive
-{{Fill OneDrive Description}}
+{{OneDrive Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -93,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -PublicFolder
-{{Fill PublicFolder Description}}
+{{PublicFolder Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -108,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -All
-{{Fill All Description}}
+{{All Locations}}
 
 ```yaml
 Type: SwitchParameter

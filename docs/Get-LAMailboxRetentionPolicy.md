@@ -56,7 +56,7 @@ Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get
 ## PARAMETERS
 
 ### -list
-{{Fill list Description}}
+{{UPNs passed from the pipeline}}
 
 ```yaml
 Type: String[]

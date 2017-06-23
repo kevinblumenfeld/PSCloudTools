@@ -62,7 +62,7 @@ Import-Csv ./upns.csv | Get-LAFolderSize | Export-Csv ./FolderSizes.csv -NoTypeI
 ## PARAMETERS
 
 ### -userprincipalname
-{{UserPrincipalName(s) passed from the Pipeline}}
+{{UPNs passed from the pipeline}}
 
 ```yaml
 Type: String

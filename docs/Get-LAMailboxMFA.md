@@ -85,7 +85,7 @@ Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get
 ## PARAMETERS
 
 ### -userprincipalname
-{{Fill userprincipalname Description}}
+{{UPNs passed from the pipeline}}
 
 ```yaml
 Type: String[]
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 ```
 
 ### -Archive
-{{Fill Archive Description}}
+{{Reports on Archive Mailbox}}
 
 ```yaml
 Type: SwitchParameter
@@ -115,7 +115,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartMFA
-{{Fill StartMFA Description}}
+{{Actually Starts the MFA for Mailboxes passed at pipeline}}
 
 ```yaml
 Type: SwitchParameter

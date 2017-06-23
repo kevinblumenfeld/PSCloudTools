@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -list
-{{List of UPNs passed at the Pipeline}}
+{{UPNs passed from the pipeline}}
 
 ```yaml
 Type: Object[]

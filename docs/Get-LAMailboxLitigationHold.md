@@ -68,7 +68,7 @@ Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get
 ## PARAMETERS
 
 ### -LitigationHoldDisabledOnly
-{{Fill LitigationHoldDisabledOnly Description}}
+{{Reports on Mailboxes the have Litigation Hold Disabled}}
 
 ```yaml
 Type: SwitchParameter
@@ -83,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -list
-{{Fill list Description}}
+{{UPNs passed from the pipeline}}
 
 ```yaml
 Type: Object[]
