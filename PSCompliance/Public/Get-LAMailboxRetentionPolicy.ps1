@@ -1,37 +1,8 @@
-function Get-LAMailboxRetentionPolicy {
-    <#
-.SYNOPSIS
-   Reports on which retention policy a mailbox or mailboxes have.
-
-.DESCRIPTION
-   Reports on which retention policy a mailbox or mailboxes have.
-   Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
-
-   Individual mailboxes, all mailboxes, all mailboxes in a department are all possibilities.
-
-   Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
-   
-   A CSV could look like this
-
-   UserPrincipalName
-   user01@contoso.com
-   user02@contoso.com
-   user03@contoso.com
-   user04@contoso.com
-
-.EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Out-GridView
-
-.EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Export-Csv .\retentionpolicyofmailboxes.csv -NoTypeInformation
-
-.EXAMPLE
-   Import-Csv .\upns.csv | Get-LAMailboxRetentionPolicy | Export-Csv .\ListofMailboxesandtheirRetentionPolicy.csv -NoTypeInformation
-
-.EXAMPLE
-   Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Export-Csv .\HRdeptRetentionPolicy.csv -NoTypeInformation
-   
+<#
+.EXTERNALHELP PSCompliance-help.xml
 #>
+function Get-LAMailboxRetentionPolicy {
+
     [CmdletBinding()]
     Param
     (

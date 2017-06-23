@@ -1,39 +1,8 @@
-function Get-LAComplianceSearch {
-    <#
-.SYNOPSIS
-   Reports on Compliance Searches (the predecessor to Get-MailboxSearch)
-
-.DESCRIPTION
-   Reports on Compliance Searches in the Office 365 Security & Compliance Center.  The command New-ComplianceSearch does not put any mailboxes on hold, therefor this only reports on searches.
-   Holds are all now created through eDiscovery cases in the Office 365 Security & Compliance Center.
-   Again, this report simply reports on "Searches"
-
-   Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
-
-   ** If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint, OneDrive & PublicFolders)
-     ** this report will report on everything
-
-   If run with no switches, it will output all included Exchange mailboxes with each search name
-   If run with the SharePoint switch, it will output all included SharePoint Sites with each search name
-   If run with the OneDrive switch, it will output all included OneDrive Sites with each search name
-   If run with the PublicFolder switch, it will output all included Public Folders with each search name
-   
-.EXAMPLE
-   Get-LAComplianceSearch | Export-Csv ./Exchangecompliancesearch.csv -NoTypeInformation
-
-.EXAMPLE
-   Get-LAComplianceSearch -SharePoint | Export-Csv ./SharePointSearches.csv -NoTypeInformation
-
-.EXAMPLE
-   Get-LAComplianceSearch -OneDrive | Export-Csv ./OneDriveSearches.csv -NoTypeInformation
-
-.EXAMPLE
-   Get-LAComplianceSearch -PublicFolder | Export-Csv ./PublicFolderSearches.csv -NoTypeInformation
-
-.EXAMPLE
-   Get-LAComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -NoTypeInformation
-
+<#
+.EXTERNALHELP PSCompliance-help.xml
 #>
+function Get-LAComplianceSearch {
+
     [CmdletBinding()]
     Param
     (

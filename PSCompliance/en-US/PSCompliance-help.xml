@@ -811,11 +811,11 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>UserPrincipalName
+<dev:code>A CSV could look like this
+
+UserPrincipalName
 user01@contoso.com
-user02@contoso.com
-user03@contoso.com
-user04@contoso.com</dev:code>
+user02@contoso.com</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -909,12 +909,12 @@ user04@contoso.com</dev:code>
 </maml:para>
 </dev:remarks>
 </command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>UserPrincipalName
+<command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+<dev:code>A CSV could look like this
+
+UserPrincipalName
 user01@contoso.com
-user02@contoso.com
-user03@contoso.com
-user04@contoso.com</dev:code>
+user02@contoso.com</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -1019,11 +1019,11 @@ user04@contoso.com</dev:code>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-<dev:code>UserPrincipalName
+<dev:code>A CSV could look like this
+
+UserPrincipalName
 user01@contoso.com
-user02@contoso.com
-user03@contoso.com
-user04@contoso.com</dev:code>
+user02@contoso.com</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -1159,11 +1159,11 @@ user04@contoso.com</dev:code>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 9 --------------------------</maml:title>
-<dev:code>UserPrincipalName
+<dev:code>A CSV could look like this
+
+UserPrincipalName
 user01@contoso.com
-user02@contoso.com
-user03@contoso.com
-user04@contoso.com</dev:code>
+user02@contoso.com</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -1239,11 +1239,11 @@ user04@contoso.com</dev:code>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>UserPrincipalName
+<dev:code>A CSV could look like this
+
+UserPrincipalName
 user01@contoso.com
-user02@contoso.com
-user03@contoso.com
-user04@contoso.com</dev:code>
+user02@contoso.com</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>

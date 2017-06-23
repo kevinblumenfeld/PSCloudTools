@@ -12,7 +12,7 @@ Retrieve Office 365 Compliance Cases, holds and hold queries
 ## SYNTAX
 
 ```
-Get-LAComplianceCase
+Get-LAComplianceCase [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,8 +43,10 @@ Enter the following, for example: c:\scripts\test
 This is what the user will see:
 Enter a file path to save the report to a .csv file:
 
-
 ## PARAMETERS
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

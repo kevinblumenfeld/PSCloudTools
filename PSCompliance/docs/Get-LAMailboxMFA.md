@@ -13,7 +13,7 @@ Also, it can start the Managed Folder Assistant for one more or more mailboxes.
 ## SYNTAX
 
 ```
-Get-LAMailboxMFA [-userprincipalname] <String[]> [-Archive] [-StartMFA]
+Get-LAMailboxMFA [-userprincipalname] <String[]> [-Archive] [-StartMFA] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,13 +75,12 @@ Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get
 ```
 
 ### -------------------------- EXAMPLE 9 --------------------------
-A CSV could look like this
 ```
+A CSV could look like this
+
 UserPrincipalName
 user01@contoso.com
 user02@contoso.com
-user03@contoso.com
-user04@contoso.com
 ```
 
 ## PARAMETERS
@@ -130,6 +129,9 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

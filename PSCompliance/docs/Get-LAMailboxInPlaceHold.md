@@ -48,16 +48,14 @@ Import-Csv .\upns.csv | Get-LAMailboxInPlaceHold | Export-Csv .\legacyHoldsbyMai
 Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\HRsHolds.csv -NoTypeInformation
 ```
 
-### -------------------------- EXAMPLE 5 --------------------------
-A CSV could look like this
+### -------------------------- EXAMPLE 4 --------------------------
 ```
+A CSV could look like this
+
 UserPrincipalName
 user01@contoso.com
 user02@contoso.com
-user03@contoso.com
-user04@contoso.com
 ```
-
 
 ## PARAMETERS
 
@@ -98,4 +96,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

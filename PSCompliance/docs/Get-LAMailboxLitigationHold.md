@@ -14,7 +14,7 @@ Additionally, can report on all mailboxes that do not have litigation hold enabl
 ## SYNTAX
 
 ```
-Get-LAMailboxLitigationHold [-LitigationHoldDisabledOnly] [-list] <Object[]>
+Get-LAMailboxLitigationHold [-LitigationHoldDisabledOnly] [-list] <Object[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,16 +58,13 @@ Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get
 ```
 
 ### -------------------------- EXAMPLE 6 --------------------------
-A CSV could look like this
 ```
+A CSV could look like this
+
 UserPrincipalName
 user01@contoso.com
 user02@contoso.com
-user03@contoso.com
-user04@contoso.com
 ```
-
-
 
 ## PARAMETERS
 
@@ -100,6 +97,9 @@ Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

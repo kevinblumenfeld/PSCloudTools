@@ -1,58 +1,8 @@
-function Get-LAMailboxMFA {
-    <#
-.SYNOPSIS
-   Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives.
-   Also, it can start the Managed Folder Assistant for one more or more mailboxes.
-
-.DESCRIPTION
-   Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives.
-   Also, it can start the Managed Folder Assistant for one more or more mailboxes.
-   
-   Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
-
-   Individual mailboxes, all mailboxes, all mailboxes in a department are all possibilities.
-
-   Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
-   
-   A CSV could look like this
-
-   UserPrincipalName
-   user01@contoso.com
-   user02@contoso.com
-   user03@contoso.com
-   user04@contoso.com
-
-.EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Out-GridView
-
-.EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation
-
-   * This command reports on the Managed Folder Assistant statistics for ARCHIVE mailboxes. Hence, the -Archive switch. *
-
-.EXAMPLE
-   Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA
-
-   ** This command starts the Managed Folder Assistant and could be subject to Microsoft throttling **
-
-.EXAMPLE
-   Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA
-
-   ** This command starts the Managed Folder Assistant and could be subject to Microsoft throttling **
-
-.EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
-
-.EXAMPLE
-   Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
-
-.EXAMPLE
-   Import-Csv .\upns.csv | Get-LAMailboxMFA | Out-GridView
-
-.EXAMPLE
-   Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation
-   
+<#
+.EXTERNALHELP PSCompliance-help.xml
 #>
+function Get-LAMailboxMFA {
+
     [CmdletBinding()]
     Param
     (

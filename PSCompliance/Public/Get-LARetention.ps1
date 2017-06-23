@@ -1,20 +1,8 @@
-function Get-LARetention {
-    <#
-.SYNOPSIS
-   Reports on Exchange Retention Policies, Retention Policy Tags and Retention Policy Tag Links
-
-.DESCRIPTION
-   Reports on Exchange Retention Policies, Retention Policy Tags and Retention Policy Tag Links
-   
-   This function will display all Retention Policy Tags and to which Retention Policy they are linked
-   
-.EXAMPLE
-   Get-LARetention | Export-Csv ./Retention.csv -NoTypeInformation
-
-.EXAMPLE
-   Get-LARetention | Out-GridView
-
+<#
+.EXTERNALHELP PSCompliance-help.xml
 #>
+function Get-LARetention {
+
     [CmdletBinding()]
     Param
     (

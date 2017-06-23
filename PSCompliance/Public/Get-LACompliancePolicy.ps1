@@ -1,22 +1,8 @@
-function Get-LACompliancePolicy {
-    <#
-.SYNOPSIS
-   Report on each Office 365 Retention Policies, Label Polices (including Auto-Applied Label Policies) and the Labels linked to each (policy).
-
-.DESCRIPTION
-   Report on each Office 365 Retention Policies, Label Polices (including Auto-Applied Label Policies) and the Labels linked to each (policy).
-
-   Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
-
-.EXAMPLE
-   Get-LAConnected -Tenant Contoso -Compliance
-   Get-LACompliancePolicy | Out-GridView
-
-.EXAMPLE
-   Get-LAConnected -Tenant Contoso -Compliance
-   Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation
-
+<#
+.EXTERNALHELP PSCompliance-help.xml
 #>
+function Get-LACompliancePolicy {
+
     [CmdletBinding()]
     Param
     (

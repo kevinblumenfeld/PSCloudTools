@@ -1,45 +1,8 @@
-function Get-LAMailboxLitigationHold {
-    <#
-.SYNOPSIS
-   Reports on all mailboxes and whether or not they are on Litigation Hold.  
-   Additionally, can report on all mailboxes that do not have litigation hold enabled.
-
-.DESCRIPTION
-   Reports on all mailboxes and whether or not they are on Litigation Hold.  
-   Additionally, can report on all mailboxes that do not have litigation hold enabled.
-   
-   Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
-
-   Individual mailboxes, all mailboxes, all mailboxes in a department are all possibilities.
-
-   Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
-   
-   A CSV could look like this
-
-   UserPrincipalName
-   user01@contoso.com
-   user02@contoso.com
-   user03@contoso.com
-   user04@contoso.com
-
-.EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold | Out-GridView
-
-.EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold | Export-Csv .\litigationholds.csv -NoTypeInformation
-
-.EXAMPLE
-   Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold -LitigationHoldDisabledOnly | Export-Csv .\litigationholds.csv -NoTypeInformation
-
-   ** This example only reports on those that do NOT have Litigation Hold Enabled (notice the switch -LitigationHoldDisabledOnly) **
-
-.EXAMPLE
-   Import-Csv .\upns.csv | Get-LAMailboxLitigationHold | Export-Csv .\litholds.csv -NoTypeInformation
-
-.EXAMPLE
-   Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxLitigationHold | Export-Csv .\HRlitigationholds.csv -NoTypeInformation
-
+<#
+.EXTERNALHELP PSCompliance-help.xml
 #>
+function Get-LAMailboxLitigationHold {
+
     [CmdletBinding()]
     Param
     (
