@@ -23,14 +23,6 @@ Individual mailboxes, all mailboxes, all mailboxes in a department are all possi
 
 Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 
-A CSV could look like this
-```
-UserPrincipalName
-user01@contoso.com
-user02@contoso.com
-user03@contoso.com
-user04@contoso.com
-```
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -51,6 +43,16 @@ Import-Csv .\upns.csv | Get-LAMailboxRetentionPolicy | Export-Csv .\ListofMailbo
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
 Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Export-Csv .\HRdeptRetentionPolicy.csv -NoTypeInformation
+```
+
+### -------------------------- EXAMPLE 5 --------------------------
+A CSV could look like this
+```
+UserPrincipalName
+user01@contoso.com
+user02@contoso.com
+user03@contoso.com
+user04@contoso.com
 ```
 
 ## PARAMETERS

@@ -28,15 +28,6 @@ Note: This function executes two commands per mailbox and could be subject to Of
       For best results, no more than 2 concurrent sessions of this function should be run.
       It may be necessary to contact Office 365 support to have some throttling reduced.
 
-
-A CSV could look like this
-```
-UserPrincipalName
-user01@contoso.com
-user02@contoso.com
-user03@contoso.com
-user04@contoso.com
-```
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -58,6 +49,17 @@ Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAFolderSize 
 ```
 Import-Csv ./upns.csv | Get-LAFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation
 ```
+
+### -------------------------- EXAMPLE 5 --------------------------
+A CSV could look like this
+```
+UserPrincipalName
+user01@contoso.com
+user02@contoso.com
+user03@contoso.com
+user04@contoso.com
+```
+
 
 ## PARAMETERS
 
