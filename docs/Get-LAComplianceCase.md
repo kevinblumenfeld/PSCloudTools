@@ -41,10 +41,8 @@ Enter a file path to save the report to a .csv file:
 Enter the following, for example: c:\scripts\test
 
 This is what the user will see:
-Enter a file path to save the report to a .csv file: c:\scripts\test
+Enter a file path to save the report to a .csv file:
 
-
-script begin
 
 ## PARAMETERS
 

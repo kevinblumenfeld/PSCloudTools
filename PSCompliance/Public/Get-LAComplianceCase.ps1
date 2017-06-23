@@ -25,7 +25,7 @@ function Get-LAComplianceCase {
    Enter a file path to save the report to a .csv file: c:\scripts\test
 
 #>
-    #script begin
+
     write-host "***********************************************"
     write-host "   Office 365 Security & Compliance Center   " -foregroundColor yellow -backgroundcolor darkgreen
     write-host "        eDiscovery cases - Holds report         " -foregroundColor yellow -backgroundcolor darkgreen 

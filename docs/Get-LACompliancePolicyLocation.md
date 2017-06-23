@@ -26,14 +26,10 @@ For Office 365 Retention Policies, this reports on where administrators have cho
 
 The Label or Retention Policies are set to (either include OR exclude) 4 different workflows.
  
-1.
-Exchange Email
-2.
-SharePoint Sites
-3.
-OneDrive Accounts
-4.
-Office 365 Groups
+1. Exchange Email
+2. SharePoint Sites
+3. OneDrive Accounts
+4. Office 365 Groups
 
 A Label or Retention Policy can contain either a set of inclusions or exclusions to one thru four of the above workflows.
 It is worth noting, a Label or Retention Policy cannot exclude the mailbox of USER01 and include the mailbox of USER02.
@@ -49,22 +45,14 @@ The location column will otherwise display a specific location, for example, a s
 
 The ContentLocation column can have one of 8 possibilities (all of which are fairly self-explanatory):
 
-1.
-Exchange
-2.
-SharePoint
-3.
-OneDrive
-4.
-Groups
-5.
-Exchange_Exception
-6.
-SharePoint_Exception
-7.
-OneDrive_Exception
-8.
-Groups_Exception
+1. Exchange
+2. SharePoint
+3. OneDrive
+4. Groups
+5. Exchange_Exception
+6. SharePoint_Exception
+7. OneDrive_Exception
+8. Groups_Exception
 
 ## EXAMPLES
 
@@ -93,7 +81,7 @@ Get-LACompliancePolicyLocation -SharePoint -OnlyExceptions | Export-Csv ./sharep
 ## PARAMETERS
 
 ### -All
-{{Fill All Description}}
+{{All Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -108,7 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exchange
-{{Fill Exchange Description}}
+{{Exchange Mailbox Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -123,7 +111,7 @@ Accept wildcard characters: False
 ```
 
 ### -SharePoint
-{{Fill SharePoint Description}}
+{{SharePoint Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -138,7 +126,7 @@ Accept wildcard characters: False
 ```
 
 ### -OneDrive
-{{Fill OneDrive Description}}
+{{OneDrive Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -153,7 +141,7 @@ Accept wildcard characters: False
 ```
 
 ### -Skype
-{{Fill Skype Description}}
+{{Skype Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -168,7 +156,7 @@ Accept wildcard characters: False
 ```
 
 ### -Groups
-{{Fill Groups Description}}
+{{Office 365 Modern Groups Locations}}
 
 ```yaml
 Type: SwitchParameter
@@ -183,7 +171,7 @@ Accept wildcard characters: False
 ```
 
 ### -WithExceptions
-{{Fill WithExceptions Description}}
+{{Included Location Exceptions}}
 
 ```yaml
 Type: SwitchParameter
@@ -198,7 +186,7 @@ Accept wildcard characters: False
 ```
 
 ### -OnlyExceptions
-{{Fill OnlyExceptions Description}}
+{{Only Include Locations Exceptions}}
 
 ```yaml
 Type: SwitchParameter
