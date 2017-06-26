@@ -58,24 +58,24 @@ The ContentLocation column can have one of 8 possibilities (all of which are fai
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-LACompliancePolicyLocation -All -WithExceptions | Out-GridView
+Get-LaCompliancePolicyLocation -All -WithExceptions | Out-GridView
 ```
 
 * This will display everything, so this is a good command to start with *
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-LACompliancePolicyLocation -Exchange -OnlyExceptions | Out-GridView
+Get-LaCompliancePolicyLocation -Exchange -OnlyExceptions | Out-GridView
 ```
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-LACompliancePolicyLocation -SharePoint -WithExceptions | Out-GridView
+Get-LaCompliancePolicyLocation -SharePoint -WithExceptions | Out-GridView
 ```
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Get-LACompliancePolicyLocation -SharePoint -OnlyExceptions | Export-Csv ./sharepointexceptions.csv -NoTypeInformation
+Get-LaCompliancePolicyLocation -SharePoint -OnlyExceptions | Export-Csv ./sharepointexceptions.csv -NoTypeInformation
 ```
 
 ## PARAMETERS

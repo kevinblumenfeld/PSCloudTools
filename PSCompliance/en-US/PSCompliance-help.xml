@@ -857,36 +857,76 @@ user02@contoso.com</dev:code>
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LaMailboxOldestItem</command:name>
+<command:details><command:name>Get-LaMailboxMFA</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LaMailboxOldestItem</command:noun>
-<maml:description><maml:para>Reports on the oldest item in a mailbox(es)
+<command:noun>LaMailboxMFA</command:noun>
+<maml:description><maml:para>Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives. Also, it can start the Managed Folder Assistant for one more or more mailboxes.
 </maml:para>
 </maml:description>
 </command:details>
-<maml:description><maml:para>Users  Additionally, each case's hold (Exchange and/or SharePoint) are returned.
+<maml:description><maml:para>Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives. Also, it can start the Managed Folder Assistant for one more or more mailboxes.
+</maml:para>
+<maml:para>Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
+</maml:para>
+<maml:para>Individual mailboxes, all mailboxes, all mailboxes in a department are all possibilities.
+</maml:para>
+<maml:para>Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxOldestItem</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxMFA</maml:name>
 <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
-<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
+<maml:Description><maml:para>{{UPNs passed from the pipeline}}
 </maml:para>
 </maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
+<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+<dev:type><maml:name>String[]</maml:name>
 <maml:uri /></dev:type>
 <dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Archive</maml:name>
+<maml:Description><maml:para>{{Reports on Archive Mailbox}}
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>StartMFA</maml:name>
+<maml:Description><maml:para>{{Actually Starts the MFA for Mailboxes passed at pipeline}}
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
 </command:syntaxItem>
 </command:syntax>
 <command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
-<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
+<maml:Description><maml:para>{{UPNs passed from the pipeline}}
 </maml:para>
 </maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
+<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+<dev:type><maml:name>String[]</maml:name>
 <maml:uri /></dev:type>
 <dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Archive</maml:name>
+<maml:Description><maml:para>{{Reports on Archive Mailbox}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>StartMFA</maml:name>
+<maml:Description><maml:para>{{Actually Starts the MFA for Mailboxes passed at pipeline}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
 </command:parameters>
 <command:inputTypes></command:inputTypes>
@@ -896,80 +936,60 @@ user02@contoso.com</dev:code>
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAMailboxOldestItem</dev:code>
-<dev:remarks><maml:para>Reports on the oldest item in the mailbox not including the recoverable items folders
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Out-GridView</dev:code>
+<dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAMailboxOldestItem -IncludeRecoverableItems</dev:code>
-<dev:remarks><maml:para>Reports on the oldest item in the mailbox including the recoverable items folders
+<command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>This command reports on the Managed Folder Assistant statistics for ARCHIVE mailboxes. Hence, the -Archive switch.
 </maml:para>
 </dev:remarks>
 </command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAMailboxOldestItem</dev:code>
-<dev:remarks><maml:para>Reports on the oldest item in the mailbox - only searches in the recoverable items folders
+<command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+<dev:code>Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA</dev:code>
+<dev:remarks><maml:para>This command starts the Managed Folder Assistant and could be subject to Microsoft throttling
 </maml:para>
 </dev:remarks>
 </command:example>
-</command:examples>
-<command:relatedLinks></command:relatedLinks>
-</command:command>
-<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LaMailboxOldestItem</command:name>
-<command:verb>Get</command:verb>
-<command:noun>LaMailboxOldestItem</command:noun>
-<maml:description><maml:para>Reports on the oldest item in a mailbox(es)
-</maml:para>
-</maml:description>
-</command:details>
-<maml:description><maml:para>Users  Additionally, each case's hold (Exchange and/or SharePoint) are returned.
-</maml:para>
-</maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxOldestItem</maml:name>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
-<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-</command:syntaxItem>
-</command:syntax>
-<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
-<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-</command:parameters>
-<command:inputTypes></command:inputTypes>
-<command:returnValues></command:returnValues>
-<maml:alertSet><maml:alert><maml:para>
-</maml:para>
-</maml:alert>
-</maml:alertSet>
-<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAMailboxOldestItem</dev:code>
-<dev:remarks><maml:para>Reports on the oldest item in the mailbox not including the recoverable items folders
+<command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA</dev:code>
+<dev:remarks><maml:para>This command starts the Managed Folder Assistant and could be subject to Microsoft throttling
 </maml:para>
 </dev:remarks>
 </command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAMailboxOldestItem -IncludeRecoverableItems</dev:code>
-<dev:remarks><maml:para>Reports on the oldest item in the mailbox including the recoverable items folders
+<command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAMailboxOldestItem</dev:code>
-<dev:remarks><maml:para>Reports on the oldest item in the mailbox - only searches in the recoverable items folders
+<command:example><maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+<dev:code>Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
+<dev:code>Import-Csv .\upns.csv | Get-LAMailboxMFA | Out-GridView</dev:code>
+<dev:remarks><maml:para>
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
+<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 9 --------------------------</maml:title>
+<dev:code>A CSV could look like this
+
+UserPrincipalName
+user01@contoso.com
+user02@contoso.com</dev:code>
+<dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>

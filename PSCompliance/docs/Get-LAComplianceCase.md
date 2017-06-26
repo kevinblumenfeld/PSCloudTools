@@ -20,8 +20,8 @@ All Office 365 Compliance Cases are returned from the Office 365 Security & Comp
 Additionally, each case's hold (Exchange and/or SharePoint) are returned.
 
 Make sure you are first connected to the Office 365 compliance service. 
-Simply use Get-LAConnected,  e.g.
-Get-LAConnected -Tenant Contoso -Compliance
+Simply use Get-LaConnected,  e.g.
+Get-LaConnected -Tenant Contoso -Compliance
 
 Credit: https://support.office.com/en-us/article/Create-a-report-on-holds-in-eDiscovery-cases-in-Office-365-cca08d26-6fbf-4b2c-b102-b226e4cd7381
 
@@ -29,7 +29,7 @@ Credit: https://support.office.com/en-us/article/Create-a-report-on-holds-in-eDi
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-LAComplianceCase
+Get-LaComplianceCase
 ```
 
 User is prompted for path for output. 

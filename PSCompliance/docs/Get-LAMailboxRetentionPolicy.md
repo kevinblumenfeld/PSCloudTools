@@ -27,22 +27,22 @@ Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Out-GridView
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxRetentionPolicy | Out-GridView
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Export-Csv .\retentionpolicyofmailboxes.csv -NoTypeInformation
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxRetentionPolicy | Export-Csv .\retentionpolicyofmailboxes.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Import-Csv .\upns.csv | Get-LAMailboxRetentionPolicy | Export-Csv .\ListofMailboxesandtheirRetentionPolicy.csv -NoTypeInformation
+Import-Csv .\upns.csv | Get-LaMailboxRetentionPolicy | Export-Csv .\ListofMailboxesandtheirRetentionPolicy.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Export-Csv .\HRdeptRetentionPolicy.csv -NoTypeInformation
+Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxRetentionPolicy | Export-Csv .\HRdeptRetentionPolicy.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 5 --------------------------

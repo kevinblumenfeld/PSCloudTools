@@ -24,20 +24,21 @@ Additionally, each case's hold (Exchange and/or SharePoint) are returned.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Import-Csv .\upns.csv | Get-LAMailboxOldestItem | Out-GridView
+Import-Csv .\upns.csv | Get-LaMailboxOldestItem | Out-GridView
+```
 
 Reports on the oldest item in the mailbox not including the recoverable items folders
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Get-LAMailboxOldestItem -IncludeRecoverableItems
+Get-Mailbox -ResultSize unlimited | Get-LaMailboxOldestItem -IncludeRecoverableItems
 ```
 
 Reports on the oldest item in the mailbox including the recoverable items folders
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-Recipient -Filter "Department -eq 'Human Resources'" -RecipientType mailuser | Get-LAMailboxOldestItem -RecoverableItemsOnly
+Get-Recipient -Filter "Department -eq 'Human Resources'" -RecipientType mailuser | Get-LaMailboxOldestItem -RecoverableItemsOnly
 ```
 
 Reports on the oldest item in the mailbox - only searches in the recoverable items folders

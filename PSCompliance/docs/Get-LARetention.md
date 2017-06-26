@@ -24,12 +24,12 @@ This function will display all Retention Policy Tags and to which Retention Poli
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-LARetention | Export-Csv ./Retention.csv -NoTypeInformation
+Get-LaRetention | Export-Csv ./Retention.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-LARetention | Out-GridView
+Get-LaRetention | Out-GridView
 ```
 
 ## PARAMETERS

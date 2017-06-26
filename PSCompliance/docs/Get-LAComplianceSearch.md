@@ -22,8 +22,8 @@ Holds are all now created through eDiscovery cases in the Office 365 Security & 
 Again, this report simply reports on "Searches"
 
 Make sure you are first connected to the Office 365 compliance service. 
-Simply use Get-LAConnected,  e.g.
-Get-LAConnected -Tenant Contoso -Compliance
+Simply use Get-LaConnected,  e.g.
+Get-LaConnected -Tenant Contoso -Compliance
 
 ** If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint & PublicFolders)
   ** this report will report on everything
@@ -36,27 +36,27 @@ If run with the PublicFolder switch, it will output if All or None of the Public
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-LAComplianceSearch | Export-Csv ./Exchangecompliancesearch.csv -NoTypeInformation
+Get-LaComplianceSearch | Export-Csv ./Exchangecompliancesearch.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-LAComplianceSearch -SharePoint | Export-Csv ./SharePointSearches.csv -NoTypeInformation
+Get-LaComplianceSearch -SharePoint | Export-Csv ./SharePointSearches.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-LAComplianceSearch -OneDrive | Export-Csv ./OneDriveSearches.csv -NoTypeInformation
+Get-LaComplianceSearch -OneDrive | Export-Csv ./OneDriveSearches.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Get-LAComplianceSearch -PublicFolder | Export-Csv ./PublicFolderSearches.csv -NoTypeInformation
+Get-LaComplianceSearch -PublicFolder | Export-Csv ./PublicFolderSearches.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 5 --------------------------
 ```
-Get-LAComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -NoTypeInformation
+Get-LaComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -NoTypeInformation
 ```
 
 ## PARAMETERS

@@ -32,22 +32,22 @@ Note: This function executes two commands per mailbox and could be subject to Of
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-Mailbox -identity user01@contoso.com | Select UserPrincipalName | Get-LAFolderSize
+Get-Mailbox -identity user01@contoso.com | Select UserPrincipalName | Get-LaFolderSize
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAFolderSize | Out-GridView
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaFolderSize | Out-GridView
 ```
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Import-Csv ./upns.csv | Get-LAFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation
+Import-Csv ./upns.csv | Get-LaFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 5 --------------------------

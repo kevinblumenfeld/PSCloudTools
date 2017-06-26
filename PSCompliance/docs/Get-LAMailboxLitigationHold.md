@@ -32,29 +32,29 @@ Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold | Out-GridView
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxLitigationHold | Out-GridView
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold | Export-Csv .\litigationholds.csv -NoTypeInformation
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxLitigationHold | Export-Csv .\litigationholds.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold -LitigationHoldDisabledOnly | Export-Csv .\litigationholds.csv -NoTypeInformation
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxLitigationHold -LitigationHoldDisabledOnly | Export-Csv .\litigationholds.csv -NoTypeInformation
 ```
 
 ** This example only reports on those that do NOT have Litigation Hold Enabled (notice the switch -LitigationHoldDisabledOnly) **
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Import-Csv .\upns.csv | Get-LAMailboxLitigationHold | Export-Csv .\litholds.csv -NoTypeInformation
+Import-Csv .\upns.csv | Get-LaMailboxLitigationHold | Export-Csv .\litholds.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 5 --------------------------
 ```
-Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxLitigationHold | Export-Csv .\HRlitigationholds.csv -NoTypeInformation
+Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxLitigationHold | Export-Csv .\HRlitigationholds.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 6 --------------------------

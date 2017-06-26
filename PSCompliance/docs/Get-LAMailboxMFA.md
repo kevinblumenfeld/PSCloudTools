@@ -30,48 +30,48 @@ Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Out-GridView
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxMFA | Out-GridView
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation
 ```
 
 * This command reports on the Managed Folder Assistant statistics for ARCHIVE mailboxes. Hence, the -Archive switch. *
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA
+Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LaMailboxMFA -StartMFA
 ```
 
 ** This command starts the Managed Folder Assistant and could be subject to Microsoft throttling **
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA
+Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxMFA -StartMFA
 ```
 
 ** This command starts the Managed Folder Assistant and could be subject to Microsoft throttling **
 
 ### -------------------------- EXAMPLE 5 --------------------------
 ```
-Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
+Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 6 --------------------------
 ```
-Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
+Import-Csv .\upns.csv | Get-LaMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 7 --------------------------
 ```
-Import-Csv .\upns.csv | Get-LAMailboxMFA | Out-GridView
+Import-Csv .\upns.csv | Get-LaMailboxMFA | Out-GridView
 ```
 
 ### -------------------------- EXAMPLE 8 --------------------------
 ```
-Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation
+Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation
 ```
 
 ### -------------------------- EXAMPLE 9 --------------------------
