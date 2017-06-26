@@ -862,6 +862,10 @@ user02@contoso.com</dev:code>
 <command:noun>LaMailboxOldestItem</command:noun>
 <maml:description><maml:para>Reports on the oldest item in a mailbox(es)
 </maml:para>
+<maml:para>3 methods to search for the oldest item
+</maml:para>
+<maml:para>1. Without any switches, searches entire mailbox not including the recoverable items folder 2. With -IncludeRecoverableItems switch, searches entire mailbox including recoverable items folder 3. With -RecoverableItemsOnly switch, searches only the recoverable items folder
+</maml:para>
 </maml:description>
 </command:details>
 <maml:description><maml:para>Users  Additionally, each case's hold (Exchange and/or SharePoint) are returned.
