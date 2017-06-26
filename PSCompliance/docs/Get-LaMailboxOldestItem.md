@@ -11,9 +11,9 @@ Reports on the oldest item in a mailbox(es)
 
 3 methods to search for the oldest item
 
-1. Without any switches, searches entire mailbox not including the recoverable items folder
-2. With -IncludeRecoverableItems switch, searches entire mailbox including recoverable items folder
-3. With -RecoverableItemsOnly switch, searches only the recoverable items folder
+1. Without any switches, searches entire mailbox not including the recoverable items folders
+2. With -IncludeRecoverableItems switch, searches entire mailbox including recoverable items folders
+3. With -RecoverableItemsOnly switch, searches only the recoverable items folders
 
 ## SYNTAX
 
