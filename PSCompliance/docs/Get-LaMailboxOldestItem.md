@@ -45,22 +45,6 @@ Reports on the oldest item in the mailbox - only searches in the recoverable ite
 
 ## PARAMETERS
 
-
-### -userprincipalname
-{{UPNs are passed from the pipeline}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
 ### -IncludeRecoverableItems
 {{Include Recoverable Items Folder in the search for the oldest item}}
 
@@ -88,6 +72,21 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -userprincipalname
+{{UPNs are passed from the pipeline}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 

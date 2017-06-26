@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LaConnected
+# Get-LAConnected
 
 ## SYNOPSIS
 Connects to Office 365 services and/or Azure
@@ -12,7 +12,7 @@ Connects to Office 365 services and/or Azure
 ## SYNTAX
 
 ```
-Get-LaConnected [-Tenant] <String> [-ExchangeAndMSOL] [-All365] [-Azure] [-AzureOnly] [-Skype] [-SharePoint]
+Get-LAConnected [-Tenant] <String> [-ExchangeAndMSOL] [-All365] [-Azure] [-AzureOnly] [-Skype] [-SharePoint]
  [-Compliance] [-ComplianceLegacy] [-AzureADver2] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 

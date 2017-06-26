@@ -11,7 +11,7 @@
 </command:details>
 <maml:description><maml:para>All Office 365 Compliance Cases are returned from the Office 365 Security &amp; Compliance Center. Additionally, each case's hold (Exchange and/or SharePoint) are returned.
 </maml:para>
-<maml:para>Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
+<maml:para>Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LaConnected,  e.g. Get-LaConnected -Tenant Contoso -Compliance
 </maml:para>
 <maml:para>Credit: https://support.office.com/en-us/article/Create-a-report-on-holds-in-eDiscovery-cases-in-Office-365-cca08d26-6fbf-4b2c-b102-b226e4cd7381
 </maml:para>
@@ -27,7 +27,7 @@
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAComplianceCase</dev:code>
+<dev:code>Get-LaComplianceCase</dev:code>
 <dev:remarks><maml:para>User is prompted for path for output.  Simply enter a path and not the file name:
 </maml:para>
 <maml:para>This is what the user will see: Enter a file path to save the report to a .csv file:
@@ -51,7 +51,7 @@
 </command:details>
 <maml:description><maml:para>Report on each Office 365 Retention Policies, Label Polices (including Auto-Applied Label Policies) and the Labels linked to each (policy).
 </maml:para>
-<maml:para>Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
+<maml:para>Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LaConnected,  e.g. Get-LaConnected -Tenant Contoso -Compliance
 </maml:para>
 </maml:description>
 <command:syntax><command:syntaxItem><maml:name>Get-LaCompliancePolicy</maml:name>
@@ -65,17 +65,17 @@
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Compliance
+<dev:code>Get-LaConnected -Tenant Contoso -Compliance
 
-Get-LACompliancePolicy | Out-GridView</dev:code>
+Get-LaCompliancePolicy | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Compliance
+<dev:code>Get-LaConnected -Tenant Contoso -Compliance
 
-Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:code>
+Get-LaCompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -257,25 +257,25 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LACompliancePolicyLocation -All -WithExceptions | Out-GridView</dev:code>
+<dev:code>Get-LaCompliancePolicyLocation -All -WithExceptions | Out-GridView</dev:code>
 <dev:remarks><maml:para>This will display everything, so this is a good command to start with
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-LACompliancePolicyLocation -Exchange -OnlyExceptions | Out-GridView</dev:code>
+<dev:code>Get-LaCompliancePolicyLocation -Exchange -OnlyExceptions | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-LACompliancePolicyLocation -SharePoint -WithExceptions | Out-GridView</dev:code>
+<dev:code>Get-LaCompliancePolicyLocation -SharePoint -WithExceptions | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-LACompliancePolicyLocation -SharePoint -OnlyExceptions | Export-Csv ./sharepointexceptions.csv -NoTypeInformation</dev:code>
+<dev:code>Get-LaCompliancePolicyLocation -SharePoint -OnlyExceptions | Export-Csv ./sharepointexceptions.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -293,7 +293,7 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </command:details>
 <maml:description><maml:para>Reports on Compliance Searches in the Office 365 Security &amp; Compliance Center.  The command New-ComplianceSearch does not put any mailboxes on hold, therefor this only reports on searches. Holds are all now created through eDiscovery cases in the Office 365 Security &amp; Compliance Center. Again, this report simply reports on "Searches"
 </maml:para>
-<maml:para>Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
+<maml:para>Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LaConnected,  e.g. Get-LaConnected -Tenant Contoso -Compliance
 </maml:para>
 <maml:para>** If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint &amp; PublicFolders)   ** this report will report on everything
 </maml:para>
@@ -362,31 +362,31 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAComplianceSearch | Export-Csv ./Exchangecompliancesearch.csv -NoTypeInformation</dev:code>
+<dev:code>Get-LaComplianceSearch | Export-Csv ./Exchangecompliancesearch.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-LAComplianceSearch -SharePoint | Export-Csv ./SharePointSearches.csv -NoTypeInformation</dev:code>
+<dev:code>Get-LaComplianceSearch -SharePoint | Export-Csv ./SharePointSearches.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-LAComplianceSearch -OneDrive | Export-Csv ./OneDriveSearches.csv -NoTypeInformation</dev:code>
+<dev:code>Get-LaComplianceSearch -OneDrive | Export-Csv ./OneDriveSearches.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-LAComplianceSearch -PublicFolder | Export-Csv ./PublicFolderSearches.csv -NoTypeInformation</dev:code>
+<dev:code>Get-LaComplianceSearch -PublicFolder | Export-Csv ./PublicFolderSearches.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>Get-LAComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -NoTypeInformation</dev:code>
+<dev:code>Get-LaComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -402,7 +402,7 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </maml:para>
 </maml:description>
 </command:details>
-<maml:description><maml:para>Reports on in-place holds from the legacy, Exchange specific, "Compliance Management &gt; in-place eDiscovery &amp; hold" This does not report on each mailbox that is on hold - Use Get-LAMailboxInPlaceHold to report on that (however that command provides only the legacy holds). To report on modern holds, use Get-LAComplianceCase to report on in-place holds from the new "Security and Compliance Center".
+<maml:description><maml:para>Reports on in-place holds from the legacy, Exchange specific, "Compliance Management &gt; in-place eDiscovery &amp; hold" This does not report on each mailbox that is on hold - Use Get-LaMailboxInPlaceHold to report on that (however that command provides only the legacy holds). To report on modern holds, use Get-LaComplianceCase to report on in-place holds from the new "Security and Compliance Center".
 </maml:para>
 </maml:description>
 <command:syntax><command:syntaxItem><maml:name>Get-LaInPlaceHold</maml:name>
@@ -416,13 +416,13 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAInPlaceHold | Export-Csv ./LegacyHolds.csv -NoTypeInformation</dev:code>
+<dev:code>Get-LaInPlaceHold | Export-Csv ./LegacyHolds.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-LAInPlaceHold | Out-GridView</dev:code>
+<dev:code>Get-LaInPlaceHold | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -472,25 +472,25 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-Mailbox -identity user01@contoso.com | Select UserPrincipalName | Get-LAFolderSize</dev:code>
+<dev:code>Get-Mailbox -identity user01@contoso.com | Select UserPrincipalName | Get-LaFolderSize</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAFolderSize | Out-GridView</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaFolderSize | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Import-Csv ./upns.csv | Get-LAFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation</dev:code>
+<dev:code>Import-Csv ./upns.csv | Get-LaFolderSize | Export-Csv ./FolderSizes.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -571,25 +571,25 @@ user02@contoso.com</dev:code>
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Out-GridView</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxInPlaceHold | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\legacyholds.csv -NoTypeInformation</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxInPlaceHold | Export-Csv .\legacyholds.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Import-Csv .\upns.csv | Get-LAMailboxInPlaceHold | Export-Csv .\legacyHoldsbyMailbox.csv -NoTypeInformation</dev:code>
+<dev:code>Import-Csv .\upns.csv | Get-LaMailboxInPlaceHold | Export-Csv .\legacyHoldsbyMailbox.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxInPlaceHold | Export-Csv .\HRsHolds.csv -NoTypeInformation</dev:code>
+<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxInPlaceHold | Export-Csv .\HRsHolds.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -674,31 +674,31 @@ user02@contoso.com</dev:code>
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold | Out-GridView</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxLitigationHold | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold | Export-Csv .\litigationholds.csv -NoTypeInformation</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxLitigationHold | Export-Csv .\litigationholds.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxLitigationHold -LitigationHoldDisabledOnly | Export-Csv .\litigationholds.csv -NoTypeInformation</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxLitigationHold -LitigationHoldDisabledOnly | Export-Csv .\litigationholds.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>This example only reports on those that do NOT have Litigation Hold Enabled (notice the switch -LitigationHoldDisabledOnly)
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Import-Csv .\upns.csv | Get-LAMailboxLitigationHold | Export-Csv .\litholds.csv -NoTypeInformation</dev:code>
+<dev:code>Import-Csv .\upns.csv | Get-LaMailboxLitigationHold | Export-Csv .\litholds.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxLitigationHold | Export-Csv .\HRlitigationholds.csv -NoTypeInformation</dev:code>
+<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxLitigationHold | Export-Csv .\HRlitigationholds.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -796,49 +796,49 @@ user02@contoso.com</dev:code>
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Out-GridView</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxMFA | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>This command reports on the Managed Folder Assistant statistics for ARCHIVE mailboxes. Hence, the -Archive switch.
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA</dev:code>
+<dev:code>Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LaMailboxMFA -StartMFA</dev:code>
 <dev:remarks><maml:para>This command starts the Managed Folder Assistant and could be subject to Microsoft throttling
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA</dev:code>
+<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxMFA -StartMFA</dev:code>
 <dev:remarks><maml:para>This command starts the Managed Folder Assistant and could be subject to Microsoft throttling
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-<dev:code>Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation</dev:code>
+<dev:code>Import-Csv .\upns.csv | Get-LaMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-<dev:code>Import-Csv .\upns.csv | Get-LAMailboxMFA | Out-GridView</dev:code>
+<dev:code>Import-Csv .\upns.csv | Get-LaMailboxMFA | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
-<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation</dev:code>
+<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -857,42 +857,36 @@ user02@contoso.com</dev:code>
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LaMailboxMFA</command:name>
+<command:details><command:name>Get-LaMailboxOldestItem</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LaMailboxMFA</command:noun>
-<maml:description><maml:para>Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives. Also, it can start the Managed Folder Assistant for one more or more mailboxes.
+<command:noun>LaMailboxOldestItem</command:noun>
+<maml:description><maml:para>Reports on the oldest item in a mailbox(es)
 </maml:para>
 </maml:description>
 </command:details>
-<maml:description><maml:para>Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives. Also, it can start the Managed Folder Assistant for one more or more mailboxes.
-</maml:para>
-<maml:para>Mailbox UPNs should be passed from the pipeline as demonstrated in the examples below.
-</maml:para>
-<maml:para>Individual mailboxes, all mailboxes, all mailboxes in a department are all possibilities.
-</maml:para>
-<maml:para>Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
+<maml:description><maml:para>Users  Additionally, each case's hold (Exchange and/or SharePoint) are returned.
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxMFA</maml:name>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
-<maml:Description><maml:para>{{UPNs passed from the pipeline}}
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxOldestItem</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none"><maml:name>userprincipalname</maml:name>
+<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
 </maml:para>
 </maml:Description>
-<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-<dev:type><maml:name>String[]</maml:name>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
 <maml:uri /></dev:type>
 <dev:defaultValue>None</dev:defaultValue>
 </command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Archive</maml:name>
-<maml:Description><maml:para>{{Reports on Archive Mailbox}}
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>IncludeRecoverableItems</maml:name>
+<maml:Description><maml:para>{{Include Recoverable Items Folder in the search for the oldest item}}
 </maml:para>
 </maml:Description>
 <dev:type><maml:name>SwitchParameter</maml:name>
 <maml:uri /></dev:type>
 <dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>StartMFA</maml:name>
-<maml:Description><maml:para>{{Actually Starts the MFA for Mailboxes passed at pipeline}}
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>RecoverableItemsOnly</maml:name>
+<maml:Description><maml:para>{{Recoverable Items Folders are the only folders searched while looking for the oldest item in the mailbox}}
 </maml:para>
 </maml:Description>
 <dev:type><maml:name>SwitchParameter</maml:name>
@@ -901,32 +895,32 @@ user02@contoso.com</dev:code>
 </command:parameter>
 </command:syntaxItem>
 </command:syntax>
-<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
-<maml:Description><maml:para>{{UPNs passed from the pipeline}}
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>IncludeRecoverableItems</maml:name>
+<maml:Description><maml:para>{{Include Recoverable Items Folder in the search for the oldest item}}
 </maml:para>
 </maml:Description>
-<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-<dev:type><maml:name>String[]</maml:name>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>RecoverableItemsOnly</maml:name>
+<maml:Description><maml:para>{{Recoverable Items Folders are the only folders searched while looking for the oldest item in the mailbox}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none"><maml:name>userprincipalname</maml:name>
+<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
 <maml:uri /></dev:type>
 <dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Archive</maml:name>
-<maml:Description><maml:para>{{Reports on Archive Mailbox}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>StartMFA</maml:name>
-<maml:Description><maml:para>{{Actually Starts the MFA for Mailboxes passed at pipeline}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
 </command:parameters>
 <command:inputTypes></command:inputTypes>
@@ -936,60 +930,20 @@ user02@contoso.com</dev:code>
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Out-GridView</dev:code>
-<dev:remarks><maml:para>
+<dev:code>Import-Csv .\upns.csv | Get-LaMailboxOldestItem | Out-GridView</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox not including the recoverable items folders
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA -Archive | Export-Csv .\MFAstatsForARCHIVEmailbox.csv -NoTypeInformation</dev:code>
-<dev:remarks><maml:para>This command reports on the Managed Folder Assistant statistics for ARCHIVE mailboxes. Hence, the -Archive switch.
+<dev:code>Get-Mailbox -ResultSize unlimited | Get-LaMailboxOldestItem -IncludeRecoverableItems</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox including the recoverable items folders
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-Mailbox -identity "user01@contoso.com" | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA</dev:code>
-<dev:remarks><maml:para>This command starts the Managed Folder Assistant and could be subject to Microsoft throttling
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA -StartMFA</dev:code>
-<dev:remarks><maml:para>This command starts the Managed Folder Assistant and could be subject to Microsoft throttling
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation</dev:code>
-<dev:remarks><maml:para>
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-<dev:code>Import-Csv .\upns.csv | Get-LAMailboxMFA | Export-Csv .\MFAstats.csv -NoTypeInformation</dev:code>
-<dev:remarks><maml:para>
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-<dev:code>Import-Csv .\upns.csv | Get-LAMailboxMFA | Out-GridView</dev:code>
-<dev:remarks><maml:para>
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
-<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxMFA | Export-Csv .\HRsMFAstats.csv -NoTypeInformation</dev:code>
-<dev:remarks><maml:para>
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 9 --------------------------</maml:title>
-<dev:code>A CSV could look like this
-
-UserPrincipalName
-user01@contoso.com
-user02@contoso.com</dev:code>
-<dev:remarks><maml:para>
+<dev:code>Get-Recipient -Filter "Department -eq 'Human Resources'" -RecipientType mailuser | Get-LaMailboxOldestItem -RecoverableItemsOnly</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox - only searches in the recoverable items folders
 </maml:para>
 </dev:remarks>
 </command:example>
@@ -1040,25 +994,25 @@ user02@contoso.com</dev:code>
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Out-GridView</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxRetentionPolicy | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Export-Csv .\retentionpolicyofmailboxes.csv -NoTypeInformation</dev:code>
+<dev:code>Get-Mailbox -ResultSize unlimited | Select UserPrincipalName | Get-LaMailboxRetentionPolicy | Export-Csv .\retentionpolicyofmailboxes.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Import-Csv .\upns.csv | Get-LAMailboxRetentionPolicy | Export-Csv .\ListofMailboxesandtheirRetentionPolicy.csv -NoTypeInformation</dev:code>
+<dev:code>Import-Csv .\upns.csv | Get-LaMailboxRetentionPolicy | Export-Csv .\ListofMailboxesandtheirRetentionPolicy.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LAMailboxRetentionPolicy | Export-Csv .\HRdeptRetentionPolicy.csv -NoTypeInformation</dev:code>
+<dev:code>Get-MsolUser -All -Department 'Human Resources' | Select UserPrincipalName | Get-LaMailboxRetentionPolicy | Export-Csv .\HRdeptRetentionPolicy.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -1100,13 +1054,13 @@ user02@contoso.com</dev:code>
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LARetention | Export-Csv ./Retention.csv -NoTypeInformation</dev:code>
+<dev:code>Get-LaRetention | Export-Csv ./Retention.csv -NoTypeInformation</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-LARetention | Out-GridView</dev:code>
+<dev:code>Get-LaRetention | Out-GridView</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
