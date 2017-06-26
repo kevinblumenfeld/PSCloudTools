@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LAMailboxLitigationHold
+# Get-LaMailboxLitigationHold
 
 ## SYNOPSIS
 Reports on all mailboxes and whether or not they are on Litigation Hold.
@@ -14,7 +14,7 @@ Additionally, can report on all mailboxes that do not have litigation hold enabl
 ## SYNTAX
 
 ```
-Get-LAMailboxLitigationHold [-LitigationHoldDisabledOnly] [-list] <Object[]> [<CommonParameters>]
+Get-LaMailboxLitigationHold [-LitigationHoldDisabledOnly] [-list] <Object[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION

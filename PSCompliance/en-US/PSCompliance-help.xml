@@ -2,9 +2,9 @@
 <helpItems xmlns="http://msh" schema="maml">
 
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAComplianceCase</command:name>
+<command:details><command:name>Get-LaComplianceCase</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LAComplianceCase</command:noun>
+<command:noun>LaComplianceCase</command:noun>
 <maml:description><maml:para>Retrieve Office 365 Compliance Cases, holds and hold queries
 </maml:para>
 </maml:description>
@@ -16,7 +16,7 @@
 <maml:para>Credit: https://support.office.com/en-us/article/Create-a-report-on-holds-in-eDiscovery-cases-in-Office-365-cca08d26-6fbf-4b2c-b102-b226e4cd7381
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAComplianceCase</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaComplianceCase</maml:name>
 </command:syntaxItem>
 </command:syntax>
 <command:parameters></command:parameters>
@@ -42,9 +42,9 @@
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LACompliancePolicy</command:name>
+<command:details><command:name>Get-LaCompliancePolicy</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LACompliancePolicy</command:noun>
+<command:noun>LaCompliancePolicy</command:noun>
 <maml:description><maml:para>Report on each Office 365 Retention Policies, Label Polices (including Auto-Applied Label Policies) and the Labels linked to each (policy).
 </maml:para>
 </maml:description>
@@ -54,7 +54,7 @@
 <maml:para>Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LACompliancePolicy</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaCompliancePolicy</maml:name>
 </command:syntaxItem>
 </command:syntax>
 <command:parameters></command:parameters>
@@ -84,9 +84,9 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LACompliancePolicyLocation</command:name>
+<command:details><command:name>Get-LaCompliancePolicyLocation</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LACompliancePolicyLocation</command:noun>
+<command:noun>LaCompliancePolicyLocation</command:noun>
 <maml:description><maml:para>Reports on all Label Policies and Office 365 Retention Policies located in the Security and Compliance Center
 </maml:para>
 </maml:description>
@@ -110,7 +110,7 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 <maml:para>1. Exchange 2. SharePoint 3. OneDrive 4. Groups 5. Exchange_Exception 6. SharePoint_Exception 7. OneDrive_Exception 8. Groups_Exception
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LACompliancePolicyLocation</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaCompliancePolicyLocation</maml:name>
 <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>All</maml:name>
 <maml:Description><maml:para>{{All Locations}}
 </maml:para>
@@ -284,9 +284,9 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAComplianceSearch</command:name>
+<command:details><command:name>Get-LaComplianceSearch</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LAComplianceSearch</command:noun>
+<command:noun>LaComplianceSearch</command:noun>
 <maml:description><maml:para>Reports on Compliance Searches (the predecessor to Get-MailboxSearch)
 </maml:para>
 </maml:description>
@@ -295,22 +295,14 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </maml:para>
 <maml:para>Make sure you are first connected to the Office 365 compliance service.  Simply use Get-LAConnected,  e.g. Get-LAConnected -Tenant Contoso -Compliance
 </maml:para>
-<maml:para>** If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint, OneDrive &amp; PublicFolders)   ** this report will report on everything
+<maml:para>** If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint &amp; PublicFolders)   ** this report will report on everything
 </maml:para>
-<maml:para>If run with no switches, it will output all included Exchange mailboxes with each search name If run with the SharePoint switch, it will output all included SharePoint Sites with each search name If run with the OneDrive switch, it will output all included OneDrive Sites with each search name If run with the PublicFolder switch, it will output all included Public Folders with each search name
+<maml:para>If run with no switches, it will output all included Exchange mailboxes with each search name If run with the SharePoint switch, it will output all included SharePoint Sites with each search name If run with the PublicFolder switch, it will output if All or None of the Public Folders are searched with each search name
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAComplianceSearch</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaComplianceSearch</maml:name>
 <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SharePoint</maml:name>
 <maml:Description><maml:para>{{SharePoint Locations}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>OneDrive</maml:name>
-<maml:Description><maml:para>{{OneDrive Locations}}
 </maml:para>
 </maml:Description>
 <dev:type><maml:name>SwitchParameter</maml:name>
@@ -337,15 +329,6 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 </command:syntax>
 <command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SharePoint</maml:name>
 <maml:Description><maml:para>{{SharePoint Locations}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>OneDrive</maml:name>
-<maml:Description><maml:para>{{OneDrive Locations}}
 </maml:para>
 </maml:Description>
 <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
@@ -412,307 +395,9 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAConnected</command:name>
+<command:details><command:name>Get-LaInPlaceHold</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LAConnected</command:noun>
-<maml:description><maml:para>Connects to Office 365 services and/or Azure
-</maml:para>
-</maml:description>
-</command:details>
-<maml:description><maml:para>Connects to Office 365 services and/or Azure.
-</maml:para>
-<maml:para>Connects to some or all of the Office 365/Azure services based on switches provided at runtime.
-</maml:para>
-<maml:para>Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant parameter For AzureOnly, provide a unique name for the -Tenant parameter
-</maml:para>
-<maml:para>Locally saves and encrypts to a file the username and password. The encrypted file...
-1.  can only be used on the computer and within the user's profile from which it was created. 2.  is the same .txt for all the Office 365 Services. 3.  for Azure is separate and is a .json file.
-</maml:para>
-<maml:para>If Azure or AzureOnly switch is used for first time:
-</maml:para>
-<maml:para>1.  User will login as normal when prompted by Azure 2.  User will be prompted to select which Azure Subscription 3.  Select the subscription and click "OK"
-</maml:para>
-<maml:para>If Azure or AzureOnly switch is used:
-</maml:para>
-<maml:para>1.  User will be prompted to pick username used previously 2.  If a new username is to be used (e.g. username not found when prompted), click Cancel to be prompted to login. 3.  User will be prompted to select which Azure Subscription 4.  Select the subscription and click "OK"
-</maml:para>
-<maml:para>Directories used/created during the execution of this script 
-</maml:para>
-<maml:para>1.  $env:USERPROFILE\ps\ 2.  $env:USERPROFILE\ps\creds\
-</maml:para>
-<maml:para>All saved credentials are saved in $env:USERPROFILE\ps\creds\ Transcipt is started and kept in $env:USERPROFILE\ps&lt;tenantspecified&gt;
-</maml:para>
-</maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAConnected</maml:name>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Tenant</maml:name>
-<maml:Description><maml:para>{{The Tenant Name}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ExchangeAndMSOL</maml:name>
-<maml:Description><maml:para>{{Exchange and MSOnline}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>All365</maml:name>
-<maml:Description><maml:para>{{All Office 365 Services}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Azure</maml:name>
-<maml:Description><maml:para>{{Microsoft Azure}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AzureOnly</maml:name>
-<maml:Description><maml:para>{{Connect to Azure by itself}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Skype</maml:name>
-<maml:Description><maml:para>{{Microsoft Skype}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SharePoint</maml:name>
-<maml:Description><maml:para>{{Microsoft SharePoint}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Compliance</maml:name>
-<maml:Description><maml:para>{{Office 365 Security and Compliance Center}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ComplianceLegacy</maml:name>
-<maml:Description><maml:para>{{Legacy Compliance Cmdlets}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AzureADver2</maml:name>
-<maml:Description><maml:para>{{Azure Active Directory Version 2}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
-<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
-<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-</command:syntaxItem>
-</command:syntax>
-<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Tenant</maml:name>
-<maml:Description><maml:para>{{The Tenant Name}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ExchangeAndMSOL</maml:name>
-<maml:Description><maml:para>{{Exchange and MSOnline}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>All365</maml:name>
-<maml:Description><maml:para>{{All Office 365 Services}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Azure</maml:name>
-<maml:Description><maml:para>{{Microsoft Azure}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AzureOnly</maml:name>
-<maml:Description><maml:para>{{Connect to Azure by itself}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Skype</maml:name>
-<maml:Description><maml:para>{{Microsoft Skype}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SharePoint</maml:name>
-<maml:Description><maml:para>{{Microsoft SharePoint}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Compliance</maml:name>
-<maml:Description><maml:para>{{Office 365 Security and Compliance Center}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ComplianceLegacy</maml:name>
-<maml:Description><maml:para>{{Legacy Compliance Cmdlets}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AzureADver2</maml:name>
-<maml:Description><maml:para>{{Azure Active Directory Version 2}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
-<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
-<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-</command:parameters>
-<command:inputTypes></command:inputTypes>
-<command:returnValues></command:returnValues>
-<maml:alertSet><maml:alert><maml:para>
-</maml:para>
-</maml:alert>
-</maml:alertSet>
-<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -AzureOnly</dev:code>
-<dev:remarks><maml:para>Connects to Azure Only For the mandatory parameter, Tenant, simply provide something that uniquely identifies the Azure Tenant
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso</dev:code>
-<dev:remarks><maml:para>Connects by default to MS Online Service (MSOL) and Exchange Online (unless AzureOnly switch is used) Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant parameter
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Skype</dev:code>
-<dev:remarks><maml:para>Connects by default to MS Online Service (MSOL) and Exchange Online Connects to Skype Online
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -SharePoint</dev:code>
-<dev:remarks><maml:para>Connects by default to MS Online Service (MSOL) and Exchange Online Connects to SharePoint Online
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Compliance</dev:code>
-<dev:remarks><maml:para>Connects by default to MS Online Service (MSOL) and Exchange Online Connects to Compliance &amp; Security Center
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -All365</dev:code>
-<dev:remarks><maml:para>Connects to MS Online Service (MSOL), Exchange Online, Skype, SharePoint &amp; Compliance
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -All365 -Azure</dev:code>
-<dev:remarks><maml:para>Connects to Azure, MS Online Service (MSOL), Exchange Online, Skype, SharePoint &amp; Compliance
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Skype -Azure</dev:code>
-<dev:remarks><maml:para>Connects to Azure, MS Online Service (MSOL), Exchange Online &amp; Skype This is to illustrate that any number of individual services can be used to connect.
-</maml:para>
-</dev:remarks>
-</command:example>
-</command:examples>
-<command:relatedLinks></command:relatedLinks>
-</command:command>
-<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAInPlaceHold</command:name>
-<command:verb>Get</command:verb>
-<command:noun>LAInPlaceHold</command:noun>
+<command:noun>LaInPlaceHold</command:noun>
 <maml:description><maml:para>Reports on in-place holds from the legacy, Exchange specific, "Compliance Management &gt; in-place eDiscovery &amp; hold"
 </maml:para>
 </maml:description>
@@ -720,7 +405,7 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 <maml:description><maml:para>Reports on in-place holds from the legacy, Exchange specific, "Compliance Management &gt; in-place eDiscovery &amp; hold" This does not report on each mailbox that is on hold - Use Get-LAMailboxInPlaceHold to report on that (however that command provides only the legacy holds). To report on modern holds, use Get-LAComplianceCase to report on in-place holds from the new "Security and Compliance Center".
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAInPlaceHold</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaInPlaceHold</maml:name>
 </command:syntaxItem>
 </command:syntax>
 <command:parameters></command:parameters>
@@ -746,9 +431,9 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAMailboxFolderSize</command:name>
+<command:details><command:name>Get-LaMailboxFolderSize</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LAMailboxFolderSize</command:noun>
+<command:noun>LaMailboxFolderSize</command:noun>
 <maml:description><maml:para>Retrieves each mailbox's: 1. entire TotalItemSize  2. and more specifically, TotalItemSize for just the RecoverableItems folder
 </maml:para>
 </maml:description>
@@ -758,7 +443,7 @@ Get-LACompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 <maml:para>Note: This function executes two commands per mailbox and could be subject to Office 365 throttling.       Therefor, for large tenants it is best to break up mailboxes into CSV's of 5,000 or less UPNs.       For best results, no more than 2 concurrent sessions of this function should be run.       It may be necessary to contact Office 365 support to have some throttling reduced.
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAMailboxFolderSize</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxFolderSize</maml:name>
 <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
 <maml:Description><maml:para>{{UPNs passed from the pipeline}}
 </maml:para>
@@ -824,9 +509,9 @@ user02@contoso.com</dev:code>
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAMailboxInPlaceHold</command:name>
+<command:details><command:name>Get-LaMailboxInPlaceHold</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LAMailboxInPlaceHold</command:noun>
+<command:noun>LaMailboxInPlaceHold</command:noun>
 <maml:description><maml:para>Reports on the legacy In-Place Holds for each mailbox
 </maml:para>
 </maml:description>
@@ -840,7 +525,7 @@ user02@contoso.com</dev:code>
 <maml:para>Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAMailboxInPlaceHold</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxInPlaceHold</maml:name>
 <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>list</maml:name>
 <maml:Description><maml:para>{{UPNs passed from the pipeline}}
 </maml:para>
@@ -923,9 +608,9 @@ user02@contoso.com</dev:code>
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAMailboxLitigationHold</command:name>
+<command:details><command:name>Get-LaMailboxLitigationHold</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LAMailboxLitigationHold</command:noun>
+<command:noun>LaMailboxLitigationHold</command:noun>
 <maml:description><maml:para>Reports on all mailboxes and whether or not they are on Litigation Hold.
 </maml:para>
 <maml:para>Additionally, can report on all mailboxes that do not have litigation hold enabled.
@@ -943,7 +628,7 @@ user02@contoso.com</dev:code>
 <maml:para>Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAMailboxLitigationHold</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxLitigationHold</maml:name>
 <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>list</maml:name>
 <maml:Description><maml:para>{{UPNs passed from the pipeline}}
 </maml:para>
@@ -1032,9 +717,9 @@ user02@contoso.com</dev:code>
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAMailboxMFA</command:name>
+<command:details><command:name>Get-LaMailboxMFA</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LAMailboxMFA</command:noun>
+<command:noun>LaMailboxMFA</command:noun>
 <maml:description><maml:para>Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives. Also, it can start the Managed Folder Assistant for one more or more mailboxes.
 </maml:para>
 </maml:description>
@@ -1048,7 +733,7 @@ user02@contoso.com</dev:code>
 <maml:para>Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAMailboxMFA</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxMFA</maml:name>
 <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
 <maml:Description><maml:para>{{UPNs passed from the pipeline}}
 </maml:para>
@@ -1172,9 +857,129 @@ user02@contoso.com</dev:code>
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LAMailboxRetentionPolicy</command:name>
+<command:details><command:name>Get-LaMailboxOldestItem</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LAMailboxRetentionPolicy</command:noun>
+<command:noun>LaMailboxOldestItem</command:noun>
+<maml:description><maml:para>Reports on the oldest item in a mailbox(es)
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>Users  Additionally, each case's hold (Exchange and/or SharePoint) are returned.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxOldestItem</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
+<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
+<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes></command:inputTypes>
+<command:returnValues></command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>Get-LAMailboxOldestItem</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox not including the recoverable items folders
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>Get-LAMailboxOldestItem -IncludeRecoverableItems</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox including the recoverable items folders
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>Get-LAMailboxOldestItem</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox - only searches in the recoverable items folders
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Get-LaMailboxOldestItem</command:name>
+<command:verb>Get</command:verb>
+<command:noun>LaMailboxOldestItem</command:noun>
+<maml:description><maml:para>Reports on the oldest item in a mailbox(es)
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>Users  Additionally, each case's hold (Exchange and/or SharePoint) are returned.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxOldestItem</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
+<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>userprincipalname</maml:name>
+<maml:Description><maml:para>{{UPNs are passed from the pipeline}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes></command:inputTypes>
+<command:returnValues></command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>Get-LAMailboxOldestItem</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox not including the recoverable items folders
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>Get-LAMailboxOldestItem -IncludeRecoverableItems</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox including the recoverable items folders
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>Get-LAMailboxOldestItem</dev:code>
+<dev:remarks><maml:para>Reports on the oldest item in the mailbox - only searches in the recoverable items folders
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Get-LaMailboxRetentionPolicy</command:name>
+<command:verb>Get</command:verb>
+<command:noun>LaMailboxRetentionPolicy</command:noun>
 <maml:description><maml:para>Reports on which retention policy a mailbox or mailboxes have.
 </maml:para>
 </maml:description>
@@ -1186,7 +991,7 @@ user02@contoso.com</dev:code>
 <maml:para>Also demonstrated in an example below is importing mailboxes (UPNs) from a CSV
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LAMailboxRetentionPolicy</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaMailboxRetentionPolicy</maml:name>
 <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none"><maml:name>list</maml:name>
 <maml:Description><maml:para>{{UPNs passed from the pipeline}}
 </maml:para>
@@ -1252,9 +1057,9 @@ user02@contoso.com</dev:code>
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>Get-LARetention</command:name>
+<command:details><command:name>Get-LaRetention</command:name>
 <command:verb>Get</command:verb>
-<command:noun>LARetention</command:noun>
+<command:noun>LaRetention</command:noun>
 <maml:description><maml:para>Reports on Exchange Retention Policies, Retention Policy Tags and Retention Policy Tag Links
 </maml:para>
 </maml:description>
@@ -1264,7 +1069,7 @@ user02@contoso.com</dev:code>
 <maml:para>This function will display all Retention Policy Tags and to which Retention Policy they are linked
 </maml:para>
 </maml:description>
-<command:syntax><command:syntaxItem><maml:name>Get-LARetention</maml:name>
+<command:syntax><command:syntaxItem><maml:name>Get-LaRetention</maml:name>
 </command:syntaxItem>
 </command:syntax>
 <command:parameters></command:parameters>

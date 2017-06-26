@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LACompliancePolicy {
+function Get-LaCompliancePolicy {
 
     [CmdletBinding()]
     Param

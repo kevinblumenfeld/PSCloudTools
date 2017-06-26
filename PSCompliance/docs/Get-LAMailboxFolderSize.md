@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LAMailboxFolderSize
+# Get-LaMailboxFolderSize
 
 ## SYNOPSIS
 Retrieves each mailbox's:
@@ -14,7 +14,7 @@ Retrieves each mailbox's:
 ## SYNTAX
 
 ```
-Get-LAMailboxFolderSize [-userprincipalname] <String> [<CommonParameters>]
+Get-LaMailboxFolderSize [-userprincipalname] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION

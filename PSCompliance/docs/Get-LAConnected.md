@@ -1,5 +1,5 @@
 ---
-external help file: PSCompliance-help.xml
+external help file: PSLicense-help.xml
 online version: 
 schema: 2.0.0
 ---

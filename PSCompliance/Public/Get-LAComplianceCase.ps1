@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LAComplianceCase {
+function Get-LaComplianceCase {
 
     write-host "***********************************************"
     write-host "   Office 365 Security & Compliance Center   " -foregroundColor yellow -backgroundcolor darkgreen
@@ -20,7 +20,7 @@ function Get-LAComplianceCase {
         write-host "Working on case :" $cc.name
         if ($cc.status -eq 'Closed') {
             $cmembers = ((Get-ComplianceCaseMember -Case $cc.name).windowsLiveID) -join ';'
-            add-tocasereport -casename $cc.name -casestatus $cc.Status -caseclosedby $cc.closedby -caseClosedDateTime $cc.ClosedDateTime -casemembers $cmembers 
+            Get-AddtoCaseReport -casename $cc.name -casestatus $cc.Status -caseclosedby $cc.closedby -caseClosedDateTime $cc.ClosedDateTime -casemembers $cmembers 
         }
         else {
             $cmembers = ((Get-ComplianceCaseMember -Case $cc.name).windowsLiveID) -join ';'

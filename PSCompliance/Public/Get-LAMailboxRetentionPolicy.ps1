@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LAMailboxRetentionPolicy {
+function Get-LaMailboxRetentionPolicy {
 
     [CmdletBinding()]
     Param

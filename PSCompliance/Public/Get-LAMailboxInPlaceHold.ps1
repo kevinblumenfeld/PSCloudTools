@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LAMailboxInPlaceHold {
+function Get-LaMailboxInPlaceHold {
 
     [CmdletBinding()]
     Param

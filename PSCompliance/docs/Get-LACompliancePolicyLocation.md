@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LACompliancePolicyLocation
+# Get-LaCompliancePolicyLocation
 
 ## SYNOPSIS
 Reports on all Label Policies and Office 365 Retention Policies located in the Security and Compliance Center
@@ -12,7 +12,7 @@ Reports on all Label Policies and Office 365 Retention Policies located in the S
 ## SYNTAX
 
 ```
-Get-LACompliancePolicyLocation [-All] [-Exchange] [-SharePoint] [-OneDrive] [-Skype] [-Groups]
+Get-LaCompliancePolicyLocation [-All] [-Exchange] [-SharePoint] [-OneDrive] [-Skype] [-Groups]
  [-WithExceptions] [-OnlyExceptions] [<CommonParameters>]
 ```
 

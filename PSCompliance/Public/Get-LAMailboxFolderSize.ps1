@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LAMailboxFolderSize {
+function Get-LaMailboxFolderSize {
 
     Param(
         [Parameter(

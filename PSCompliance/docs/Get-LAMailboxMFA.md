@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LAMailboxMFA
+# Get-LaMailboxMFA
 
 ## SYNOPSIS
 Reports on several key indicators of the Managed Folder Assistant against one or more mailboxes or mailbox archives.
@@ -13,7 +13,7 @@ Also, it can start the Managed Folder Assistant for one more or more mailboxes.
 ## SYNTAX
 
 ```
-Get-LAMailboxMFA [-userprincipalname] <String[]> [-Archive] [-StartMFA] [<CommonParameters>]
+Get-LaMailboxMFA [-userprincipalname] <String[]> [-Archive] [-StartMFA] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LAMailboxLitigationHold {
+function Get-LaMailboxLitigationHold {
 
     [CmdletBinding()]
     Param

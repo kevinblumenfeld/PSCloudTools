@@ -1,16 +1,13 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LAComplianceSearch {
+function Get-LaComplianceSearch {
 
     [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory = $false)]
         [switch] $SharePoint,
-
-        [Parameter(Mandatory = $false)]
-        [switch] $OneDrive,
 
         [Parameter(Mandatory = $false)]
         [switch] $PublicFolder,
@@ -24,83 +21,83 @@ function Get-LAComplianceSearch {
     }
     Process {
         If ($All) {
-            $searches = Get-ComplianceSearch | select name, @{n = "Mailboxes"; e = {(Get-ComplianceSearch $_.identity).ExchangeLocation}}, @{n = "SharePoint"; e = {(Get-ComplianceSearch $_.identity).SharePointLocation}}, @{n = "OneDrive"; e = {(Get-ComplianceSearch $_.identity).OneDriveLocation}}, @{n = "PublicFolder"; e = {(Get-ComplianceSearch $_.identity).PublicFolderLocation}}  
+            $searches = Get-ComplianceSearch | % {Get-ComplianceSearch $_.identity | select name, Items, Size, ExchangeLocation, SharePointLocation, PublicFolderLocation, ContentMatchQuery}
             $searches | Sort name
         }
         If ($SharePoint) {
-            $searches = Get-ComplianceSearch | select name, @{n = "SharePoint"; e = {(Get-ComplianceSearch $_.identity).SharePointLocation}} 
+            $searches = Get-ComplianceSearch | % {Get-ComplianceSearch $_.identity | select name, Items, Size, SharePointLocation, ContentMatchQuery}
             foreach ($row in $searches) {
-                $searchHash = @{}
-                if ($row.SharePoint) {
-                    foreach ($site in $row.SharePoint) {
-                        $searchHash['name'] = $row.name
-                        $searchHash['SharePoint'] = $site
-                        $resultArray += [psCustomObject]$searchHash
-                    }    
-                }
-                else {
-                    $searchHash['name'] = $row.name
-                    $searchHash['SharePoint'] = "none"
-                    $resultArray += [psCustomObject]$searchHash
-                }
-            }      
-        }
-        If ($OneDrive) {
-            $searches = Get-ComplianceSearch | select name, @{n = "OneDrive"; e = {(Get-ComplianceSearch $_.identity).OneDriveLocation}} 
-            foreach ($row in $searches) {
-                $searchHash = @{}
-                if ($row.OneDrive) {
-                    foreach ($mbx in $row.OneDrive) {
+                $searchHash = [Ordered]@{}
+                if ($row.SharePointLocation) {
+                    foreach ($site in $row.SharePointLocation) {
                         $searchHash['Search'] = $row.name
-                        $searchHash['OneDrive'] = $mbx
+                        $searchHash['Items'] = $row.Items
+                        $searchHash['Size'] = $row.Size                                               
+                        $searchHash['SharePointLocation'] = $site
+                        $searchHash['Query'] = $row.ContentMatchQuery  
                         $resultArray += [psCustomObject]$searchHash
                     }    
                 }
                 else {
                     $searchHash['Search'] = $row.name
-                    $searchHash['OneDrive'] = "none"
+                    $searchHash['Items'] = $row.Items
+                    $searchHash['Size'] = $row.Size                                               
+                    $searchHash['SharePointLocation'] = 'None'
+                    $searchHash['Query'] = $row.ContentMatchQuery  
                     $resultArray += [psCustomObject]$searchHash
                 }
-            }     
-            $resultArray | Select Search, OneDrive | Sort Search, OneDrive
+            }  
+            $resultArray | Sort Search, SharePointLocation    
         }
         If ($PublicFolder) {
-            $searches = Get-ComplianceSearch | select name, @{n = "PublicFolder"; e = {(Get-ComplianceSearch $_.identity).PublicFolderLocation}} 
+            $searches = Get-ComplianceSearch | % {Get-ComplianceSearch $_.identity | select name, Items, Size, PublicFolderLocation, ContentMatchQuery}
             foreach ($row in $searches) {
-                $searchHash = @{}
-                if ($row.PublicFolder) {
-                    foreach ($mbx in $row.PublicFolder) {
+                $searchHash = [Ordered]@{}
+                if ($row.PublicFolderLocation) {
+                    foreach ($site in $row.PublicFolderLocation) {
                         $searchHash['Search'] = $row.name
-                        $searchHash['PublicFolder'] = $mbx
+                        $searchHash['Items'] = $row.Items
+                        $searchHash['Size'] = $row.Size                                               
+                        $searchHash['PublicFolderLocation'] = $site
+                        $searchHash['Query'] = $row.ContentMatchQuery  
                         $resultArray += [psCustomObject]$searchHash
                     }    
                 }
                 else {
                     $searchHash['Search'] = $row.name
-                    $searchHash['PublicFolder'] = "none"
+                    $searchHash['Items'] = $row.Items
+                    $searchHash['Size'] = $row.Size                                               
+                    $searchHash['PublicFolderLocation'] = 'None'
+                    $searchHash['Query'] = $row.ContentMatchQuery  
                     $resultArray += [psCustomObject]$searchHash
                 }
-            }     
-            $resultArray | Select Search, PublicFolder | Sort Search, PublicFolder
+            }  
+            $resultArray | Sort Search, PublicFolderLocation    
         }
-        If (!($All -or $SharePoint -or $OneDrive -or $PublicFolder)) {
-            $searches = Get-ComplianceSearch | select name, @{n = "Mailbox"; e = {(Get-ComplianceSearch $_.identity).ExchangeLocation}} 
+        If (!($All -or $SharePoint -or $PublicFolder)) {
+            $searches = Get-ComplianceSearch | % {Get-ComplianceSearch $_.identity | select name, Items, Size, ExchangeLocation, ContentMatchQuery}
             foreach ($row in $searches) {
-                $searchHash = @{}
-                if ($row.Mailbox) {
-                    foreach ($mbx in $row.Mailbox) {
+                $searchHash = [Ordered]@{}
+                if ($row.ExchangeLocation) {
+                    foreach ($site in $row.ExchangeLocation) {
                         $searchHash['Search'] = $row.name
-                        $searchHash['Mailbox'] = $mbx
+                        $searchHash['Items'] = $row.Items
+                        $searchHash['Size'] = $row.Size                                               
+                        $searchHash['ExchangeLocation'] = $site
+                        $searchHash['Query'] = $row.ContentMatchQuery  
                         $resultArray += [psCustomObject]$searchHash
                     }    
                 }
                 else {
                     $searchHash['Search'] = $row.name
-                    $searchHash['Mailbox'] = "none"
+                    $searchHash['Items'] = $row.Items
+                    $searchHash['Size'] = $row.Size                                               
+                    $searchHash['ExchangeLocation'] = 'None'
+                    $searchHash['Query'] = $row.ContentMatchQuery  
                     $resultArray += [psCustomObject]$searchHash
                 }
-            }     
-            $resultArray | Select Search, Mailbox | Sort Search, mailbox
+            }  
+            $resultArray | Sort Search, ExchangeLocation    
         }
     }
     End {

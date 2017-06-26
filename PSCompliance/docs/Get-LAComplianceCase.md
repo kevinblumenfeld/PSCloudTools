@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LAComplianceCase
+# Get-LaComplianceCase
 
 ## SYNOPSIS
 Retrieve Office 365 Compliance Cases, holds and hold queries
@@ -12,7 +12,7 @@ Retrieve Office 365 Compliance Cases, holds and hold queries
 ## SYNTAX
 
 ```
-Get-LAComplianceCase [<CommonParameters>]
+Get-LaComplianceCase [<CommonParameters>]
 ```
 
 ## DESCRIPTION

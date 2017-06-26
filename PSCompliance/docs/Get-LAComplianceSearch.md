@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LAComplianceSearch
+# Get-LaComplianceSearch
 
 ## SYNOPSIS
 Reports on Compliance Searches (the predecessor to Get-MailboxSearch)
@@ -12,7 +12,7 @@ Reports on Compliance Searches (the predecessor to Get-MailboxSearch)
 ## SYNTAX
 
 ```
-Get-LAComplianceSearch [-SharePoint] [-OneDrive] [-PublicFolder] [-All] [<CommonParameters>]
+Get-LaComplianceSearch [-SharePoint] [-PublicFolder] [-All] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,13 +25,12 @@ Make sure you are first connected to the Office 365 compliance service.
 Simply use Get-LAConnected,  e.g.
 Get-LAConnected -Tenant Contoso -Compliance
 
-** If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint, OneDrive & PublicFolders)
+** If run with the All switch, it will output all the searches, one per row and a column for each location (all locations of Exchange, SharePoint & PublicFolders)
   ** this report will report on everything
 
 If run with no switches, it will output all included Exchange mailboxes with each search name
 If run with the SharePoint switch, it will output all included SharePoint Sites with each search name
-If run with the OneDrive switch, it will output all included OneDrive Sites with each search name
-If run with the PublicFolder switch, it will output all included Public Folders with each search name
+If run with the PublicFolder switch, it will output if All or None of the Public Folders are searched with each search name
 
 ## EXAMPLES
 
@@ -64,21 +63,6 @@ Get-LAComplianceSearch -All | Export-Csv ./AllSearchesAllLocations.csv -NoTypeIn
 
 ### -SharePoint
 {{SharePoint Locations}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OneDrive
-{{OneDrive Locations}}
 
 ```yaml
 Type: SwitchParameter

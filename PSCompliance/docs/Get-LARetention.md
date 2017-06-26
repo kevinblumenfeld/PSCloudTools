@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LARetention
+# Get-LaRetention
 
 ## SYNOPSIS
 Reports on Exchange Retention Policies, Retention Policy Tags and Retention Policy Tag Links
@@ -12,7 +12,7 @@ Reports on Exchange Retention Policies, Retention Policy Tags and Retention Poli
 ## SYNTAX
 
 ```
-Get-LARetention [<CommonParameters>]
+Get-LaRetention [<CommonParameters>]
 ```
 
 ## DESCRIPTION

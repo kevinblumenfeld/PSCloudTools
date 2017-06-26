@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LACompliancePolicy
+# Get-LaCompliancePolicy
 
 ## SYNOPSIS
 Report on each Office 365 Retention Policies, Label Polices (including Auto-Applied Label Policies) and the Labels linked to each (policy).
@@ -12,7 +12,7 @@ Report on each Office 365 Retention Policies, Label Polices (including Auto-Appl
 ## SYNTAX
 
 ```
-Get-LACompliancePolicy [<CommonParameters>]
+Get-LaCompliancePolicy [<CommonParameters>]
 ```
 
 ## DESCRIPTION

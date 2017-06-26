@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LAMailboxRetentionPolicy
+# Get-LaMailboxRetentionPolicy
 
 ## SYNOPSIS
 Reports on which retention policy a mailbox or mailboxes have.
@@ -12,7 +12,7 @@ Reports on which retention policy a mailbox or mailboxes have.
 ## SYNTAX
 
 ```
-Get-LAMailboxRetentionPolicy [-list] <String[]> [<CommonParameters>]
+Get-LaMailboxRetentionPolicy [-list] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION

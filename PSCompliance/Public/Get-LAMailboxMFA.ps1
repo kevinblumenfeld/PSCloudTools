@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LAMailboxMFA {
+function Get-LaMailboxMFA {
 
     [CmdletBinding()]
     Param

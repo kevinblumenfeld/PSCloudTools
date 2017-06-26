@@ -4,7 +4,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-LAInPlaceHold
+# Get-LaInPlaceHold
 
 ## SYNOPSIS
 Reports on in-place holds from the legacy, Exchange specific, "Compliance Management \> in-place eDiscovery & hold"
@@ -12,7 +12,7 @@ Reports on in-place holds from the legacy, Exchange specific, "Compliance Manage
 ## SYNTAX
 
 ```
-Get-LAInPlaceHold [<CommonParameters>]
+Get-LaInPlaceHold [<CommonParameters>]
 ```
 
 ## DESCRIPTION

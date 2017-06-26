@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LARetention {
+function Get-LaRetention {
 
     [CmdletBinding()]
     Param

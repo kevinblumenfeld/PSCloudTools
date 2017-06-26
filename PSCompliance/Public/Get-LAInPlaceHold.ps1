@@ -1,7 +1,7 @@
 <#
 .EXTERNALHELP PSCompliance-help.xml
 #>
-function Get-LAInPlaceHold {
+function Get-LaInPlaceHold {
 
     [CmdletBinding()]
     Param
