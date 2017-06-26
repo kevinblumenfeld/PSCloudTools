@@ -864,7 +864,7 @@ user02@contoso.com</dev:code>
 </maml:para>
 <maml:para>3 methods to search for the oldest item
 </maml:para>
-<maml:para>1. Without any switches, searches entire mailbox not including the recoverable items folder 2. With -IncludeRecoverableItems switch, searches entire mailbox including recoverable items folder 3. With -RecoverableItemsOnly switch, searches only the recoverable items folder
+<maml:para>1. Without any switches, searches entire mailbox not including the recoverable items folders 2. With -IncludeRecoverableItems switch, searches entire mailbox including recoverable items folders 3. With -RecoverableItemsOnly switch, searches only the recoverable items folders
 </maml:para>
 </maml:description>
 </command:details>
