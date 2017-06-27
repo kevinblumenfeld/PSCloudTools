@@ -22,7 +22,7 @@ function Get-LaMailboxLitigationHold {
     }
     Process {
         if ($LitigationHoldDisabledOnly) {
-            $entry = Get-Mailbox -identity $_.UserPrincipalName | Where {$_.LitigationHoldEnabled -ne $true}
+            $entry = Get-Mailbox -identity $_.UserPrincipalName -Filter {LitigationHoldEnabled -ne 'True'}
             foreach ($mailbox in $entry) {   
                 $mailboxHash = [ordered]@{}
                 foreach ($field in $mailboxProperties) {

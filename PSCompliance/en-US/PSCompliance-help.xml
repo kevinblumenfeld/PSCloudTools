@@ -395,6 +395,138 @@ Get-LaCompliancePolicy | Export-Csv ./labelsandpols.csv -NoTypeInformation</dev:
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Get-LaComplianceValue</command:name>
+<command:verb>Get</command:verb>
+<command:noun>LaComplianceValue</command:noun>
+<maml:description><maml:para>Reports on all mailboxes that have the values specified Specifically reports on either those mailboxes with these  parameters (and those without, depending on what you specify):
+</maml:para>
+<maml:para>1. LitigationHoldEnabled 2. ArchiveEnabled 3. RetainDeletedItemsFor30Days 4. UseDatabaseRetentionDefaults 5. SingleItemRecoveryEnabled 6. InactiveMailboxes
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>Reports on all mailboxes that have the values specified at runtime. Either choose to Included or Exclude the value specified in the results that are returned.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Get-LaComplianceValue</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>Filter</maml:name>
+<maml:Description><maml:para>{{Set on whether to Include or Exclude the Value}}
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Include</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Exclude</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Value</maml:name>
+<maml:Description><maml:para>{{Choose the value that is to be included or excluded from the results}}
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">LitigationHoldEnabled</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">ArchiveEnabled</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">RetainDeletedItemsFor30Days</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">UseDatabaseRetentionDefaults</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">SingleItemRecoveryEnabled</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">InactiveMailboxes</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>Filter</maml:name>
+<maml:Description><maml:para>{{Set on whether to Include or Exclude the Value}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Value</maml:name>
+<maml:Description><maml:para>{{Choose the value that is to be included or excluded from the results}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>Get-LaComplianceValue -Filter Exclude -Value LitigationHoldEnabled | Export-Csv ./onlythoseWITHOUTLitHold.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>Reports on only those mailboxes that do not have Litigation Hold enabled
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2</maml:title>
+<dev:code>Get-LaComplianceValue -Filter Include -Value LitigationHoldEnabled | Export-Csv ./onlythoseWITHLitHold.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>Reports on only those mailboxes that do have Litigation Hold enabled
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 3</maml:title>
+<dev:code>Get-LaComplianceValue -Filter Exclude -Value ArchiveEnabled | Export-Csv ./onlythoseWITHOUTArchiveEnabled.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>Reports on only those mailboxes that do not have an archive mailbox
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 4</maml:title>
+<dev:code>Get-LaComplianceValue -Filter Exclude -Value RetainDeletedItemsFor30Days | Export-Csv ./onlythosewithRetDelItemsLessthan30days.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>Reports on only those mailboxes that have RetainDeletedItemsFor set at less than 30 days
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 5</maml:title>
+<dev:code>Get-LaComplianceValue -Filter Exclude -Value UseDatabaseRetentionDefaults | Export-Csv ./onlythosewithUseDatabaseRetentionDefaultsSettoTrue.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>Reports on only those mailboxes that have UseDatabaseRetentionDefaults set to true
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 6</maml:title>
+<dev:code>Get-LaComplianceValue -Filter Exclude -Value SingleItemRecoveryEnabled | Export-Csv ./onlythoseWITHOUTSingleItemRecoveryEnabled.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>Reports on only those mailboxes that do not have SingleItemRecovery set to Enabled
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 7</maml:title>
+<dev:code>Get-LaComplianceValue -Filter Include -Value InactiveMailboxes | Export-Csv ./onlyInactiveMailboxes.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>Reports on all Inactive Mailboxes.  Provides a more comprehensive report of many important parameters on each inactive mailbox
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 8</maml:title>
+<dev:code>Get-LaComplianceValue -Filter Exclude -Value InactiveMailboxes | Export-Csv ./onlyActiveMailboxes.csv -NoTypeInformation</dev:code>
+<dev:remarks><maml:para>Reports on all Mailboxes except Inactive Mailboxes.  Provides a more comprehensive report of many important parameters on each mailbox
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
 <command:details><command:name>Get-LaInPlaceHold</command:name>
 <command:verb>Get</command:verb>
 <command:noun>LaInPlaceHold</command:noun>
