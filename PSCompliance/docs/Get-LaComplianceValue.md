@@ -105,7 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -Value
-{{Choose the value that is to be included or excluded from the results}}
+{{Choose the Value that is to be included or excluded from the results}}
 
 ```yaml
 Type: String
