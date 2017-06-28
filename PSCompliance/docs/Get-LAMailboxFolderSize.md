@@ -26,7 +26,7 @@ However, a CSV could certainly be used to break up large data sets.
 Note: This function executes two commands per mailbox and could be subject to Office 365 throttling.
       Therefor, for large tenants it is best to break up mailboxes into CSV's of 5,000 or less UPNs.
       For best results, no more than 2 concurrent sessions of this function should be run.
-      It may be necessary to contact Office 365 support to have some throttling reduced.
+      It may be necessary to contact Office 365 support to have some throttling reduced. 
 
 ## EXAMPLES
 
