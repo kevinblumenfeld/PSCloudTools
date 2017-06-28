@@ -11,7 +11,11 @@ PSCompliance reports on these technologies and what is assigned/utilizing them
 
 ## Installation
 
-Drop the entire module (including folder structure) in any path found when running: PS C:\> $env:PSModulePath
+Install-Module PSCompliance
+
+to update to the latest version
+
+Update-Module PSCompliance
 
 ## Usage
 
