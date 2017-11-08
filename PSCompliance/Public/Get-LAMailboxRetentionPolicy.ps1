@@ -13,7 +13,11 @@ function Get-LaMailboxRetentionPolicy {
     )
     Begin {
         $resultArray = @()
-        $mailboxProperties = @("DisplayName", "IsMailboxEnabled", "AccountDisabled", "RetentionPolicy", "SingleItemRecoveryEnabled", "RecipientTypeDetails", "UseDatabaseRetentionDefaults", "RecoverableItemsQuota", "archivename", "UserPrincipalName", "Office", "RetainDeletedItemsFor", "LitigationHoldEnabled", "LitigationHoldDuration", "LitigationHoldDate", "LitigationHoldOwner", "RoleAssignmentPolicy")
+        $mailboxProperties = @("DisplayName", "IsMailboxEnabled", "AccountDisabled", "RetentionPolicy"
+            "SingleItemRecoveryEnabled", "RecipientTypeDetails", "UseDatabaseRetentionDefaults"
+            "RecoverableItemsQuota", "archivename", "UserPrincipalName", "Office"
+            "RetainDeletedItemsFor", "LitigationHoldEnabled", "LitigationHoldDuration"
+            "LitigationHoldDate", "LitigationHoldOwner", "RoleAssignmentPolicy")
     }
     Process {
         $entry = Get-Mailbox -identity $_.UserPrincipalName
