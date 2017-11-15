@@ -1,8 +1,5 @@
-<#
-.EXTERNALHELP PSCompliance-help.xml
-#>
-function Get-LaMailboxMFA {
-
+function Get-MfaStats {
+    
     [CmdletBinding()]
     Param
     (
@@ -10,38 +7,41 @@ function Get-LaMailboxMFA {
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true)]
         [string[]] $userprincipalname,
-        
+                
         [Parameter(Mandatory = $false)]
         [switch] $Archive,
-  
+          
         [Parameter(Mandatory = $false)]
         [switch] $StartMFA
     )
     Begin {
         $resultarray = @()
+    
+        
     }
     Process {
-        if ($StartMFA) {
-            Write-Output "Starting Managed Folder Assistant on: $($_.UserPrincipalName)"
-            Start-ManagedFolderAssistant $_.userprincipalname
-        }
-        else {
-            if ($Archive) {
-                $logProps = Export-MailboxDiagnosticLogs $_.userprincipalname -ExtendedProperties -Archive
+        foreach ($CurUPN in $userprincipalname) {
+            if ($StartMFA) {
+                Write-Output "Starting Managed Folder Assistant on: $($CurUPN)"
+                Start-ManagedFolderAssistant $CurUPN
             }
             else {
-                $logProps = Export-MailboxDiagnosticLogs $_.userprincipalname -ExtendedProperties
+                if ($Archive) {
+                    $logProps = Export-MailboxDiagnosticLogs $CurUPN -ExtendedProperties -Archive
+                }
+                else {
+                    $logProps = Export-MailboxDiagnosticLogs $CurUPN -ExtendedProperties
+                }
+                $xmlprops = [xml]($logProps.MailboxLog)
+                $stats = $xmlprops.Properties.MailboxTable.Property | ? {$_.Name -like "ELC*"} 
+                $statHash = [ordered]@{}
+                for ($i = 0; $i -lt $stats.count; $i++) {
+                    $statHash['UPN'] = $CurUPN
+                    $statHash[$stats[$i].name] = $stats[$i].value
+                }
+                $resultarray += [PSCustomObject]$statHash
             }
-            $xmlprops = [xml]($logProps.MailboxLog)
-            $stats = $xmlprops.Properties.MailboxTable.Property | ? {$_.Name -like "ELC*"} 
-            $statHash = [ordered]@{}
-            for ($i = 0; $i -lt $stats.count; $i++) {
-                $statHash['UPN'] = $_.userprincipalname
-                $statHash[$stats[$i].name] = $stats[$i].value
-            }
-            $resultarray += [PSCustomObject]$statHash
         }
-
     }
     End {
         $resultarray
